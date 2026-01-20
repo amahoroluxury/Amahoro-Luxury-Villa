@@ -1,0 +1,56 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+model Booking {
+  id                String   @id @default(uuid())
+  guestName         String
+  guestEmail        String
+  guestPhone        String
+  checkIn           DateTime
+  checkOut          DateTime
+  guestsCount       Int
+  specialRequests   String?
+  totalAmountUsd     Float
+  depositAmountUsd   Float
+  amountPaidUsd      Float    @default(0)
+  balanceDueUsd      Float
+  status             String   @default("PendingDeposit") // PendingDeposit, DepositPaid, FullyPaid, Cancelled
+  paymentStatus      String   @default("Unpaid")        // Unpaid, Partial, Paid
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+  transactions       PaymentTransaction[]
+}
+
+model PaymentTransaction {
+  id                      String   @id @default(uuid())
+  bookingId               String
+  booking                 Booking  @relation(fields: [bookingId], references: [id])
+  flutterwaveTxRef        String   @unique
+  flutterwaveTransactionId String?
+  amountUsd               Float
+  type                    String   // deposit, full, balance
+  status                  String   @default("pending") // pending, success, failed
+  createdAt               DateTime @default(now())
+}
+
+model BlockedDate {
+  id        String   @id @default(uuid())
+  date      DateTime @unique
+  reason    String?
+  createdAt DateTime @default(now())
+}
+
+model Admin {
+  id       String @id @default(uuid())
+  email    String @unique
+  password String
+}

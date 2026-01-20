@@ -1,0 +1,119 @@
+.wrapper {
+  min-height: 100vh;
+}
+
+.header {
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  padding: 2rem 0;
+}
+
+.headerContent {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.headerContent h1 {
+  font-size: 1.5rem;
+}
+
+.adminNav {
+  display: flex;
+  gap: 2rem;
+}
+
+.adminNav a {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+.adminNav a.active {
+  color: var(--primary);
+}
+
+.stats {
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  margin-bottom: 4rem;
+}
+
+.statCard {
+  background: var(--surface);
+  padding: 2rem;
+  border: 1px solid var(--border);
+}
+
+.statCard span {
+  display: block;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 0.5rem;
+}
+
+.statCard strong {
+  font-size: 2rem;
+  color: var(--secondary);
+}
+
+.tableWrapper {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  overflow-x: auto;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.table th {
+  padding: 1.5rem;
+  background: var(--background);
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  border-bottom: 1px solid var(--border);
+}
+
+.table td {
+  padding: 1.5rem;
+  border-bottom: 1px solid var(--border);
+  font-size: 0.9rem;
+}
+
+.guestInfo strong {
+  display: block;
+  margin-bottom: 0.25rem;
+}
+
+.guestInfo span {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.badge {
+  padding: 0.5rem 1rem;
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  border-radius: 20px;
+}
+
+.pendingdeposit { background: #fff8e1; color: #f57c00; }
+.depositpaid { background: #e8f5e9; color: #2e7d32; }
+.fullypaid { background: #e3f2fd; color: #1565c0; }
+.cancelled { background: #ffebee; color: #c62828; }
+
+.viewLink {
+  color: var(--primary);
+  font-weight: 600;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+}

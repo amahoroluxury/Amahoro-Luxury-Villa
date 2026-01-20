@@ -1,0 +1,99 @@
+.wrapper {
+  padding-top: 120px;
+}
+
+.pageHeader {
+  text-align: center;
+  margin-bottom: 6rem;
+}
+
+.pageHeader h1 {
+  font-size: 3rem;
+  margin-bottom: 1.5rem;
+}
+
+.lead {
+  font-size: 1.25rem;
+  color: var(--text-muted);
+  max-width: 800px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+.label {
+  display: block;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--primary);
+  margin-bottom: 1.5rem;
+  font-weight: 600;
+}
+
+.grid {
+  display: grid;
+  gap: 2.5rem;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+}
+
+.reviewCard {
+  padding: 3rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+}
+
+.stars {
+  display: flex;
+  gap: 0.25rem;
+  margin-bottom: 1.5rem;
+}
+
+.reviewText {
+  font-size: 1.125rem;
+  line-height: 1.8;
+  color: var(--text-main);
+  margin-bottom: 2rem;
+  font-style: italic;
+  font-family: var(--font-serif);
+}
+
+.author {
+  margin-top: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.author strong {
+  font-size: 0.9rem;
+  color: var(--secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.author span {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.ctaBanner {
+  padding: 8rem 0;
+  text-align: center;
+}
+
+.ctaCard h3 {
+  font-size: 2rem;
+  margin-bottom: 3rem;
+}
+
+.primaryBtn {
+  display: inline-block;
+  background-color: var(--primary);
+  color: white;
+  padding: 1.25rem 2.5rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}

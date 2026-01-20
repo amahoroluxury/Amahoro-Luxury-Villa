@@ -1,0 +1,65 @@
+.wrapper {
+  padding-top: 120px;
+}
+
+.pageHeader {
+  text-align: center;
+  margin-bottom: 6rem;
+}
+
+.pageHeader h1 {
+  font-size: 3rem;
+  margin-bottom: 1.5rem;
+}
+
+.lead {
+  font-size: 1.1rem;
+  color: var(--text-muted);
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.label {
+  display: block;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--primary);
+  margin-bottom: 1.5rem;
+  font-weight: 600;
+}
+
+.grid {
+  display: grid;
+  gap: 4rem;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+
+.policySection {
+  background: var(--surface);
+  padding: 3rem;
+  border: 1px solid var(--border);
+}
+
+.policySection h2 {
+  font-size: 1.5rem;
+  margin-bottom: 2rem;
+  color: var(--secondary);
+}
+
+.policySection p, .policySection li {
+  font-size: 1rem;
+  line-height: 1.8;
+  color: var(--text-muted);
+}
+
+.policySection ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.policySection li strong {
+  color: var(--secondary);
+}

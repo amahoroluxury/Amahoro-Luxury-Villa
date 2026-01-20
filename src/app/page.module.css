@@ -1,0 +1,166 @@
+.wrapper {
+  min-height: 100vh;
+}
+
+.hero {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('https://images.unsplash.com/photo-1613490493576-7fde63acd811?q=80&w=2071&auto=format&fit=crop') center/cover no-repeat;
+  color: white;
+}
+
+.heroContent {
+  max-width: 800px;
+}
+
+.title {
+  font-size: 3.5rem;
+  line-height: 1.1;
+  margin-bottom: 1.5rem;
+  color: white;
+}
+
+@media (min-width: 768px) {
+  .title {
+    font-size: 5rem;
+  }
+}
+
+.subtitle {
+  font-size: 1.25rem;
+  margin-bottom: 3rem;
+  opacity: 0.95;
+  font-family: var(--font-sans);
+  font-weight: 300;
+  max-width: 600px;
+}
+
+.heroActions {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+}
+
+.primaryBtn {
+  background-color: var(--primary);
+  color: white;
+  padding: 1.25rem 2.5rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+.primaryBtn:hover {
+  background-color: var(--primary-light);
+  transform: translateY(-2px);
+}
+
+.secondaryBtn {
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  border-bottom: 1px solid white;
+  padding-bottom: 5px;
+}
+
+.introGrid {
+  display: grid;
+  gap: 5rem;
+}
+
+@media (min-width: 1024px) {
+  .introGrid {
+    grid-template-columns: 1.2fr 1fr;
+    align-items: flex-start;
+  }
+}
+
+.label {
+  display: block;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--primary);
+  margin-bottom: 1.5rem;
+  font-weight: 600;
+}
+
+.introText h2 {
+  font-size: 2.5rem;
+  margin-bottom: 2rem;
+  color: var(--secondary);
+}
+
+@media (min-width: 768px) {
+  .introText h2 {
+    font-size: 3.5rem;
+  }
+}
+
+.introText p {
+  font-size: 1.125rem;
+  line-height: 1.9;
+  color: var(--text-muted);
+  margin-bottom: 2rem;
+}
+
+.textLink {
+  font-weight: 600;
+  color: var(--primary);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+}
+
+.highlights {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.highlightCard {
+  padding: 2.5rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  transition: var(--transition-smooth);
+}
+
+.highlightCard:hover {
+  border-color: var(--primary);
+  transform: translateY(-5px);
+}
+
+.highlightCard h3 {
+  font-size: 1.25rem;
+  margin-bottom: 1rem;
+}
+
+.highlightCard p {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+.ctaSection {
+  text-align: center;
+  background-color: var(--surface);
+}
+
+.ctaCard {
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.ctaCard h2 {
+  font-size: 2.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.ctaCard p {
+  font-size: 1.1rem;
+  color: var(--text-muted);
+  margin-bottom: 3rem;
+}

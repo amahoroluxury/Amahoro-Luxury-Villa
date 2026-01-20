@@ -1,0 +1,4 @@
+- Pricing: Per night (USD)
+- Deposit: 50% minimum to confirm
+- Balance: Must be paid before check-in (online or offline)
+- Calendar: Manual now, sync later

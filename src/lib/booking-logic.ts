@@ -18,7 +18,7 @@ export async function getAvailability(checkIn: Date, checkOut: Date) {
   const requestedEnd = startOfDay(checkOut);
 
   // Check manual blocks
-  const isBlocked = blockedDates.some(block => {
+  const isBlocked = blockedDates.some((block: any) => {
     const blockDate = startOfDay(block.date);
     return blockDate >= requestedStart && blockDate < requestedEnd;
   });
@@ -26,7 +26,7 @@ export async function getAvailability(checkIn: Date, checkOut: Date) {
   if (isBlocked) return false;
 
   // Check booking overlaps
-  const hasOverlap = confirmedBookings.some(booking => {
+  const hasOverlap = confirmedBookings.some((booking: any) => {
     const bookingStart = startOfDay(booking.checkIn);
     const bookingEnd = startOfDay(booking.checkOut);
     

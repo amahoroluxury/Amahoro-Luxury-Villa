@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import styles from './rooms.module.css';
 
 const rooms = [
@@ -50,9 +51,11 @@ export default function RoomsPage() {
           {rooms.map((room, index) => (
             <div key={room.id} className={`${styles.roomRow} ${index % 2 !== 0 ? styles.reverse : ''}`}>
               <div className={styles.roomImage}>
-                <div 
-                  className={styles.img} 
-                  style={{ '--bg-image': `url(${room.image})` } as React.CSSProperties}
+                <Image 
+                  src={room.image} 
+                  alt={room.name}
+                  fill
+                  className={styles.img}
                 />
               </div>
               <div className={styles.roomContent}>

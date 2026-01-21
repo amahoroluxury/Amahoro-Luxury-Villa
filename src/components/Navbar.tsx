@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import Logo from '@/components/Logo';
 import { usePathname } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
@@ -41,7 +42,7 @@ export default function Navbar() {
       <div className="container">
         <div className={styles.navContainer}>
           <Link href="/" className={styles.logo}>
-            AMAHORO
+            <Logo height={scrolled ? 70 : 90} className={styles.navLogo} />
           </Link>
 
           <div className={styles.desktopLinks}>
@@ -79,7 +80,9 @@ export default function Navbar() {
             className={styles.mobilePanel}
           >
             <div className={styles.mobileHeader}>
-              <div className={styles.logo}>AMAHORO</div>
+              <div className={styles.logo}>
+                <Logo height={80} />
+              </div>
               <button 
                 className={styles.mobileClose} 
                 onClick={() => setIsOpen(false)}

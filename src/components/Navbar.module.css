@@ -23,11 +23,20 @@
 }
 
 .logo {
-  font-family: var(--font-serif);
-  font-size: 1.25rem;
-  letter-spacing: 0.2em;
-  font-weight: 600;
-  color: var(--secondary);
+  display: flex;
+  align-items: center;
+}
+
+.logoImage {
+  height: 90px;
+  width: auto;
+  object-fit: contain;
+}
+
+@media (min-width: 1024px) {
+  .logoImage {
+    height: 120px;
+  }
 }
 
 .desktopLinks {

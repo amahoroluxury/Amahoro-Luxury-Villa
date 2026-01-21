@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import styles from './page.module.css';
 import InstagramFeed from '@/components/InstagramFeed';
+import GuestFavoriteBanner from '@/components/GuestFavoriteBanner';
 
 export default function Home() {
   return (
@@ -51,6 +52,8 @@ export default function Home() {
       </section>
       
       {/* Featured Rooms Preview Section would go here */}
+      
+      <GuestFavoriteBanner />
       
       <InstagramFeed />
 

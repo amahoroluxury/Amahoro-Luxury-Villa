@@ -1,0 +1,20 @@
+.logoContainer {
+  display: inline-flex;
+  align-items: center;
+}
+
+.height_70 { height: 70px; }
+.height_80 { height: 80px; }
+.height_90 { height: 90px; }
+.height_120 { height: 120px; }
+.height_140 { height: 140px; }
+.height_200 { height: 200px; }
+
+.svg {
+  height: 100%;
+  width: auto;
+}
+
+.luxuryVillaText {
+  text-transform: uppercase;
+}

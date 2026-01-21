@@ -1,0 +1,158 @@
+.bannerSection {
+  padding: 3rem 1rem;
+  background-color: #fff;
+  display: flex;
+  justify-content: center;
+}
+
+.bannerCard {
+  background: white;
+  border: 1px solid #DDDDDD; /* Airbnb specific light gray */
+  border-radius: 24px; /* Slightly more rounded */
+  padding: 1.5rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: none; /* Airbnb usually flat or very subtle */
+  max-width: 900px;
+  width: 100%;
+  flex-wrap: nowrap;
+  gap: 2rem;
+  font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, Helvetica Neue, sans-serif;
+}
+
+.leftSection {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  flex-shrink: 0;
+}
+
+.laurelIcon {
+  height: 54px; /* Slightly larger */
+  width: auto;
+  color: #E31C5F; /* The user screenshot showed Gold/Yellow, but Airbnb Guest Favorite is often a gold trophy or laurel? Wait, the Airbnb 'Guest Favorite' badge is usually a laurel wreath. Let's stick to the gold provided in previous steps but refine the tone if needed. Actually standard Guest Favorite on Airbnb is often black or white on image, but gold/yellow in banner. */ 
+  fill: #FFD700; /* Gold */
+  color: #C19B23; /* A more metallic gold */
+}
+
+.flipped {
+  transform: scaleX(-1);
+}
+
+.badgeText {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  line-height: 0.95;
+  margin: 0 -8px; /* Pull laurels closer */
+  z-index: 1;
+}
+
+.guestFavorite {
+  font-weight: 800; /* Extra bold */
+  font-size: 1.15rem;
+  color: #222222;
+  text-transform: capitalize;
+  letter-spacing: -0.03em;
+}
+
+.centerText {
+  flex: 1;
+  text-align: center;
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: #222222;
+  margin: 0 1rem;
+  line-height: 1.4;
+  max-width: 400px;
+}
+
+.rightSection {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem; /* Tighter gap */
+  flex-shrink: 0;
+}
+
+.ratingBlock {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  line-height: 1;
+}
+
+.ratingValue {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: #222;
+  margin-bottom: 2px;
+}
+
+.stars {
+  color: #222;
+  font-size: 0.6rem;
+  letter-spacing: 0;
+  display: flex;
+  gap: 1px;
+}
+
+.separator {
+  width: 1px;
+  height: 44px;
+  background-color: #DDDDDD;
+  margin: 0 0.5rem;
+}
+
+.reviewCountBlock {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  line-height: 1;
+}
+
+.reviewCount {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: #222;
+  margin-bottom: 2px;
+}
+
+.reviewLabel {
+  font-size: 0.75rem;
+  text-decoration: underline;
+  color: #222;
+  font-weight: 600;
+  cursor: pointer;
+  letter-spacing: 0.02em;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 900px) {
+  .bannerCard {
+    flex-direction: column;
+    text-align: center;
+    padding: 2rem 1.5rem;
+    gap: 1.5rem;
+  }
+  
+  .leftSection {
+    margin-bottom: 0.5rem;
+  }
+  
+  .centerText {
+    order: 2; /* Move text below stats on mobile if preferred, or keep middle. */
+    margin: 0;
+    font-size: 1.25rem;
+  }
+
+  .rightSection {
+    order: 3;
+    width: 100%;
+    justify-content: center;
+    gap: 2rem;
+  }
+}

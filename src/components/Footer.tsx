@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import styles from './Footer.module.css';
+import Logo from '@/components/Logo';
 
 export default function Footer() {
   return (
@@ -7,7 +8,9 @@ export default function Footer() {
       <div className="container">
         <div className={styles.grid}>
           <div className={styles.brand}>
-            <h2 className={styles.logo}>AMAHORO</h2>
+            <Link href="/" className={styles.logoLink}>
+              <Logo height={140} />
+            </Link>
             <p className={styles.tagline}>A Sanctuary of Peace in the Heart of Kigali.</p>
           </div>
           
@@ -41,7 +44,13 @@ export default function Footer() {
         </div>
         
         <div className={styles.bottom}>
-          <p>&copy; {new Date().getFullYear()}  Amahoro Luxury Villa . All rights reserved.</p>
+          <p>&copy; {new Date().getFullYear()} Amahoro Luxury Villa. All rights reserved.</p>
+          <p className={styles.developer}>
+            Developed by{' '}
+            <a href="https://getrwanda.rw/" target="_blank" rel="noopener noreferrer">
+              #TeamGet
+            </a>
+          </p>
           <div className={styles.legal}>
             <Link href="/policies">Policies</Link>
             <Link href="/privacy">Privacy</Link>

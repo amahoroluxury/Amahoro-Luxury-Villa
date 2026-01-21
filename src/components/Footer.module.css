@@ -16,12 +16,15 @@
   }
 }
 
-.logo {
-  font-family: var(--font-serif);
-  font-size: 1.5rem;
-  letter-spacing: 0.2em;
+.logoLink {
+  display: inline-block;
   margin-bottom: 1rem;
-  color: var(--primary);
+}
+
+.logoImage {
+  height: 200px;
+  width: auto;
+  object-fit: contain;
 }
 
 .tagline {
@@ -85,5 +88,21 @@
 }
 
 .legal a:hover {
+  text-decoration: underline;
+}
+
+.developer {
+  font-weight: 500;
+}
+
+.developer a {
+  color: var(--primary);
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.2s ease;
+}
+
+.developer a:hover {
+  color: var(--secondary);
   text-decoration: underline;
 }

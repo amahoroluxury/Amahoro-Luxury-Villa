@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import styles from './about.module.css';
+import Reviews from '@/components/Reviews';
 
 export default function AboutPage() {
   return (
@@ -52,6 +53,8 @@ export default function AboutPage() {
           </div>
         </div>
       </section>
+
+      <Reviews />
     </div>
   );
 }

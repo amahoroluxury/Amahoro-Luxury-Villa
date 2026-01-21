@@ -16,7 +16,7 @@ export default function LocationPage() {
           <span className={styles.label}>The Neighborhood</span>
           <h1>Stay close to everything—without the noise</h1>
           <p className={styles.lead}>
-            Located in the upscale community of Kibagabaga, Amahoro Luxury Villa is surrounded by top-rated restaurants, gyms, pharmacies, and hospitals.
+            Located in the upscale community of Kibagabaga,  Amahoro Luxury Villa  is surrounded by top-rated restaurants, gyms, pharmacies, and hospitals.
           </p>
         </div>
       </header>
@@ -41,7 +41,7 @@ export default function LocationPage() {
             <div className={styles.info}>
               <h2>Prime Location in Kibagabaga</h2>
               <p>
-                Amahoro Luxury Villa offers the perfect balance of serenity and accessibility. 
+                Amahoro Luxury Villa  offers the perfect balance of serenity and accessibility. 
                 Whether you’re here for business or leisure, you’ll find everything you need within minutes.
               </p>
               <ul className={styles.localLinks}>

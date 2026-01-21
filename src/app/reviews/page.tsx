@@ -31,7 +31,7 @@ const reviews = [
     name: 'Marcus Williams',
     location: 'United States',
     rating: 5,
-    text: 'Amahoro Villa exceeded our expectations. Spacious, clean, and in a great location. Close to great restaurants but far enough from the noise to truly relax.'
+    text: ' Amahoro Luxury Villa  exceeded our expectations. Spacious, clean, and in a great location. Close to great restaurants but far enough from the noise to truly relax.'
   },
 ];
 
@@ -43,7 +43,7 @@ export default function ReviewsPage() {
           <span className={styles.label}>Testimonials</span>
           <h1>Trusted by guests from around the world</h1>
           <p className={styles.lead}>
-            Our guests share their experiences of peace, luxury, and hospitality at Amahoro Villa.
+            Our guests share their experiences of peace, luxury, and hospitality at  Amahoro Luxury Villa .
           </p>
         </div>
       </header>
@@ -72,7 +72,7 @@ export default function ReviewsPage() {
       <section className={styles.ctaBanner}>
         <div className="container">
           <div className={styles.ctaCard}>
-            <h3>Ready to create your own story at Amahoro?</h3>
+            <h3>Ready to create your own story at  Amahoro Luxury Villa ?</h3>
             <Link href="/book" className={styles.primaryBtn}>Check Availability</Link>
           </div>
         </div>

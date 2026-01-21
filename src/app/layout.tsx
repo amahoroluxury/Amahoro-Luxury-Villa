@@ -17,8 +17,8 @@ const playfair = Playfair_Display({
 });
 
 export const metadata: Metadata = {
-  title: "Amahoro Luxury Villa | Luxury Villa Stay in Kigali",
-  description: "Amahoro Luxury Villa — Kigali's premier luxury short-term rental home. Experience Afro-Modern luxury, comfort, and unforgettable hospitality.",
+  title: " Amahoro Luxury Villa  | Luxury Villa Stay in Kigali",
+  description: " Amahoro Luxury Villa  — Kigali's premier luxury short-term rental home. Experience Afro-Modern luxury, comfort, and unforgettable hospitality.",
   keywords: "luxury villa Kigali, Kibagabaga villa rental, Kigali short-term rental",
 };
 

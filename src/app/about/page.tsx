@@ -6,7 +6,7 @@ export default function AboutPage() {
     <div className={styles.wrapper}>
       <section className={styles.hero}>
         <div className="container">
-          <h1 className={styles.heroTitle}>Amahoro means Peace</h1>
+          <h1 className={styles.heroTitle}> Amahoro Luxury Villa  means Peace</h1>
         </div>
       </section>
 
@@ -17,7 +17,7 @@ export default function AboutPage() {
               <span className={styles.label}>Our Story</span>
               <h2>A Sanctuary of Calm</h2>
               <p>
-                Amahoro means peace in Kinyarwanda. It embodies the spirit of calm that defines our villa. 
+                 Amahoro Luxury Villa  means peace in Kinyarwanda. It embodies the spirit of calm that defines our villa. 
                 We celebrate Rwandan culture through the craftsmanship that went into building and furnishing the home.
               </p>
               <p>
@@ -43,7 +43,7 @@ export default function AboutPage() {
             <div className={styles.expText}>
               <h2>A home built for unforgettable moments</h2>
               <p>
-                From morning coffee at the espresso bar to sunset dinners on the terrace, every space at Amahoro 
+                From morning coffee at the espresso bar to sunset dinners on the terrace, every space at  Amahoro Luxury Villa   
                 is designed to feel warm, elegant, and effortless. Whether you’re hosting family, relaxing with friends, 
                 or enjoying a quiet escape, the villa offers comfort you can truly settle into.
               </p>

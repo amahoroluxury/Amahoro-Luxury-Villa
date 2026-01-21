@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import styles from './page.module.css';
+import InstagramFeed from '@/components/InstagramFeed';
 
 export default function Home() {
   return (
@@ -24,7 +25,7 @@ export default function Home() {
               <span className={styles.label}>Brand Overview</span>
               <h2>Afro-Modern Comfort.<br />Kigali Energy. Private Peace.</h2>
               <p>
-                Amahoro Luxury Villa is for couples, families and friends to relax, and reconnect. 
+                Amahoro Luxury Villa  is for couples, families and friends to relax, and reconnect. 
                 It offers private indoor/outdoor living, a rare find in Kigali. 
                 Have a local chef prepare an outdoor barbecue or an intimate dinner in a spacious modern home 
                 with views facing the hills of Kigali.
@@ -51,10 +52,12 @@ export default function Home() {
       
       {/* Featured Rooms Preview Section would go here */}
       
+      <InstagramFeed />
+
       <section className={`${styles.ctaSection} section-padding`}>
         <div className="container">
           <div className={styles.ctaCard}>
-            <h2>Ready to experience Amahoro?</h2>
+            <h2>Ready to experience  Amahoro Luxury Villa ?</h2>
             <p>Book your stay in Kigali&apos;s most peaceful luxury retreat.</p>
             <Link href="/book" className={styles.primaryBtn}>Check Availability</Link>
           </div>

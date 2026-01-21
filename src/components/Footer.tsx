@@ -41,7 +41,7 @@ export default function Footer() {
         </div>
         
         <div className={styles.bottom}>
-          <p>&copy; {new Date().getFullYear()} Amahoro Luxury Villa. All rights reserved.</p>
+          <p>&copy; {new Date().getFullYear()}  Amahoro Luxury Villa . All rights reserved.</p>
           <div className={styles.legal}>
             <Link href="/policies">Policies</Link>
             <Link href="/privacy">Privacy</Link>

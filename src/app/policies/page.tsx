@@ -48,7 +48,7 @@ export default function PoliciesPage() {
             <div className={styles.policySection}>
               <h2>Safety & Privacy</h2>
               <p>
-                Amahoro Villa is located in a secure gated neighborhood with 24/7 security. 
+                Amahoro Luxury Villa  is located in a secure gated neighborhood with 24/7 security. 
                 Our house manager is available on-site for any assistance during your stay. 
                 Your privacy is our priority—the entire villa is for your exclusive use.
               </p>

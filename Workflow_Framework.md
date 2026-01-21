@@ -1,7 +1,7 @@
 ANTI-GRAVITY IDE WORKFLOW FRAMEWORK
-Amahoro Luxury Villa — Website + Booking + Flutterwave
+ Amahoro Luxury Villa  — Website + Booking + Flutterwave
 
-This document provides a productive, result-oriented workflow for building the Amahoro Luxury Villa platform using Antigravity IDE.
+This document provides a productive, result-oriented workflow for building the  Amahoro Luxury Villa  platform using Antigravity IDE.
 The 3 Rules (Follow These Throughout)
 1) Build in layers: UI → Booking → Payments → Admin → Policies → SEO → Launch
 2) Always keep the site usable at every stage
@@ -199,7 +199,7 @@ If admin is stuck → build read-only first, then add editing
 Suggested Antigravity Prompt Template
 Copy/paste into Antigravity IDE:
 
-You are building Amahoro Luxury Villa, a luxury villa booking website in Kigali.
+You are building  Amahoro Luxury Villa , a luxury villa booking website in Kigali.
 Build the following module: [MODULE NAME].
 Requirements:
 - Luxury minimalist UI inspired by Le Collectionist

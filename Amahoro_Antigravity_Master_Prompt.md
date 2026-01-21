@@ -1,15 +1,15 @@
 ANTI-GRAVITY IDE MASTER PROMPT
-Amahoro Luxury Villa — Website + Booking + Flutterwave
+ Amahoro Luxury Villa  — Website + Booking + Flutterwave
 
 
 MASTER PROMPT (COPY/PASTE INTO ANTIGRAVITY IDE)
 You are an expert full-stack engineer and product designer building a luxury villa booking platform.
 
 PROJECT NAME
-Amahoro Luxury Villa — Luxury Website + Booking + Payments (Flutterwave)
+ Amahoro Luxury Villa  — Luxury Website + Booking + Payments (Flutterwave)
 
 PROJECT GOAL
-Build a premium, conversion-focused website for Amahoro Luxury Villa in Kigali, Rwanda, inspired by Le Collectionist aesthetics : https://www.lecollectionist.com/ (luxury minimalism, photo-led design, smooth navigation), with a complete booking system and secure payments.
+Build a premium, conversion-focused website for  Amahoro Luxury Villa  in Kigali, Rwanda, inspired by Le Collectionist aesthetics : https://www.lecollectionist.com/ (luxury minimalism, photo-led design, smooth navigation), with a complete booking system and secure payments.
 
 The platform must be fast, mobile-first, SEO-ready, and easy for admins to manage.
 
@@ -107,7 +107,7 @@ Sub-headline: Experience Afro-Modern luxury, comfort, and unforgettable hospital
 CTA Button: Book Your Stay
 
 Brand Overview (CLIENT PROVIDED)
-Amahoro Luxury Villa is for couples, families and friends to relax, and reconnect. It offers private indoor/outdoor living, a rare find in Kigali. Have a local chef prepare an outdoor barbecue or an intimate dinner in a spacious modern home with views facing the hills of Kigali.
+ Amahoro Luxury Villa  is for couples, families and friends to relax, and reconnect. It offers private indoor/outdoor living, a rare find in Kigali. Have a local chef prepare an outdoor barbecue or an intimate dinner in a spacious modern home with views facing the hills of Kigali.
 
 Value Proposition (CLIENT PROVIDED)
 - 4 bedrooms and 4 baths
@@ -119,7 +119,7 @@ Value Proposition (CLIENT PROVIDED)
 - We accept monthly rentals
 
 About Page (CLIENT PROVIDED)
-Amahoro means peace in Kinyarwanda. It embodies the spirit of calm that defines our villa. We celebrate Rwandan culture through the craftsmanship that went into building and furnishing the home. The space is intended to have the luxury feel of a 5-star hotel and the comfort and privacy of a home. Our mission is to complement your stay with the level of service that will make your experience memorable.
+ Amahoro Luxury Villa  means peace in Kinyarwanda. It embodies the spirit of calm that defines our villa. We celebrate Rwandan culture through the craftsmanship that went into building and furnishing the home. The space is intended to have the luxury feel of a 5-star hotel and the comfort and privacy of a home. Our mission is to complement your stay with the level of service that will make your experience memorable.
 
 Rooms & Suites (CLIENT PROVIDED)
 MASTER SUITE:
@@ -160,7 +160,7 @@ Amenities (CLIENT PROVIDED)
 - Optional private chef (request)
 
 Location (CLIENT PROVIDED)
-Located in the upscale community of Kibagabaga, Amahoro Luxury Villa is surrounded by top-rated restaurants, gyms, pharmacies, hospitals, and supermarkets. Only 15 minutes from Kigali International Airport and 12 minutes from Kigali Convention Centre.
+Located in the upscale community of Kibagabaga,  Amahoro Luxury Villa  is surrounded by top-rated restaurants, gyms, pharmacies, hospitals, and supermarkets. Only 15 minutes from Kigali International Airport and 12 minutes from Kigali Convention Centre.
 
 FAQ (CLIENT PROVIDED)
 Q: Is airport pickup available?
@@ -183,7 +183,7 @@ Policies (CLIENT PROVIDED)
 
 SEO (CLIENT PROVIDED)
 Primary Keywords: luxury villa Kigali, Kibagabaga villa rental, Kigali short-term rental
-Meta Description: Amahoro Luxury Villa — Kigali’s premier luxury short-term rental home. Book your stay today.
+Meta Description:  Amahoro Luxury Villa  — Kigali’s premier luxury short-term rental home. Book your stay today.
 
 3) BOOKING FLOW UX (MUST BUILD)
 

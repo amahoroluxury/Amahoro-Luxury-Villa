@@ -1,0 +1,88 @@
+.section {
+  background-color: #f9f9f9;
+}
+
+.title {
+  text-align: center;
+  margin-bottom: 2rem;
+  font-family: var(--font-heading, sans-serif);
+  color: #333;
+}
+
+.handle {
+  display: block;
+  font-size: 1rem;
+  color: #666;
+  font-weight: normal;
+  margin-top: 0.5rem;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+
+@media (min-width: 768px) {
+  .grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.item {
+  position: relative;
+  aspect-ratio: 1;
+  overflow: hidden;
+  border-radius: 8px;
+}
+
+.instagramOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  color: white;
+  font-weight: bold;
+}
+
+.item:hover .instagramOverlay {
+  opacity: 1;
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.item:hover .image {
+  transform: scale(1.05);
+}
+
+.ctaContainer {
+  text-align: center;
+  margin-top: 2rem;
+}
+
+.button {
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  background-color: #E1306C; /* Instagram Color */
+  color: white;
+  text-decoration: none;
+  border-radius: 4px;
+  font-weight: 500;
+  transition: background-color 0.2s;
+}
+
+.button:hover {
+  background-color: #C13584;
+}

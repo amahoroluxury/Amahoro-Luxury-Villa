@@ -38,7 +38,7 @@ export async function POST(request: Request) {
           payment_type: type,
         },
         customizations: {
-          title: 'Amahoro Luxury Villa',
+          title: ' Amahoro Luxury Villa ',
           description: `Payment for stay: ${type}`,
           logo: 'https://amahoroluxury.com/logo.png',
         },

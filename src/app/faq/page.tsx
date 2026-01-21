@@ -23,7 +23,7 @@ const faqs = [
   },
   {
     question: 'Is the villa suitable for families?',
-    answer: 'Absolutely. Amahoro is ideal for families, offering 4 private bedrooms, a large garden for children to play, and a secure environment.'
+    answer: 'Absolutely.  Amahoro Luxury Villa  is ideal for families, offering 4 private bedrooms, a large garden for children to play, and a secure environment.'
   },
   {
     question: 'Do you offer monthly rentals?',
@@ -45,7 +45,7 @@ export default function FAQPage() {
           <span className={styles.label}>Common Questions</span>
           <h1>Everything you need to know</h1>
           <p className={styles.lead}>
-            Find answers to common questions about your stay at Amahoro Luxury Villa.
+            Find answers to common questions about your stay at  Amahoro Luxury Villa .
           </p>
         </div>
       </header>

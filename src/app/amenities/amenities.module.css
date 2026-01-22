@@ -9,7 +9,7 @@
   justify-content: center;
   text-align: center;
   background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), 
-              url('https://images.unsplash.com/photo-1621293954908-907159247fc8?q=80&w=2070&auto=format&fit=crop') center/cover no-repeat;
+              url('/images/gallery/gallery-8.jpg') center/cover no-repeat;
   color: white;
   padding: 150px 0 6rem;
 }

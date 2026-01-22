@@ -10,7 +10,7 @@ interface LogoProps {
 
 const Logo: React.FC<LogoProps> = ({ className, height = 60, variant = 'full', theme = 'dark' }) => {
   // Determine height class if predefined
-  const heightClass = typeof height === 'number' && [70, 80, 90, 120, 140, 200].includes(height) 
+  const heightClass = typeof height === 'number' && [60, 70, 80, 90, 120, 140, 200].includes(height) 
     ? styles[`height_${height}`] 
     : '';
 

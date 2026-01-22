@@ -9,7 +9,7 @@ export default function Footer() {
         <div className={styles.grid}>
           <div className={styles.brand}>
             <Link href="/" className={styles.logoLink}>
-              <Logo height={140} />
+              <Logo height={80} />
             </Link>
             <p className={styles.tagline}>A Sanctuary of Peace in the Heart of Kigali.</p>
           </div>

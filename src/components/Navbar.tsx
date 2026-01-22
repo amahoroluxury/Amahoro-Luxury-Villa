@@ -41,7 +41,7 @@ export default function Navbar() {
       <div className="container">
         <div className={styles.navContainer}>
           <Link href="/" className={styles.logo}>
-            <Logo height={scrolled ? 70 : 90} className={styles.navLogo} theme={scrolled ? 'dark' : 'light'} />
+            <Logo height={scrolled ? 60 : 80} className={styles.navLogo} theme={scrolled ? 'dark' : 'light'} />
           </Link>
 
           <div className={styles.desktopLinks}>

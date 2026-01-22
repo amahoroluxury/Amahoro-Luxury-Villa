@@ -9,7 +9,6 @@ import { Menu, X } from 'lucide-react';
 import styles from './Navbar.module.css';
 
 const navLinks = [
-  { name: 'Home', href: '/' },
   { name: 'About', href: '/about' },
   { name: 'Rooms', href: '/rooms' },
   { name: 'Amenities', href: '/amenities' },
@@ -42,7 +41,7 @@ export default function Navbar() {
       <div className="container">
         <div className={styles.navContainer}>
           <Link href="/" className={styles.logo}>
-            <Logo height={scrolled ? 70 : 90} className={styles.navLogo} />
+            <Logo height={scrolled ? 70 : 90} className={styles.navLogo} theme={scrolled ? 'dark' : 'light'} />
           </Link>
 
           <div className={styles.desktopLinks}>

@@ -1,31 +1,45 @@
 .wrapper {
-  padding-top: 120px;
+  padding-top: 0;
 }
 
 .pageHeader {
+  min-height: 60vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   text-align: center;
-  margin-bottom: 6rem;
+  background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), 
+              url('https://images.unsplash.com/photo-1526772662000-3f88f10405ff?q=80&w=2034&auto=format&fit=crop') center/cover no-repeat;
+  color: white;
+  padding: 150px 0 6rem;
 }
 
 .pageHeader h1 {
-  font-size: 3rem;
+  font-size: 3.5rem;
   margin-bottom: 1.5rem;
+  color: white;
+}
+
+@media (min-width: 768px) {
+  .pageHeader h1 {
+    font-size: 4.5rem;
+  }
 }
 
 .lead {
   font-size: 1.25rem;
-  color: var(--text-muted);
+  color: rgba(255, 255, 255, 0.95);
   max-width: 800px;
   margin: 0 auto;
-  line-height: 1.6;
+  line-height: 1.8;
 }
 
 .label {
   display: block;
-  font-size: 0.7rem;
+  font-size: 0.75rem;
   text-transform: uppercase;
-  letter-spacing: 0.2em;
-  color: var(--primary);
+  letter-spacing: 0.3em;
+  color: rgba(255, 255, 255, 0.9);
   margin-bottom: 1.5rem;
   font-weight: 600;
 }
@@ -46,6 +60,10 @@
   background-image: url('https://images.unsplash.com/photo-1526772662000-3f88f10405ff?q=80&w=2034&auto=format&fit=crop');
   background-size: cover;
   background-position: center;
+}
+
+.mapPlaceholder iframe {
+  border: 0;
 }
 
 .mapOverlay {

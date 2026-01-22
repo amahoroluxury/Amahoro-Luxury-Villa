@@ -1,5 +1,7 @@
 .wrapper {
   min-height: 100vh;
+  margin: 0;
+  padding: 0;
 }
 
 .hero {
@@ -8,6 +10,8 @@
   align-items: center;
   background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('https://images.unsplash.com/photo-1613490493576-7fde63acd811?q=80&w=2071&auto=format&fit=crop') center/cover no-repeat;
   color: white;
+  margin-top: 0;
+  padding-top: 150px;
 }
 
 .heroContent {

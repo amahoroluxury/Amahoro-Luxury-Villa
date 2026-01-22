@@ -2,6 +2,10 @@ import Link from 'next/link';
 import styles from './page.module.css';
 import InstagramFeed from '@/components/InstagramFeed';
 import GuestFavoriteBanner from '@/components/GuestFavoriteBanner';
+import FeaturedSpaces from '@/components/FeaturedSpaces';
+import TestimonialsCarousel from '@/components/TestimonialsCarousel';
+import AmenitiesStrip from '@/components/AmenitiesStrip';
+import MapPreview from '@/components/MapPreview';
 
 export default function Home() {
   return (
@@ -50,12 +54,17 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      <AmenitiesStrip />
       
-      {/* Featured Rooms Preview Section would go here */}
+      <FeaturedSpaces />
       
       <GuestFavoriteBanner />
+      <TestimonialsCarousel />
       
       <InstagramFeed />
+
+      <MapPreview />
 
       <section className={`${styles.ctaSection} section-padding`}>
         <div className="container">

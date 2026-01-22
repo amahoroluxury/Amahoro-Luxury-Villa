@@ -1,4 +1,5 @@
-FUNCTIONAL SPECIFICATION DOCUMENT (FSD)
+# FUNCTIONAL SPECIFICATION DOCUMENT (FSD)
+
  Amahoro Luxury Villa  — Website + Online Booking + Payments (Flutterwave)
 
 Project Name:  Amahoro Luxury Villa  Website & Booking Platform
@@ -7,8 +8,6 @@ Developer: GetRwanda Ltd (#TeamGet)
 Currency: USD
 Calendar: Manual (MVP), Sync in future
 Payment Rule: 50% deposit minimum to confirm; remaining balance must be paid before check-in (online/offline)
-
-
 
 1. Project Overview
  Amahoro Luxury Villa  is a luxury short-term rental villa in Kigali, Rwanda. The client requires a premium, modern website inspired by high-end hospitality aesthetics (e.g., [Le Collectionist](https://www.lecollectionist.com/en)) with smooth navigation and a photo-led or Video-led design.
@@ -46,6 +45,7 @@ Admin Users (Internal):
 • Site admin (GetRwanda support)
 4. Information Architecture (Site Map)
 Public Pages:
+
 1. Home
 2. About
 3. Rooms / Suites

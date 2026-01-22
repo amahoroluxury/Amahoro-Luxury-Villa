@@ -33,10 +33,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${inter.variable} ${playfair.variable}`} suppressHydrationWarning>
       <body>
-        <Navbar />
-        <main>{children}</main>
-        <Footer />
-        {/* Sticky Book Now Button Mobile - to be implemented */}
+        {children}
       </body>
     </html>
   );

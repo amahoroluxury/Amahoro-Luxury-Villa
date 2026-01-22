@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import Logo from '@/components/Logo';
 import styles from './login.module.css';
 
 export default function AdminLoginPage() {
@@ -39,8 +40,11 @@ export default function AdminLoginPage() {
 
   return (
     <div className={styles.wrapper}>
+      <div className={styles.overlay} />
       <div className={styles.loginCard}>
-        <span className={styles.label}>Secure Access</span>
+        <div className={styles.logoWrapper}>
+          <Logo theme="light" height={80} />
+        </div>
         <h1>Admin Portal</h1>
         
         {error && <div className={styles.error}>{error}</div>}
@@ -51,6 +55,7 @@ export default function AdminLoginPage() {
             <input 
               id="email"
               type="email" 
+              placeholder="admin@amahoroluxury.com"
               value={email} 
               onChange={(e) => setEmail(e.target.value)} 
               required 
@@ -61,15 +66,18 @@ export default function AdminLoginPage() {
             <input 
               id="password"
               type="password" 
+              placeholder="••••••••"
               value={password} 
               onChange={(e) => setPassword(e.target.value)} 
               required 
             />
           </div>
           <button type="submit" className={styles.loginBtn} disabled={loading}>
-            {loading ? 'Authenticating...' : 'Login to Dashboard'}
+            {loading ? 'Authenticating...' : 'Sign In'}
           </button>
         </form>
+
+        <a href="/" className={styles.backLink}>← Back to Website</a>
       </div>
     </div>
   );

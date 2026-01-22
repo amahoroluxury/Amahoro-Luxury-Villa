@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server';
 import prisma from '@/lib/prisma';
 import { getAvailability, calculatePrice } from '@/lib/booking-logic';
 import { differenceInDays } from 'date-fns';
+import { sendBookingConfirmation, sendAdminNewBookingNotification } from '@/lib/email';
 
 export async function POST(request: Request) {
   try {
@@ -35,6 +36,24 @@ export async function POST(request: Request) {
         paymentStatus: 'Unpaid',
       }
     });
+
+    // 4. Send email notifications (non-blocking)
+    const emailData = {
+      guestName: name,
+      guestEmail: email,
+      checkIn: new Date(checkIn),
+      checkOut: new Date(checkOut),
+      totalAmountUsd: price.total,
+      depositAmountUsd: price.deposit,
+      bookingId: booking.id,
+      guestsCount: guests,
+    };
+
+    // Fire and forget - don't block the response
+    Promise.all([
+      sendBookingConfirmation(emailData),
+      sendAdminNewBookingNotification(emailData),
+    ]).catch(console.error);
 
     return NextResponse.json({ id: booking.id });
   } catch (error) {

@@ -3,7 +3,7 @@ import { NextResponse } from 'next/server';
 
 export async function POST(request: Request) {
   try {
-    const { bookingId, type } = await request.json(); // type: deposit, full, balance
+    const { bookingId, type, currency = 'USD' } = await request.json(); // type: deposit, full, balance
 
     const booking = await prisma.booking.findUnique({
       where: { id: bookingId },
@@ -13,7 +13,14 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: 'Booking not found' }, { status: 404 });
     }
 
-    const amount = type === 'deposit' ? booking.depositAmountUsd : booking.totalAmountUsd;
+    // Base amount in USD
+    const amountUsd = type === 'deposit' ? booking.depositAmountUsd : booking.totalAmountUsd;
+    
+    // Convert to RWF if requested (simplified for now, using a fixed rate)
+    const RWF_RATE = 1300;
+    const finalAmount = currency === 'RWF' ? Math.round(amountUsd * RWF_RATE) : amountUsd;
+    const finalCurrency = currency;
+    
     const tx_ref = `AMH-${booking.id.slice(0, 8)}-${Date.now()}`;
 
     // Flutterwave Standard Payment Request
@@ -25,8 +32,8 @@ export async function POST(request: Request) {
       },
       body: JSON.stringify({
         tx_ref,
-        amount,
-        currency: 'USD',
+        amount: finalAmount,
+        currency: finalCurrency,
         redirect_url: `${process.env.SITE_URL}/book/payment/verify`,
         customer: {
           email: booking.guestEmail,
@@ -37,10 +44,12 @@ export async function POST(request: Request) {
           booking_id: booking.id,
           payment_type: type,
         },
+        // Force specific options to ensure visibility
+        payment_options: currency === 'RWF' ? 'card,mobilemoneyrwanda' : 'card,paypal',
         customizations: {
           title: ' Amahoro Luxury Villa ',
-          description: `Payment for stay: ${type}`,
-          logo: 'https://amahoroluxury.com/logo.png',
+          description: `Payment for stay: ${type} (${currency})`,
+          logo: 'https://img.icons8.com/color/96/villa.png',
         },
       }),
     });
@@ -53,7 +62,7 @@ export async function POST(request: Request) {
         data: {
           bookingId: booking.id,
           flutterwaveTxRef: tx_ref,
-          amountUsd: amount,
+          amountUsd: amountUsd, // Store the USD value for accounting
           type,
           status: 'pending',
         }

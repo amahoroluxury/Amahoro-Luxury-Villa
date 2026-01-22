@@ -69,7 +69,7 @@ export default function BookingForm() {
 
       const data = await res.json();
       if (res.ok) {
-        router.push(`/book/confirmation/${data.id}`);
+        router.push(`/book/payment/${data.id}`);
       } else {
         setError(data.error || 'Failed to create booking.');
       }

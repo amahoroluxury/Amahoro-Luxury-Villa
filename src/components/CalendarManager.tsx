@@ -19,7 +19,7 @@ export default function CalendarManager({ initialBlocked }: Props) {
     
     setLoading(true);
     try {
-      const res = await fetch('/api/admin/calendar/block', {
+      const res = await fetch('/api/admin/calendar', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ date, reason }),

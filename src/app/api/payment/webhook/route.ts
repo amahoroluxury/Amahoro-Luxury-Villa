@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import prisma from '@/lib/prisma';
-import crypto from 'crypto';
+import { sendPaymentConfirmation, sendAdminPaymentNotification } from '@/lib/email';
 
 export async function POST(request: Request) {
   try {
@@ -12,18 +12,23 @@ export async function POST(request: Request) {
     }
 
     const payload = await request.json();
-    const { status, tx_ref, amount, id: flw_id, meta } = payload.data || payload;
+    const { status, tx_ref, amount: flwAmount, id: flw_id, currency: flwCurrency } = payload.data || payload;
+
+    const transaction = await prisma.paymentTransaction.findUnique({
+      where: { flutterwaveTxRef: tx_ref },
+      include: { booking: true },
+    });
+
+    if (!transaction) return NextResponse.json({ received: true });
 
     if (status === 'successful') {
-      const transaction = await prisma.paymentTransaction.findUnique({
-        where: { flutterwaveTxRef: tx_ref },
-        include: { booking: true },
-      });
-
-      if (transaction && transaction.status !== 'success') {
+      if (transaction.status !== 'success') {
         const booking = transaction.booking;
-        const newPaidAmount = booking.amountPaidUsd + amount;
-        const isFullyPaid = newPaidAmount >= booking.totalAmountUsd;
+        
+        // Convert RWF back to USD for internal tracking
+        const paidAmountUsd = flwCurrency === 'RWF' ? (flwAmount / 1300) : flwAmount;
+        const newPaidAmount = booking.amountPaidUsd + paidAmountUsd;
+        const isFullyPaid = (booking.totalAmountUsd - newPaidAmount) < 0.01;
 
         // Update Transaction
         await prisma.paymentTransaction.update({
@@ -39,12 +44,37 @@ export async function POST(request: Request) {
           where: { id: booking.id },
           data: {
             amountPaidUsd: newPaidAmount,
-            balanceDueUsd: booking.totalAmountUsd - newPaidAmount,
+            balanceDueUsd: Math.max(0, booking.totalAmountUsd - newPaidAmount),
             status: isFullyPaid ? 'FullyPaid' : 'DepositPaid',
             paymentStatus: isFullyPaid ? 'Paid' : 'Partial',
           },
         });
+
+        // Send email notifications (non-blocking)
+        const emailData = {
+          guestName: booking.guestName,
+          guestEmail: booking.guestEmail,
+          checkIn: booking.checkIn,
+          checkOut: booking.checkOut,
+          totalAmountUsd: booking.totalAmountUsd,
+          depositAmountUsd: booking.depositAmountUsd,
+          bookingId: booking.id,
+          guestsCount: booking.guestsCount,
+          amountPaid: paidAmountUsd,
+          isFullyPaid,
+          balanceDue: Math.max(0, booking.totalAmountUsd - newPaidAmount),
+        };
+
+        Promise.all([
+          sendPaymentConfirmation(emailData),
+          sendAdminPaymentNotification(emailData),
+        ]).catch(console.error);
       }
+    } else if (status === 'failed') {
+      await prisma.paymentTransaction.update({
+        where: { id: transaction.id },
+        data: { status: 'failed' },
+      });
     }
 
     return NextResponse.json({ received: true });
@@ -53,3 +83,4 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
   }
 }
+

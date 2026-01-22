@@ -41,7 +41,7 @@ export async function getAvailability(checkIn: Date, checkOut: Date) {
 }
 
 export function calculatePrice(nights: number) {
-  const nightlyRate = 350; // Base rate USD (should be configurable)
+  const nightlyRate = 10; // Temporarily lowered for testing (Flutterwave $50 limit)
   const total = nights * nightlyRate;
   const deposit = total * 0.5;
   const balance = total - deposit;

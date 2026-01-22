@@ -121,4 +121,95 @@
   font-weight: 600;
   letter-spacing: 0.1em;
   text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.secondaryBtn:hover:not(:disabled) {
+  border-color: var(--primary);
+  color: var(--primary);
+}
+
+.primaryBtn:disabled,
+.secondaryBtn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.dangerBtn {
+  background: transparent;
+  border: 1px solid #dc2626;
+  color: #dc2626;
+  padding: 1rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  cursor: pointer;
+  margin-top: 2rem;
+  width: 100%;
+  transition: all 0.2s ease;
+}
+
+.dangerBtn:hover:not(:disabled) {
+  background: #dc2626;
+  color: white;
+}
+
+.success {
+  background: #dcfce7;
+  color: #166534;
+  padding: 1rem;
+  margin-bottom: 2rem;
+  border: 1px solid #bbf7d0;
+}
+
+.error {
+  background: #fef2f2;
+  color: #dc2626;
+  padding: 1rem;
+  margin-bottom: 2rem;
+  border: 1px solid #fecaca;
+}
+
+.paid {
+  color: #16a34a !important;
+}
+
+.cancelled {
+  background: #fef2f2;
+  color: #dc2626;
+}
+
+.paymentLinkBox {
+  margin-top: 1.5rem;
+  padding: 1rem;
+  background: var(--background);
+  border: 1px solid var(--border);
+}
+
+.paymentLinkBox label {
+  display: block;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 0.5rem;
+}
+
+.paymentLinkBox input {
+  width: 100%;
+  padding: 0.75rem;
+  font-size: 0.85rem;
+  border: 1px solid var(--border);
+  margin-bottom: 0.5rem;
+}
+
+.copyBtn {
+  background: var(--primary);
+  color: white;
+  padding: 0.5rem 1rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
 }

@@ -16,14 +16,23 @@ export default function AdminLoginPage() {
     setLoading(true);
     setError('');
 
-    // For MVP/Demo purposes, we use a simple check. 
-    // In production, this would use NextAuth or a proper JWT strategy.
-    if (email === 'admin@amahoroluxury.com' && password === 'Amahoro2026!') {
-      // Simulate auth cookie/session
-      document.cookie = "admin_session=true; path=/;";
-      router.push('/admin/bookings');
-    } else {
-      setError('Invalid email or password.');
+    try {
+      const res = await fetch('/api/admin/auth', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password }),
+      });
+
+      const data = await res.json();
+
+      if (res.ok) {
+        router.push(data.redirect || '/admin/bookings');
+      } else {
+        setError(data.error || 'Invalid email or password.');
+      }
+    } catch (err) {
+      setError('An error occurred. Please try again.');
+    } finally {
       setLoading(false);
     }
   };

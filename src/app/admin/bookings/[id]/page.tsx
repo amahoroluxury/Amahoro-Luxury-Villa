@@ -1,18 +1,163 @@
+'use client';
+
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import prisma from '@/lib/prisma';
 import { format } from 'date-fns';
 import styles from './details.module.css';
 
-async function getBooking(id: string) {
-  return await prisma.booking.findUnique({
-    where: { id },
-  });
+interface Booking {
+  id: string;
+  guestName: string;
+  guestEmail: string;
+  guestPhone: string;
+  checkIn: string;
+  checkOut: string;
+  guestsCount: number;
+  specialRequests: string | null;
+  totalAmountUsd: number;
+  depositAmountUsd: number;
+  amountPaidUsd: number;
+  balanceDueUsd: number;
+  status: string;
+  paymentStatus: string;
+  createdAt: string;
 }
 
-export default async function BookingDetailsPage({ params }: { params: { id: string } }) {
-  const booking = await getBooking(params.id);
+export default function BookingDetailsPage({ params }: { params: { id: string } }) {
+  const [booking, setBooking] = useState<Booking | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [actionLoading, setActionLoading] = useState(false);
+  const [paymentLink, setPaymentLink] = useState('');
+  const [message, setMessage] = useState('');
+  const [error, setError] = useState('');
 
-  if (!booking) return <div>Booking not found</div>;
+  useEffect(() => {
+    fetchBooking();
+  }, [params.id]);
+
+  async function fetchBooking() {
+    try {
+      const res = await fetch(`/api/booking/${params.id}`);
+      if (res.ok) {
+        const data = await res.json();
+        setBooking(data);
+      } else {
+        setError('Booking not found');
+      }
+    } catch (err) {
+      setError('Failed to load booking');
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  async function handleMarkPaid() {
+    if (!booking) return;
+    
+    setActionLoading(true);
+    setMessage('');
+    setError('');
+
+    try {
+      const res = await fetch(`/api/admin/bookings/${params.id}/mark-paid`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ amount: booking.balanceDueUsd }),
+      });
+
+      const data = await res.json();
+
+      if (res.ok) {
+        setMessage(data.message);
+        fetchBooking(); // Refresh booking data
+      } else {
+        setError(data.error || 'Failed to mark as paid');
+      }
+    } catch (err) {
+      setError('An error occurred');
+    } finally {
+      setActionLoading(false);
+    }
+  }
+
+  async function handleGenerateLink() {
+    setActionLoading(true);
+    setMessage('');
+    setError('');
+    setPaymentLink('');
+
+    try {
+      const res = await fetch(`/api/admin/bookings/${params.id}/payment-link`, {
+        method: 'POST',
+      });
+
+      const data = await res.json();
+
+      if (res.ok) {
+        setPaymentLink(data.link);
+        setMessage(`Payment link generated for $${data.amount.toFixed(2)}`);
+      } else {
+        setError(data.error || 'Failed to generate link');
+      }
+    } catch (err) {
+      setError('An error occurred');
+    } finally {
+      setActionLoading(false);
+    }
+  }
+
+  async function handleCancel() {
+    if (!confirm('Are you sure you want to cancel this booking?')) return;
+    
+    setActionLoading(true);
+    setError('');
+
+    try {
+      const res = await fetch(`/api/booking/${params.id}`, {
+        method: 'DELETE',
+      });
+
+      if (res.ok) {
+        fetchBooking();
+        setMessage('Booking cancelled');
+      } else {
+        setError('Failed to cancel booking');
+      }
+    } catch (err) {
+      setError('An error occurred');
+    } finally {
+      setActionLoading(false);
+    }
+  }
+
+  function copyToClipboard() {
+    navigator.clipboard.writeText(paymentLink);
+    setMessage('Link copied to clipboard!');
+  }
+
+  if (loading) {
+    return (
+      <div className={styles.wrapper}>
+        <div className="container">
+          <p>Loading...</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (!booking) {
+    return (
+      <div className={styles.wrapper}>
+        <div className="container">
+          <p>{error || 'Booking not found'}</p>
+          <Link href="/admin/bookings">Back to Bookings</Link>
+        </div>
+      </div>
+    );
+  }
+
+  const isCancelled = booking.status === 'Cancelled';
+  const isFullyPaid = booking.status === 'FullyPaid';
 
   return (
     <div className={styles.wrapper}>
@@ -27,6 +172,9 @@ export default async function BookingDetailsPage({ params }: { params: { id: str
 
       <main className="section-padding">
         <div className="container">
+          {message && <div className={styles.success}>{message}</div>}
+          {error && <div className={styles.error}>{error}</div>}
+
           <div className={styles.grid}>
             <div className={styles.mainInfo}>
               <section className={styles.section}>
@@ -52,10 +200,15 @@ export default async function BookingDetailsPage({ params }: { params: { id: str
                 <h2>Stay Details</h2>
                 <div className={styles.infoRow}>
                   <span>Dates:</span> 
-                  <strong>{format(new Date(booking.checkIn), 'MMM dd, yyyy')} - {format(new Date(booking.checkOut), 'MMM dd, yyyy')}</strong>
+                  <strong>
+                    {format(new Date(booking.checkIn), 'MMM dd, yyyy')} - {format(new Date(booking.checkOut), 'MMM dd, yyyy')}
+                  </strong>
                 </div>
                 <div className={styles.infoRow}>
                   <span>Guests:</span> <strong>{booking.guestsCount}</strong>
+                </div>
+                <div className={styles.infoRow}>
+                  <span>Booked On:</span> <strong>{format(new Date(booking.createdAt), 'MMM dd, yyyy h:mm a')}</strong>
                 </div>
               </section>
             </div>
@@ -69,19 +222,51 @@ export default async function BookingDetailsPage({ params }: { params: { id: str
                   </span>
                 </div>
                 <div className={styles.infoRow}>
-                  <span>Total Amount:</span> <strong>${booking.totalAmountUsd}</strong>
+                  <span>Total Amount:</span> <strong>${booking.totalAmountUsd.toFixed(2)}</strong>
                 </div>
                 <div className={styles.infoRow}>
-                  <span>Amount Paid:</span> <strong>${booking.amountPaidUsd}</strong>
+                  <span>Amount Paid:</span> <strong className={styles.paid}>${booking.amountPaidUsd.toFixed(2)}</strong>
                 </div>
                 <div className={styles.infoRow}>
-                  <span>Balance Due:</span> <strong className={styles.due}>${booking.balanceDueUsd}</strong>
+                  <span>Balance Due:</span> <strong className={styles.due}>${booking.balanceDueUsd.toFixed(2)}</strong>
                 </div>
 
-                <div className={styles.actions}>
-                  <button className={styles.primaryBtn}>Mark Paid (Offline)</button>
-                  <button className={styles.secondaryBtn}>Generate Balance Link</button>
-                </div>
+                {!isCancelled && !isFullyPaid && (
+                  <div className={styles.actions}>
+                    <button 
+                      className={styles.primaryBtn}
+                      onClick={handleMarkPaid}
+                      disabled={actionLoading || booking.balanceDueUsd <= 0}
+                    >
+                      {actionLoading ? 'Processing...' : 'Mark Paid (Offline)'}
+                    </button>
+                    <button 
+                      className={styles.secondaryBtn}
+                      onClick={handleGenerateLink}
+                      disabled={actionLoading || booking.balanceDueUsd <= 0}
+                    >
+                      {actionLoading ? 'Generating...' : 'Generate Balance Link'}
+                    </button>
+                  </div>
+                )}
+
+                {paymentLink && (
+                  <div className={styles.paymentLinkBox}>
+                    <label>Payment Link:</label>
+                    <input type="text" value={paymentLink} readOnly aria-label="Payment link URL" />
+                    <button onClick={copyToClipboard} className={styles.copyBtn}>Copy</button>
+                  </div>
+                )}
+
+                {!isCancelled && (
+                  <button 
+                    className={styles.dangerBtn}
+                    onClick={handleCancel}
+                    disabled={actionLoading}
+                  >
+                    Cancel Booking
+                  </button>
+                )}
               </section>
             </div>
           </div>

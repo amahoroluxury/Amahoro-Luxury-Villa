@@ -1,50 +1,74 @@
 import Link from 'next/link';
 import prisma from '@/lib/prisma';
+import VisualCalendar from '../../../components/VisualCalendar';
 import CalendarManager from '@/components/CalendarManager';
 import styles from './calendar.module.css';
 
-async function getBlockedDates() {
-  return await prisma.blockedDate.findMany({
-    orderBy: { date: 'asc' },
-  });
+async function getCalendarData() {
+  const [blockedDates, bookings] = await Promise.all([
+    prisma.blockedDate.findMany({
+      orderBy: { date: 'asc' },
+    }),
+    prisma.booking.findMany({
+      where: {
+        status: { in: ['DepositPaid', 'FullyPaid'] },
+      },
+      select: {
+        id: true,
+        guestName: true,
+        checkIn: true,
+        checkOut: true,
+        status: true,
+      },
+    }),
+  ]);
+
+  return {
+    blockedDates: blockedDates.map(b => ({
+      id: b.id,
+      date: b.date.toISOString(),
+      reason: b.reason,
+    })),
+    bookings: bookings.map(b => ({
+      id: b.id,
+      name: b.guestName,
+      checkIn: b.checkIn.toISOString(),
+      checkOut: b.checkOut.toISOString(),
+      status: b.status,
+    })),
+  };
 }
 
 export default async function AdminCalendarPage() {
-  const blockedDates = await getBlockedDates();
+  const { blockedDates, bookings } = await getCalendarData();
 
   return (
     <div className={styles.wrapper}>
-      <header className={styles.header}>
-        <div className="container">
-          <div className={styles.headerContent}>
-            <h1>Calendar Management</h1>
-            <nav className={styles.adminNav}>
-              <Link href="/admin/bookings">Bookings</Link>
-              <Link href="/admin/calendar" className={styles.active}>Calendar</Link>
-              <Link href="/">Main Site</Link>
-            </nav>
-          </div>
-        </div>
-      </header>
-
       <main className="section-padding">
         <div className="container">
-          <div className={styles.grid}>
-            <div className={styles.calendarView}>
-              <CalendarManager initialBlocked={blockedDates.map((b: any) => b.date.toISOString())} />
+          <div className={styles.mainGrid}>
+            <div className={styles.calendarSection}>
+              <VisualCalendar 
+                initialBlocked={blockedDates} 
+                initialBookings={bookings} 
+              />
             </div>
-            <div className={styles.blockedList}>
+            <div className={styles.controlsSection}>
+              <CalendarManager />
+              
               <section className={styles.section}>
-                <h2>Blocked Dates</h2>
+                <h3>Manual Blocks</h3>
                 <div className={styles.list}>
                   {blockedDates.length === 0 ? (
-                    <p className={styles.empty}>No manually blocked dates.</p>
+                    <p className={styles.empty}>No manual blocks.</p>
                   ) : (
                     blockedDates.map((block: any) => (
                       <div key={block.id} className={styles.blockRow}>
-                        <span>{new Date(block.date).toLocaleDateString()}</span>
-                        <strong>{block.reason || 'No reason'}</strong>
-                        <button className={styles.deleteBtn}>Remove</button>
+                        <div className={styles.blockInfo}>
+                          <strong>{new Date(block.date).toLocaleDateString()}</strong>
+                          <span>{block.reason || 'No reason'}</span>
+                        </div>
+                        <button className={styles.deleteBtn}>&times;</button>
                       </div>
                     ))
                   )}

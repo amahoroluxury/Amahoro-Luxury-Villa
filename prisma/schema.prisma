@@ -54,3 +54,10 @@ model Admin {
   email    String @unique
   password String
 }
+
+model Settings {
+  id           String   @id @default("site-settings")
+  nightlyRate  Float    @default(500)
+  depositPercent Int    @default(50)
+  updatedAt    DateTime @updatedAt
+}

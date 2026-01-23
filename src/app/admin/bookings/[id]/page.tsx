@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import Link from 'next/link';
 import { format } from 'date-fns';
 import styles from './details.module.css';
@@ -31,11 +31,7 @@ export default function BookingDetailsPage({ params }: { params: { id: string } 
   const [message, setMessage] = useState('');
   const [error, setError] = useState('');
 
-  useEffect(() => {
-    fetchBooking();
-  }, [params.id]);
-
-  async function fetchBooking() {
+  const fetchBooking = useCallback(async () => {
     try {
       const res = await fetch(`/api/booking/${params.id}`);
       if (res.ok) {
@@ -49,7 +45,11 @@ export default function BookingDetailsPage({ params }: { params: { id: string } 
     } finally {
       setLoading(false);
     }
-  }
+  }, [params.id]);
+
+  useEffect(() => {
+    fetchBooking();
+  }, [fetchBooking]);
 
   async function handleMarkPaid() {
     if (!booking) return;
@@ -130,6 +130,31 @@ export default function BookingDetailsPage({ params }: { params: { id: string } 
     }
   }
 
+  async function handleRecalculate() {
+    setActionLoading(true);
+    setMessage('');
+    setError('');
+
+    try {
+      const res = await fetch(`/api/admin/bookings/${params.id}/recalculate`, {
+        method: 'POST',
+      });
+
+      const data = await res.json();
+
+      if (res.ok) {
+        setBooking(data.booking);
+        setMessage(data.message);
+      } else {
+        setError(data.error || 'Failed to recalculate');
+      }
+    } catch (err) {
+      setError('An error occurred');
+    } finally {
+      setActionLoading(false);
+    }
+  }
+
   function copyToClipboard() {
     navigator.clipboard.writeText(paymentLink);
     setMessage('Link copied to clipboard!');
@@ -161,17 +186,11 @@ export default function BookingDetailsPage({ params }: { params: { id: string } 
 
   return (
     <div className={styles.wrapper}>
-      <header className={styles.header}>
-        <div className="container">
-          <div className={styles.headerContent}>
-            <Link href="/admin/bookings" className={styles.backLink}>&larr; Back to Bookings</Link>
-            <h1>Booking Details</h1>
-          </div>
-        </div>
-      </header>
-
       <main className="section-padding">
         <div className="container">
+          <div className={styles.breadcrumb}>
+            <Link href="/admin/bookings">&larr; Back to Bookings</Link>
+          </div>
           {message && <div className={styles.success}>{message}</div>}
           {error && <div className={styles.error}>{error}</div>}
 
@@ -249,6 +268,14 @@ export default function BookingDetailsPage({ params }: { params: { id: string } 
                     </button>
                   </div>
                 )}
+
+                <button 
+                  className={styles.utilityBtn}
+                  onClick={handleRecalculate}
+                  disabled={actionLoading}
+                >
+                  {actionLoading ? 'Recalculating...' : 'Recalculate Totals'}
+                </button>
 
                 {paymentLink && (
                   <div className={styles.paymentLinkBox}>

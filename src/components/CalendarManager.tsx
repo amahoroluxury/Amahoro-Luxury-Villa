@@ -4,10 +4,10 @@ import { useState } from 'react';
 import styles from './CalendarManager.module.css';
 
 interface Props {
-  initialBlocked: string[];
+  initialBlocked?: string[];
 }
 
-export default function CalendarManager({ initialBlocked }: Props) {
+export default function CalendarManager({ initialBlocked = [] }: Props) {
   const [blocked, setBlocked] = useState(initialBlocked);
   const [date, setDate] = useState('');
   const [reason, setReason] = useState('');

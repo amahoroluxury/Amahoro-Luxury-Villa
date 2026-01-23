@@ -1,0 +1,135 @@
+.calendarContainer {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  padding: 2.5rem;
+  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.1);
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2.5rem;
+}
+
+.header h2 {
+  font-family: var(--font-serif);
+  font-size: 1.75rem;
+  text-transform: capitalize;
+}
+
+.nav {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.nav button {
+  background: var(--background);
+  border: 1px solid var(--border);
+  padding: 0.5rem 1rem;
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.nav button:hover {
+  background: white;
+  border-color: var(--primary);
+  color: var(--primary);
+}
+
+.daysHeader {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  margin-bottom: 1rem;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 1rem;
+}
+
+.dayName {
+  text-align: center;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  font-weight: 600;
+  letter-spacing: 0.1em;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+}
+
+.cell {
+  background: var(--surface);
+  min-height: 100px;
+  padding: 0.75rem;
+  position: relative;
+  transition: background 0.2s ease;
+}
+
+.cell:hover {
+  background: var(--background);
+}
+
+.dayNumber {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.disabled {
+  opacity: 0.3;
+}
+
+.today {
+  background: rgba(196, 164, 132, 0.05);
+}
+
+.today .dayNumber {
+  color: var(--primary);
+  font-weight: 700;
+}
+
+.event {
+  margin-top: 0.5rem;
+  padding: 0.25rem 0.5rem;
+  font-size: 0.65rem;
+  border-radius: 2px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+
+.booked { background: #e8f5e9; }
+.booked .event { background: #2e7d32; color: white; }
+.booked .dayNumber { color: #2e7d32; }
+
+.blocked { background: #ffebee; }
+.blocked .event { background: #c62828; color: white; }
+.blocked .dayNumber { color: #c62828; }
+
+.legend {
+  margin-top: 2rem;
+  display: flex;
+  gap: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border);
+}
+
+.legendItem {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-muted);
+}
+
+.bookedSample { width: 12px; height: 12px; background: #2e7d32; border-radius: 2px; }
+.blockedSample { width: 12px; height: 12px; background: #c62828; border-radius: 2px; }

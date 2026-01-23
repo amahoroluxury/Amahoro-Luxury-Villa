@@ -16,6 +16,15 @@
   /* Transitions */
   --transition-smooth: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   --transition-fast: all 0.2s ease;
+
+  /* Executive Upgrade Tokens */
+  --glass-bg: rgba(255, 255, 255, 0.7);
+  --glass-border: rgba(255, 255, 255, 0.3);
+  --glass-blur: blur(12px);
+  --shadow-executive: 0 10px 40px rgba(0, 0, 0, 0.04);
+  --shadow-hover: 0 20px 60px rgba(139, 90, 60, 0.1);
+  --grad-surface: linear-gradient(135deg, #ffffff 0%, #f9f6f2 100%);
+  --grad-accent: linear-gradient(135deg, #8B5A3C 0%, #A67B5B 100%);
 }
 
 * {

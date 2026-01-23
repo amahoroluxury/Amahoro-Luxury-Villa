@@ -17,7 +17,7 @@ export async function POST(request: Request) {
 
     // 2. Calculate final price
     const nights = differenceInDays(new Date(checkOut), new Date(checkIn));
-    const price = calculatePrice(nights);
+    const price = await calculatePrice(nights);
 
     // 3. Create booking in DB
     const booking = await prisma.booking.create({

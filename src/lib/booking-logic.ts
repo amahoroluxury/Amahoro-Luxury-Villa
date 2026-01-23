@@ -40,10 +40,15 @@ export async function getAvailability(checkIn: Date, checkOut: Date) {
   return !hasOverlap;
 }
 
-export function calculatePrice(nights: number) {
-  const nightlyRate = 10; // Temporarily lowered for testing (Flutterwave $50 limit)
+export async function calculatePrice(nights: number) {
+  // Fetch settings from DB
+  const settings = await prisma.settings.findFirst();
+  
+  const nightlyRate = settings?.nightlyRate ?? 500;
+  const depositPercent = (settings?.depositPercent ?? 50) / 100;
+
   const total = nights * nightlyRate;
-  const deposit = total * 0.5;
+  const deposit = total * depositPercent;
   const balance = total - deposit;
 
   return {

@@ -213,3 +213,25 @@
   cursor: pointer;
   border: none;
 }
+
+.utilityBtn {
+  width: 100%;
+  padding: 1rem;
+  background: var(--background);
+  border: 1px solid var(--border);
+  color: var(--text);
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  cursor: pointer;
+  margin-top: 1.5rem;
+  margin-bottom: 1rem;
+  transition: all 0.2s ease;
+}
+
+.utilityBtn:hover:not(:disabled) {
+  background: white;
+  border-color: var(--primary);
+  color: var(--primary);
+}

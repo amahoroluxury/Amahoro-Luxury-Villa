@@ -1,12 +1,21 @@
 import Link from 'next/link';
 import prisma from '@/lib/prisma';
-import { format } from 'date-fns';
 import styles from './bookings.module.css';
+import BookingList from './BookingList';
 
 async function getBookings() {
-  return await prisma.booking.findMany({
+  const data = await prisma.booking.findMany({
     orderBy: { createdAt: 'desc' },
   });
+  
+  // Convert dates to strings for client components
+  return data.map(b => ({
+    ...b,
+    checkIn: b.checkIn.toISOString(),
+    checkOut: b.checkOut.toISOString(),
+    createdAt: b.createdAt.toISOString(),
+    updatedAt: b.updatedAt.toISOString(),
+  }));
 }
 
 export default async function AdminBookingsPage() {
@@ -14,19 +23,6 @@ export default async function AdminBookingsPage() {
 
   return (
     <div className={styles.wrapper}>
-      <header className={styles.header}>
-        <div className="container">
-          <div className={styles.headerContent}>
-            <h1>Admin Dashboard</h1>
-            <nav className={styles.adminNav}>
-              <Link href="/admin/bookings" className={styles.active}>Bookings</Link>
-              <Link href="/admin/calendar">Calendar</Link>
-              <Link href="/">Main Site</Link>
-            </nav>
-          </div>
-        </div>
-      </header>
-
       <main className="section-padding">
         <div className="container">
           <div className={styles.stats}>
@@ -44,47 +40,7 @@ export default async function AdminBookingsPage() {
             </div>
           </div>
 
-          <div className={styles.tableWrapper}>
-            <table className={styles.table}>
-              <thead>
-                <tr>
-                  <th>Guest</th>
-                  <th>Dates</th>
-                  <th>Nights</th>
-                  <th>Total</th>
-                  <th>Amount Paid</th>
-                  <th>Status</th>
-                  <th>Actions</th>
-                </tr>
-              </thead>
-              <tbody>
-                {bookings.map((booking: any) => (
-                  <tr key={booking.id}>
-                    <td>
-                      <div className={styles.guestInfo}>
-                        <strong>{booking.guestName}</strong>
-                        <span>{booking.guestEmail}</span>
-                      </div>
-                    </td>
-                    <td>
-                      {format(new Date(booking.checkIn), 'MMM dd')} - {format(new Date(booking.checkOut), 'MMM dd, yyyy')}
-                    </td>
-                    <td>-</td>
-                    <td>${booking.totalAmountUsd}</td>
-                    <td>${booking.amountPaidUsd}</td>
-                    <td>
-                      <span className={`${styles.badge} ${styles[booking.status.toLowerCase()]}`}>
-                        {booking.status}
-                      </span>
-                    </td>
-                    <td>
-                      <Link href={`/admin/bookings/${booking.id}`} className={styles.viewLink}>Details</Link>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+          <BookingList initialBookings={bookings as any[]} />
         </div>
       </main>
     </div>

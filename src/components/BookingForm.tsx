@@ -1,9 +1,8 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { format, differenceInDays } from 'date-fns';
-import { calculatePrice } from '@/lib/booking-logic';
 import styles from './booking.module.css';
 
 export default function BookingForm() {
@@ -11,6 +10,7 @@ export default function BookingForm() {
   const [step, setStep] = useState(1);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+  const [price, setPrice] = useState({ nightlyRate: 500, total: 0, deposit: 0, balance: 0, depositPercent: 50 });
   
   const [formData, setFormData] = useState({
     checkIn: '',
@@ -26,7 +26,23 @@ export default function BookingForm() {
     ? differenceInDays(new Date(formData.checkOut), new Date(formData.checkIn))
     : 0;
 
-  const price = calculatePrice(nights > 0 ? nights : 0);
+  useEffect(() => {
+    async function updatePrice() {
+      try {
+        const res = await fetch(`/api/availability/price?nights=${nights}`);
+        if (res.ok) {
+          const data = await res.json();
+          setPrice(data);
+        }
+      } catch (err) {
+        console.error('Failed to fetch price');
+      }
+    }
+
+    if (nights > 0) {
+      updatePrice();
+    }
+  }, [nights]);
 
   const handleNext = async () => {
     if (step === 1) {
@@ -133,7 +149,7 @@ export default function BookingForm() {
               <p><span>Nightly Rate:</span> <span>${price.nightlyRate}</span></p>
               <p><span>Nights:</span> <span>{nights}</span></p>
               <p className={styles.total}><span>Total:</span> <span>${price.total}</span></p>
-              <p className={styles.deposit}><span>50% Deposit Due:</span> <span>${price.deposit}</span></p>
+              <p className={styles.deposit}><span>{price.depositPercent}% Deposit Due:</span> <span>${price.deposit}</span></p>
             </div>
           )}
 

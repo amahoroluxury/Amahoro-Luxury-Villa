@@ -21,10 +21,10 @@ async function main() {
   // Since we don't know the hashing strategy from the schema alone, we'll just insert a string.
   // Note: ensure the login logic handles this or you update it later.
   const admin = await prisma.admin.upsert({
-    where: { email: 'admin@amahoro.com' },
+    where: { email: 'admin@amahoroluxuryvilla.com' },
     update: {},
     create: {
-      email: 'admin@amahoro.com',
+      email: 'admin@amahoroluxuryvilla.com',
       password: 'adminpassword123', // SECURITY WARNING: Change this immediately
     },
   })

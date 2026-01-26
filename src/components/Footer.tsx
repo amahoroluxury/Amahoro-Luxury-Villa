@@ -22,7 +22,7 @@ export default function Footer() {
               <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className={styles.socialIcon} aria-label="Facebook">
                 <Facebook size={20} />
               </a>
-              <a href="mailto:booking@amahoro.com" className={styles.socialIcon} aria-label="Email">
+              <a href="mailto:booking@amahoroluxuryvilla.com" className={styles.socialIcon} aria-label="Email">
                 <Mail size={20} />
               </a>
             </div>
@@ -64,7 +64,7 @@ export default function Footer() {
             </div>
             <div className={styles.contactItem}>
               <Mail className={styles.contactIcon} />
-              <span>booking@amahoro.com</span>
+              <span>booking@amahoroluxuryvilla.com</span>
             </div>
           </div>
         </div>

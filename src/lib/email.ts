@@ -23,8 +23,8 @@ interface PaymentEmailData extends BookingEmailData {
 }
 
 const RESEND_API_KEY = process.env.RESEND_API_KEY;
-const ADMIN_EMAIL = process.env.ADMIN_EMAIL || 'admin@amahoro.com';
-const FROM_EMAIL = process.env.FROM_EMAIL || 'Amahoro Luxury Villa <bookings@amahoro.com>';
+const ADMIN_EMAIL = process.env.ADMIN_EMAIL || 'admin@amahoroluxuryvilla.com';
+const FROM_EMAIL = process.env.FROM_EMAIL || 'Amahoro Luxury Villa <bookings@amahoroluxuryvilla.com>';
 
 function formatDate(date: Date | string): string {
   return new Date(date).toLocaleDateString('en-US', {

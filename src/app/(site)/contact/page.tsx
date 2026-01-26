@@ -32,7 +32,7 @@ export default function ContactPage() {
                   <Mail className={styles.infoIcon} />
                   <div>
                     <h3>Email</h3>
-                    <p><a href="mailto:booking@amahoro.com">booking@amahoro.com</a></p>
+                    <p><a href="mailto:booking@amahoroluxuryvilla.com">booking@amahoroluxuryvilla.com</a></p>
                   </div>
                 </div>
 

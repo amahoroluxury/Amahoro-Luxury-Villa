@@ -30,14 +30,9 @@ export async function POST(request: Request) {
       where: { email },
     });
 
-    // For MVP: also allow hardcoded fallback if no admin in DB
-    const isValidFallback = 
-      email === 'admin@amahoroluxury.com' && 
-      password === 'Amahoro2026!';
-
     // Compare password (in production, use bcrypt)
-    // For now, we store plain text in DB or use fallback
-    const isValidAdmin = admin?.password === password || isValidFallback;
+    // For now, we store plain text in DB
+    const isValidAdmin = admin?.password === password;
 
     if (!isValidAdmin) {
       return NextResponse.json(

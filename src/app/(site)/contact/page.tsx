@@ -28,14 +28,13 @@ export default function ContactPage() {
                 </div>
               </div>
 
-              <div className={styles.infoCard}>
-                <div className={styles.icon}><Mail size={24} /></div>
-                <div>
-                  <h3>Email</h3>
-                  <p>For bookings and inquiries</p>
-                  <a href="mailto:booking@amahoroluxury.com" className={styles.link}>booking@amahoroluxury.com</a>
+                <div className={styles.infoItem}>
+                  <Mail className={styles.infoIcon} />
+                  <div>
+                    <h3>Email</h3>
+                    <p><a href="mailto:booking@amahoro.com">booking@amahoro.com</a></p>
+                  </div>
                 </div>
-              </div>
 
               <div className={styles.infoCard}>
                 <div className={styles.icon}><Phone size={24} /></div>

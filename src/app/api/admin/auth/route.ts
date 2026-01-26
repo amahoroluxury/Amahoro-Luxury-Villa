@@ -2,13 +2,13 @@ import { NextResponse } from 'next/server';
 import prisma from '@/lib/prisma';
 import { cookies } from 'next/headers';
 
+export const dynamic = 'force-dynamic';
+
 // Simple token-based auth for MVP
 // In production, use proper JWT or next-auth
 
 const ADMIN_TOKEN_NAME = 'admin_auth_token';
 const TOKEN_EXPIRY_HOURS = 24;
-
-export const dynamic = 'force-dynamic';
 
 function generateToken(): string {
   return `amt_${Date.now()}_${Math.random().toString(36).substring(2)}`;

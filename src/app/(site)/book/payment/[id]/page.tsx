@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { useRouter, useParams } from 'next/navigation';
 import Link from 'next/link';
 import styles from '../payment.module.css';
+import { format } from 'date-fns';
 
 interface Booking {
   id: string;

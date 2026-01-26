@@ -3,6 +3,8 @@ import prisma from '@/lib/prisma';
 import { format, startOfMonth, endOfMonth, isAfter } from 'date-fns';
 import styles from './dashboard.module.css';
 
+export const dynamic = 'force-dynamic';
+
 async function getDashboardData() {
   const now = new Date();
   const monthStart = startOfMonth(now);

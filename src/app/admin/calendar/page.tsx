@@ -4,6 +4,8 @@ import VisualCalendar from '../../../components/VisualCalendar';
 import CalendarManager from '@/components/CalendarManager';
 import styles from './calendar.module.css';
 
+export const dynamic = 'force-dynamic';
+
 async function getCalendarData() {
   const [blockedDates, bookings] = await Promise.all([
     prisma.blockedDate.findMany({
@@ -81,4 +83,3 @@ export default async function AdminCalendarPage() {
     </div>
   );
 }
-

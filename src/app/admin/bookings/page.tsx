@@ -3,6 +3,8 @@ import prisma from '@/lib/prisma';
 import styles from './bookings.module.css';
 import BookingList from './BookingList';
 
+export const dynamic = 'force-dynamic';
+
 async function getBookings() {
   const data = await prisma.booking.findMany({
     orderBy: { createdAt: 'desc' },

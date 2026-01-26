@@ -3,6 +3,8 @@ import prisma from '@/lib/prisma';
 import { format } from 'date-fns';
 import styles from './confirmation.module.css';
 
+export const dynamic = 'force-dynamic';
+
 async function getBooking(id: string) {
   return await prisma.booking.findUnique({
     where: { id },

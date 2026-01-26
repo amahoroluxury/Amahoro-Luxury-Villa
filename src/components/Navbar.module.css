@@ -6,7 +6,20 @@
   padding: 1.5rem 0;
   z-index: 1000;
   transition: var(--transition-smooth);
-  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.2) 70%, transparent 100%);
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0) 100%);
+}
+
+@media (max-width: 1023px) {
+  .nav {
+    padding: 1rem 0;
+  }
+  
+  /* Semi-transparent background on mobile even before scroll for readability */
+  .nav:not(.scrolled) {
+    background: rgba(0, 0, 0, 0.15);
+    -webkit-backdrop-filter: blur(4px);
+    backdrop-filter: blur(4px);
+  }
 }
 
 .scrolled {

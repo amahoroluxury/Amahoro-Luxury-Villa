@@ -8,14 +8,21 @@
 .scrollContainer {
   width: 100%;
   overflow-x: auto;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE/Edge */
+}
+
+.scrollContainer::-webkit-scrollbar {
+  display: none; /* Chrome/Safari */
 }
 
 .grid {
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  min-width: 600px; /* Ensures items don't squash on very small screens */
-  gap: 2rem;
+  align-items: flex-start;
+  min-width: min-content;
+  gap: 2.5rem;
+  padding: 0.5rem 0;
 }
 
 .item {
@@ -53,10 +60,17 @@
 @media (max-width: 768px) {
   .grid {
     justify-content: flex-start;
-    padding-bottom: 0.5rem; /* Space for scrollbar if visible */
+    gap: 2rem;
   }
   
   .item {
-    min-width: 100px;
+    min-width: 80px;
+    flex: 0 0 auto;
+  }
+
+  .label {
+    font-size: 0.75rem;
+    white-space: normal; /* Allow wrapping to prevent clump overlap */
+    max-width: 100px;
   }
 }

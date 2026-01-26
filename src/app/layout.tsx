@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Inter, Playfair_Display } from "next/font/google";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
+import LoadingWrapper from "@/components/LoadingWrapper";
 import "@/styles/globals.css";
 
 const inter = Inter({ 
@@ -33,7 +32,9 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${inter.variable} ${playfair.variable}`} suppressHydrationWarning>
       <body>
-        {children}
+        <LoadingWrapper>
+          {children}
+        </LoadingWrapper>
       </body>
     </html>
   );

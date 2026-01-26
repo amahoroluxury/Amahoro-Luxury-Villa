@@ -1,6 +1,8 @@
 import { NextResponse } from 'next/server';
 import prisma from '@/lib/prisma';
 
+export const dynamic = 'force-dynamic';
+
 // GET: Fetch all blocked dates and confirmed bookings for calendar display
 export async function GET() {
   try {

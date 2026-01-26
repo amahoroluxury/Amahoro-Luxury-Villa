@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import prisma from '@/lib/prisma';
-import VisualCalendar from '../../../components/VisualCalendar';
+import VisualCalendar from '@/components/VisualCalendar';
 import CalendarManager from '@/components/CalendarManager';
 import styles from './calendar.module.css';
 

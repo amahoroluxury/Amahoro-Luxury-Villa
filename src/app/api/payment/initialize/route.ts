@@ -1,6 +1,8 @@
 import prisma from '@/lib/prisma';
 import { NextResponse } from 'next/server';
 
+export const dynamic = 'force-dynamic';
+
 export async function POST(request: Request) {
   try {
     const { bookingId, type, currency = 'USD' } = await request.json(); // type: deposit, full, balance

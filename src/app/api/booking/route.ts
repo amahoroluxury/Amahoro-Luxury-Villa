@@ -4,6 +4,8 @@ import { getAvailability, calculatePrice } from '@/lib/booking-logic';
 import { differenceInDays } from 'date-fns';
 import { sendBookingConfirmation, sendAdminNewBookingNotification } from '@/lib/email';
 
+export const dynamic = 'force-dynamic';
+
 export async function POST(request: Request) {
   try {
     const body = await request.json();

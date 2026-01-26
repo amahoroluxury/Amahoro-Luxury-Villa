@@ -1,6 +1,8 @@
 import { NextResponse } from 'next/server';
 import { calculatePrice } from '@/lib/booking-logic';
 
+export const dynamic = 'force-dynamic';
+
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
   const nights = parseInt(searchParams.get('nights') || '0');

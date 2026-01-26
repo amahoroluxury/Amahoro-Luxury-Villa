@@ -8,6 +8,8 @@ import { cookies } from 'next/headers';
 const ADMIN_TOKEN_NAME = 'admin_auth_token';
 const TOKEN_EXPIRY_HOURS = 24;
 
+export const dynamic = 'force-dynamic';
+
 function generateToken(): string {
   return `amt_${Date.now()}_${Math.random().toString(36).substring(2)}`;
 }

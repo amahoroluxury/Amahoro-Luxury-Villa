@@ -8,8 +8,13 @@
 .scrollContainer {
   width: 100%;
   overflow-x: auto;
-  scrollbar-width: none; /* Firefox */
   -ms-overflow-style: none; /* IE/Edge */
+}
+
+@supports (scrollbar-width: none) {
+  .scrollContainer {
+    scrollbar-width: none; /* Firefox */
+  }
 }
 
 .scrollContainer::-webkit-scrollbar {

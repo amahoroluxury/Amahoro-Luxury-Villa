@@ -11,6 +11,20 @@ export async function POST(request: Request) {
     const body = await request.json();
     const { checkIn, checkOut, guests, name, email, phone, requests } = body;
 
+    // Basic Input Validation
+    if (!checkIn || !checkOut || !guests || !name || !email || !phone) {
+      return NextResponse.json({ error: 'Missing required fields' }, { status: 400 });
+    }
+
+    if (guests < 1 || guests > 10) {
+       return NextResponse.json({ error: 'Invalid guest count' }, { status: 400 });
+    }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      return NextResponse.json({ error: 'Invalid email address' }, { status: 400 });
+    }
+
     // 1. Re-verify availability
     const available = await getAvailability(new Date(checkIn), new Date(checkOut));
     if (!available) {

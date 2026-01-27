@@ -18,7 +18,12 @@ export function middleware(request: NextRequest) {
   // Check for admin auth cookie
   const adminToken = request.cookies.get('admin_auth_token');
 
-  if (!adminToken?.value) {
+  // Basic validation of token format (amt_... and length)
+  const isValidToken = adminToken?.value && 
+                     adminToken.value.startsWith('amt_') && 
+                     adminToken.value.length > 20;
+
+  if (!isValidToken) {
     // Redirect to login
     const loginUrl = new URL('/admin/login', request.url);
     return NextResponse.redirect(loginUrl);

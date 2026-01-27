@@ -17,15 +17,16 @@ async function main() {
   })
   console.log({ settings })
 
-  // Seed Admin (password should ideally be hashed, but for initial seed we might use a placeholder or handle hashing if bcrypt is available)
-  // Since we don't know the hashing strategy from the schema alone, we'll just insert a string.
-  // Note: ensure the login logic handles this or you update it later.
+  // Seed Admin (password now hashed)
+  const bcrypt = require('bcryptjs');
+  const hashedPassword = bcrypt.hashSync('adminpassword123', 10);
+  
   const admin = await prisma.admin.upsert({
     where: { email: 'admin@amahoroluxuryvilla.com' },
     update: {},
     create: {
       email: 'admin@amahoroluxuryvilla.com',
-      password: 'adminpassword123', // SECURITY WARNING: Change this immediately
+      password: hashedPassword,
     },
   })
   console.log({ admin })

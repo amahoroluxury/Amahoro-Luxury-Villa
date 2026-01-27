@@ -1,5 +1,26 @@
 .wrapper {
   min-height: 100vh;
+  background: #FDFCFB;
+}
+
+.pageHeader {
+  padding: 3rem 0 2rem;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 3rem;
+  background: white;
+}
+
+.pageHeader h1 {
+  font-family: var(--font-serif);
+  font-size: 2rem;
+  color: var(--secondary);
+  margin-bottom: 0.5rem;
+}
+
+.subtitle {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  font-weight: 500;
 }
 
 .header {

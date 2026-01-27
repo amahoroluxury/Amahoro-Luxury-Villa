@@ -64,51 +64,56 @@ export default function AdminSettingsPage() {
 
   return (
     <div className={styles.wrapper}>
-      <main className="section-padding">
-        <div className="container">
-          <div className={styles.contentCard}>
-            {message && <div className={styles.success}>{message}</div>}
-            {error && <div className={styles.error}>{error}</div>}
-
-            <form onSubmit={handleSave} className={styles.form}>
-              <section className={styles.section}>
-                <h2>Pricing & Payments</h2>
-                <div className={styles.field}>
-                  <label htmlFor="nightlyRate">Nightly Rate (USD)</label>
-                  <input 
-                    id="nightlyRate"
-                    type="number" 
-                    value={settings.nightlyRate} 
-                    onChange={(e) => setSettings({ ...settings, nightlyRate: parseFloat(e.target.value) })}
-                    required
-                  />
-                  <p className={styles.hint}>This rate is used for all new bookings.</p>
-                </div>
-
-                <div className={styles.field}>
-                  <label htmlFor="depositPercent">Minimum Deposit (%)</label>
-                  <input 
-                    id="depositPercent"
-                    type="number" 
-                    min="1" 
-                    max="100"
-                    value={settings.depositPercent} 
-                    onChange={(e) => setSettings({ ...settings, depositPercent: parseInt(e.target.value) })}
-                    required
-                  />
-                  <p className={styles.hint}>Percentage of the total amount required to confirm a booking.</p>
-                </div>
-              </section>
-
-              <div className={styles.formActions}>
-                <button type="submit" className={styles.saveBtn} disabled={saving}>
-                  {saving ? 'Saving...' : 'Save Settings'}
-                </button>
-              </div>
-            </form>
-          </div>
+      <header className={styles.pageHeader}>
+        <div className="admin-container">
+          <h1>Site Settings</h1>
+          <p className={styles.subtitle}>Configure global villa parameters and pricing.</p>
         </div>
-      </main>
+      </header>
+
+      <div className="admin-container">
+        <div className={styles.contentCard}>
+          {message && <div className={styles.success}>{message}</div>}
+          {error && <div className={styles.error}>{error}</div>}
+
+          <form onSubmit={handleSave} className={styles.form}>
+            <section className={styles.section}>
+              <h2>Pricing & Payments</h2>
+              <div className={styles.field}>
+                <label htmlFor="nightlyRate">Nightly Rate (USD)</label>
+                <input 
+                  id="nightlyRate"
+                  type="number" 
+                  value={settings.nightlyRate} 
+                  onChange={(e) => setSettings({ ...settings, nightlyRate: parseFloat(e.target.value) })}
+                  required
+                />
+                <p className={styles.hint}>This rate is used for all new bookings.</p>
+              </div>
+
+              <div className={styles.field}>
+                <label htmlFor="depositPercent">Minimum Deposit (%)</label>
+                <input 
+                  id="depositPercent"
+                  type="number" 
+                  min="1" 
+                  max="100"
+                  value={settings.depositPercent} 
+                  onChange={(e) => setSettings({ ...settings, depositPercent: parseInt(e.target.value) })}
+                  required
+                />
+                <p className={styles.hint}>Percentage of the total amount required to confirm a booking.</p>
+              </div>
+            </section>
+
+            <div className={styles.formActions}>
+              <button type="submit" className={styles.saveBtn} disabled={saving}>
+                {saving ? 'Saving...' : 'Save Settings'}
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
     </div>
   );
 }

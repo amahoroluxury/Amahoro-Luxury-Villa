@@ -7,7 +7,7 @@ export default function AdminFooter() {
 
   return (
     <footer className={styles.footer}>
-      <div className="container">
+      <div className="admin-container">
         <div className={styles.content}>
           <div className={styles.left}>
             <p>&copy; {currentYear} Amahoro Luxury Villa. Admin Portal.</p>

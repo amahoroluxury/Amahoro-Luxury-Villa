@@ -25,26 +25,31 @@ export default async function AdminBookingsPage() {
 
   return (
     <div className={styles.wrapper}>
-      <main className="section-padding">
-        <div className="container">
-          <div className={styles.stats}>
-            <div className={styles.statCard}>
-              <span>Total Bookings</span>
-              <strong>{bookings.length}</strong>
-            </div>
-            <div className={styles.statCard}>
-              <span>Pending Deposit</span>
-              <strong>{bookings.filter((b: any) => b.status === 'PendingDeposit').length}</strong>
-            </div>
-            <div className={styles.statCard}>
-              <span>Confirmed</span>
-              <strong>{bookings.filter((b: any) => b.status === 'DepositPaid' || b.status === 'FullyPaid').length}</strong>
-            </div>
-          </div>
-
-          <BookingList initialBookings={bookings as any[]} />
+      <header className={styles.pageHeader}>
+        <div className="admin-container">
+          <h1>Manage Bookings</h1>
+          <p className={styles.subtitle}>Review and manage your villa reservations.</p>
         </div>
-      </main>
+      </header>
+
+      <div className="admin-container">
+        <div className={styles.stats}>
+          <div className={styles.statCard}>
+            <span>Total Bookings</span>
+            <strong>{bookings.length}</strong>
+          </div>
+          <div className={styles.statCard}>
+            <span>Pending Deposit</span>
+            <strong>{bookings.filter((b: any) => b.status === 'PendingDeposit').length}</strong>
+          </div>
+          <div className={styles.statCard}>
+            <span>Confirmed</span>
+            <strong>{bookings.filter((b: any) => b.status === 'DepositPaid' || b.status === 'FullyPaid').length}</strong>
+          </div>
+        </div>
+
+        <BookingList initialBookings={bookings as any[]} />
+      </div>
     </div>
   );
 }

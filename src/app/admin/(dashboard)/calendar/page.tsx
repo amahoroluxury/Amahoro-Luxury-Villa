@@ -46,40 +46,45 @@ export default async function AdminCalendarPage() {
 
   return (
     <div className={styles.wrapper}>
-      <main className="section-padding">
-        <div className="container">
-          <div className={styles.mainGrid}>
-            <div className={styles.calendarSection}>
-              <VisualCalendar 
-                initialBlocked={blockedDates} 
-                initialBookings={bookings} 
-              />
-            </div>
-            <div className={styles.controlsSection}>
-              <CalendarManager />
-              
-              <section className={styles.section}>
-                <h3>Manual Blocks</h3>
-                <div className={styles.list}>
-                  {blockedDates.length === 0 ? (
-                    <p className={styles.empty}>No manual blocks.</p>
-                  ) : (
-                    blockedDates.map((block: any) => (
-                      <div key={block.id} className={styles.blockRow}>
-                        <div className={styles.blockInfo}>
-                          <strong>{new Date(block.date).toLocaleDateString()}</strong>
-                          <span>{block.reason || 'No reason'}</span>
-                        </div>
-                        <button className={styles.deleteBtn}>&times;</button>
+      <header className={styles.pageHeader}>
+        <div className="admin-container">
+          <h1>Booking Calendar</h1>
+          <p className={styles.subtitle}>Manage availability and view scheduled stays.</p>
+        </div>
+      </header>
+
+      <div className="admin-container">
+        <div className={styles.mainGrid}>
+          <div className={styles.calendarSection}>
+            <VisualCalendar 
+              initialBlocked={blockedDates} 
+              initialBookings={bookings} 
+            />
+          </div>
+          <div className={styles.controlsSection}>
+            <CalendarManager />
+            
+            <section className={styles.section}>
+              <h3>Manual Blocks</h3>
+              <div className={styles.list}>
+                {blockedDates.length === 0 ? (
+                  <p className={styles.empty}>No manual blocks.</p>
+                ) : (
+                  blockedDates.map((block: any) => (
+                    <div key={block.id} className={styles.blockRow}>
+                      <div className={styles.blockInfo}>
+                        <strong>{new Date(block.date).toLocaleDateString()}</strong>
+                        <span>{block.reason || 'No reason'}</span>
                       </div>
-                    ))
-                  )}
-                </div>
-              </section>
-            </div>
+                      <button className={styles.deleteBtn}>&times;</button>
+                    </div>
+                  ))
+                )}
+              </div>
+            </section>
           </div>
         </div>
-      </main>
+      </div>
     </div>
   );
 }

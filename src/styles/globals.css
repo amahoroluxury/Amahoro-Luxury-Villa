@@ -117,3 +117,24 @@ input:focus, textarea:focus {
   border-color: var(--primary);
 }
 
+/* Admin Specific Layouts */
+.admin-container {
+  width: 100%;
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.admin-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  box-shadow: var(--shadow-executive);
+  padding: 1.5rem;
+}
+
+@media (max-width: 768px) {
+  .admin-container {
+    padding: 1rem;
+  }
+}

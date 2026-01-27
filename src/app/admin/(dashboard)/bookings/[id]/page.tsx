@@ -186,119 +186,124 @@ export default function BookingDetailsPage({ params }: { params: { id: string } 
 
   return (
     <div className={styles.wrapper}>
-      <main className="section-padding">
-        <div className="container">
+      <header className={styles.pageHeader}>
+        <div className="admin-container">
           <div className={styles.breadcrumb}>
             <Link href="/admin/bookings">&larr; Back to Bookings</Link>
           </div>
-          {message && <div className={styles.success}>{message}</div>}
-          {error && <div className={styles.error}>{error}</div>}
+          <h1>Booking Details</h1>
+          <p className={styles.subtitle}>Viewing reservation for {booking.guestName}</p>
+        </div>
+      </header>
 
-          <div className={styles.grid}>
-            <div className={styles.mainInfo}>
-              <section className={styles.section}>
-                <h2>Guest Information</h2>
-                <div className={styles.infoRow}>
-                  <span>Name:</span> <strong>{booking.guestName}</strong>
-                </div>
-                <div className={styles.infoRow}>
-                  <span>Email:</span> <strong>{booking.guestEmail}</strong>
-                </div>
-                <div className={styles.infoRow}>
-                  <span>Phone:</span> <strong>{booking.guestPhone}</strong>
-                </div>
-                {booking.specialRequests && (
-                  <div className={styles.infoRow}>
-                    <span>Special Requests:</span> 
-                    <p className={styles.requestNote}>{booking.specialRequests}</p>
-                  </div>
-                )}
-              </section>
+      <div className="admin-container">
+        {message && <div className={styles.success}>{message}</div>}
+        {error && <div className={styles.error}>{error}</div>}
 
-              <section className={styles.section}>
-                <h2>Stay Details</h2>
+        <div className={styles.grid}>
+          <div className={styles.mainInfo}>
+            <section className={styles.section}>
+              <h2>Guest Information</h2>
+              <div className={styles.infoRow}>
+                <span>Name:</span> <strong>{booking.guestName}</strong>
+              </div>
+              <div className={styles.infoRow}>
+                <span>Email:</span> <strong>{booking.guestEmail}</strong>
+              </div>
+              <div className={styles.infoRow}>
+                <span>Phone:</span> <strong>{booking.guestPhone}</strong>
+              </div>
+              {booking.specialRequests && (
                 <div className={styles.infoRow}>
-                  <span>Dates:</span> 
-                  <strong>
-                    {format(new Date(booking.checkIn), 'MMM dd, yyyy')} - {format(new Date(booking.checkOut), 'MMM dd, yyyy')}
-                  </strong>
+                  <span>Special Requests:</span> 
+                  <p className={styles.requestNote}>{booking.specialRequests}</p>
                 </div>
-                <div className={styles.infoRow}>
-                  <span>Guests:</span> <strong>{booking.guestsCount}</strong>
-                </div>
-                <div className={styles.infoRow}>
-                  <span>Booked On:</span> <strong>{format(new Date(booking.createdAt), 'MMM dd, yyyy h:mm a')}</strong>
-                </div>
-              </section>
-            </div>
+              )}
+            </section>
 
-            <div className={styles.paymentInfo}>
-              <section className={styles.section}>
-                <h2>Payment Status</h2>
-                <div className={styles.statusBadge}>
-                  <span className={`${styles.badge} ${styles[booking.status.toLowerCase()]}`}>
-                    {booking.status}
-                  </span>
-                </div>
-                <div className={styles.infoRow}>
-                  <span>Total Amount:</span> <strong>${booking.totalAmountUsd.toFixed(2)}</strong>
-                </div>
-                <div className={styles.infoRow}>
-                  <span>Amount Paid:</span> <strong className={styles.paid}>${booking.amountPaidUsd.toFixed(2)}</strong>
-                </div>
-                <div className={styles.infoRow}>
-                  <span>Balance Due:</span> <strong className={styles.due}>${booking.balanceDueUsd.toFixed(2)}</strong>
-                </div>
+            <section className={styles.section}>
+              <h2>Stay Details</h2>
+              <div className={styles.infoRow}>
+                <span>Dates:</span> 
+                <strong>
+                  {format(new Date(booking.checkIn), 'MMM dd, yyyy')} - {format(new Date(booking.checkOut), 'MMM dd, yyyy')}
+                </strong>
+              </div>
+              <div className={styles.infoRow}>
+                <span>Guests:</span> <strong>{booking.guestsCount}</strong>
+              </div>
+              <div className={styles.infoRow}>
+                <span>Booked On:</span> <strong>{format(new Date(booking.createdAt), 'MMM dd, yyyy h:mm a')}</strong>
+              </div>
+            </section>
+          </div>
 
-                {!isCancelled && !isFullyPaid && (
-                  <div className={styles.actions}>
-                    <button 
-                      className={styles.primaryBtn}
-                      onClick={handleMarkPaid}
-                      disabled={actionLoading || booking.balanceDueUsd <= 0}
-                    >
-                      {actionLoading ? 'Processing...' : 'Mark Paid (Offline)'}
-                    </button>
-                    <button 
-                      className={styles.secondaryBtn}
-                      onClick={handleGenerateLink}
-                      disabled={actionLoading || booking.balanceDueUsd <= 0}
-                    >
-                      {actionLoading ? 'Generating...' : 'Generate Balance Link'}
-                    </button>
-                  </div>
-                )}
+          <div className={styles.paymentInfo}>
+            <section className={styles.section}>
+              <h2>Payment Status</h2>
+              <div className={styles.statusBadge}>
+                <span className={`${styles.badge} ${styles[booking.status.toLowerCase()]}`}>
+                  {booking.status}
+                </span>
+              </div>
+              <div className={styles.infoRow}>
+                <span>Total Amount:</span> <strong>${booking.totalAmountUsd.toFixed(2)}</strong>
+              </div>
+              <div className={styles.infoRow}>
+                <span>Amount Paid:</span> <strong className={styles.paid}>${booking.amountPaidUsd.toFixed(2)}</strong>
+              </div>
+              <div className={styles.infoRow}>
+                <span>Balance Due:</span> <strong className={styles.due}>${booking.balanceDueUsd.toFixed(2)}</strong>
+              </div>
 
+              {!isCancelled && !isFullyPaid && (
+                <div className={styles.actions}>
+                  <button 
+                    className={styles.primaryBtn}
+                    onClick={handleMarkPaid}
+                    disabled={actionLoading || booking.balanceDueUsd <= 0}
+                  >
+                    {actionLoading ? 'Processing...' : 'Mark Paid (Offline)'}
+                  </button>
+                  <button 
+                    className={styles.secondaryBtn}
+                    onClick={handleGenerateLink}
+                    disabled={actionLoading || booking.balanceDueUsd <= 0}
+                  >
+                    {actionLoading ? 'Generating...' : 'Generate Balance Link'}
+                  </button>
+                </div>
+              )}
+
+              <button 
+                className={styles.utilityBtn}
+                onClick={handleRecalculate}
+                disabled={actionLoading}
+              >
+                {actionLoading ? 'Recalculating...' : 'Recalculate Totals'}
+              </button>
+
+              {paymentLink && (
+                <div className={styles.paymentLinkBox}>
+                  <label>Payment Link:</label>
+                  <input type="text" value={paymentLink} readOnly aria-label="Payment link URL" />
+                  <button onClick={copyToClipboard} className={styles.copyBtn}>Copy</button>
+                </div>
+              )}
+
+              {!isCancelled && (
                 <button 
-                  className={styles.utilityBtn}
-                  onClick={handleRecalculate}
+                  className={styles.dangerBtn}
+                  onClick={handleCancel}
                   disabled={actionLoading}
                 >
-                  {actionLoading ? 'Recalculating...' : 'Recalculate Totals'}
+                  Cancel Booking
                 </button>
-
-                {paymentLink && (
-                  <div className={styles.paymentLinkBox}>
-                    <label>Payment Link:</label>
-                    <input type="text" value={paymentLink} readOnly aria-label="Payment link URL" />
-                    <button onClick={copyToClipboard} className={styles.copyBtn}>Copy</button>
-                  </div>
-                )}
-
-                {!isCancelled && (
-                  <button 
-                    className={styles.dangerBtn}
-                    onClick={handleCancel}
-                    disabled={actionLoading}
-                  >
-                    Cancel Booking
-                  </button>
-                )}
-              </section>
-            </div>
+              )}
+            </section>
           </div>
         </div>
-      </main>
+      </div>
     </div>
   );
 }

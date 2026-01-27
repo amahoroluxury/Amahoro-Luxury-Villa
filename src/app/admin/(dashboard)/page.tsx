@@ -59,62 +59,67 @@ export default async function AdminDashboardPage() {
       <div className="admin-container">
         <div className={styles.statsGrid}>
           <div className={styles.statCard}>
-            <span>Lifetime Revenue</span>
-            <strong>${data.stats.totalRevenue.toLocaleString()}</strong>
+            <span className={styles.statLabel}>Lifetime Revenue</span>
+            <strong className={styles.statValue}>${data.stats.totalRevenue.toLocaleString()}</strong>
           </div>
           <div className={styles.statCard}>
-            <span>Revenue (This Month)</span>
-            <strong>${data.stats.monthlyRevenue.toLocaleString()}</strong>
+            <span className={styles.statLabel}>Revenue (This Month)</span>
+            <strong className={styles.statValue}>${data.stats.monthlyRevenue.toLocaleString()}</strong>
           </div>
           <div className={styles.statCard}>
-            <span>Confirmed Stays</span>
-            <strong>{data.stats.confirmedCount}</strong>
+            <span className={styles.statLabel}>Confirmed Stays</span>
+            <strong className={styles.statValue}>{data.stats.confirmedCount}</strong>
           </div>
           <div className={styles.statCard}>
-            <span>Pending Bookings</span>
-            <strong>{data.stats.pendingCount}</strong>
+            <span className={styles.statLabel}>Pending Bookings</span>
+            <strong className={styles.statValue}>{data.stats.pendingCount}</strong>
           </div>
         </div>
 
-        <div className={styles.mainContent}>
+        <div className={styles.contentGrid}>
           <section className={styles.section}>
             <div className={styles.sectionHeader}>
               <h2>Upcoming Check-ins</h2>
-              <Link href="/admin/bookings" className={styles.textLink}>View All</Link>
+              <Link href="/admin/bookings" className={styles.viewBtn}>View All &rarr;</Link>
             </div>
-            <div className={styles.recentList}>
+            <div className={styles.bookingList}>
               {data.upcoming.length === 0 ? (
                 <p className={styles.empty}>No upcoming check-ins.</p>
               ) : (
                 data.upcoming.map((booking: any) => (
-                  <div key={booking.id} className={styles.bookingItem}>
+                  <div key={booking.id} className={styles.bookingCard}>
                     <div className={styles.bookingMain}>
-                      <strong>{booking.guestName}</strong>
-                      <span>{format(new Date(booking.checkIn), 'MMM dd, yyyy')}</span>
+                      <h4>{booking.guestName}</h4>
+                      <p>{format(new Date(booking.checkIn), 'MMM dd, yyyy')}</p>
                     </div>
                     <div className={styles.bookingStatus}>
                       <span className={`${styles.badge} ${styles[booking.status.toLowerCase()]}`}>
                         {booking.status}
                       </span>
                     </div>
-                    <Link href={`/admin/bookings/${booking.id}`} className={styles.detailBtn}>Details &rarr;</Link>
+                    <Link href={`/admin/bookings/${booking.id}`} className={styles.viewBtn}>Details &rarr;</Link>
                   </div>
                 ))
               )}
             </div>
           </section>
 
-          <section className={styles.quickActions}>
-            <h2>Management</h2>
-            <div className={styles.actionButtons}>
+          <section className={styles.section}>
+            <div className={styles.sectionHeader}>
+              <h2>Management</h2>
+            </div>
+            <div className={styles.actionGrid}>
               <Link href="/admin/calendar" className={styles.actionBtn}>
                 Update Availability
+                <span>&rarr;</span>
               </Link>
               <Link href="/admin/settings" className={styles.actionBtn}>
                 Edit Nightly Rate
+                <span>&rarr;</span>
               </Link>
               <Link href="/admin/bookings" className={styles.actionBtn}>
                 Review Bookings
+                <span>&rarr;</span>
               </Link>
             </div>
           </section>

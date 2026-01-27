@@ -1,103 +1,138 @@
 .wrapper {
   min-height: 100vh;
+  background: var(--admin-content-bg);
 }
 
-.header {
-  background: var(--surface);
-  border-bottom: 1px solid var(--border);
-  padding: 2rem 0;
+.pageHeader {
+  padding: 4rem 0 3rem;
+  background: white;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  margin-bottom: 4rem;
 }
 
-.headerContent {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+.pageHeader h1 {
+  font-family: var(--font-serif);
+  font-size: 2.5rem;
+  color: #1A1A1A;
+  margin-bottom: 0.75rem;
 }
 
-.headerContent h1 {
-  font-size: 1.5rem;
-}
-
-.adminNav {
-  display: flex;
-  gap: 2rem;
-}
-
-.adminNav a {
-  font-size: 0.7rem;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  font-weight: 600;
-  color: var(--text-muted);
-}
-
-.adminNav a.active {
-  color: var(--primary);
+.subtitle {
+  color: #666;
+  font-size: 1rem;
+  font-weight: 500;
 }
 
 .stats {
   display: grid;
-  gap: 1.5rem;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  margin-bottom: 3rem;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 2rem;
+  margin-bottom: 4rem;
 }
 
 .statCard {
-  background: var(--grad-surface);
-  padding: 1.5rem 2rem;
-  border: 1px solid var(--glass-border);
-  border-radius: 12px;
-  box-shadow: var(--shadow-executive);
-  transition: var(--transition-smooth);
+  background: white;
+  padding: 2rem;
+  border-radius: 1.25rem;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
+  transition: all 0.3s ease;
+}
+
+.statCard:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.06);
 }
 
 .statCard span {
   display: block;
-  font-size: 0.65rem;
-  text-transform: uppercase;
-  color: var(--text-muted);
-  margin-bottom: 0.5rem;
+  font-size: 0.8rem;
   font-weight: 700;
-  letter-spacing: 0.15em;
+  color: #888;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.75rem;
 }
 
 .statCard strong {
+  display: block;
   font-size: 2rem;
-  color: var(--secondary);
-  font-weight: 300;
+  font-weight: 800;
+  color: #1A1A1A;
   font-family: var(--font-serif);
 }
 
+.controls {
+  display: flex;
+  gap: 1.5rem;
+  margin-bottom: 2.5rem;
+  align-items: center;
+}
+
+.searchBox {
+  flex: 1;
+}
+
+.searchBox input {
+  width: 100%;
+  padding: 1rem 1.5rem;
+  background: white;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 1rem;
+  font-size: 0.95rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.02);
+}
+
+.searchBox input:focus {
+  border-color: var(--primary);
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(197, 160, 89, 0.1);
+}
+
+.filterBox select {
+  padding: 1rem 1.5rem;
+  background: white;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 1rem;
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
 .tableWrapper {
-  background: var(--surface);
-  border: 1px solid var(--glass-border);
-  border-radius: 12px;
-  box-shadow: var(--shadow-executive);
+  background: white;
+  border-radius: 2rem;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  box-shadow: 0 4px 25px rgba(0, 0, 0, 0.03);
   overflow: hidden;
 }
 
 .table {
   width: 100%;
   border-collapse: collapse;
-  text-align: left;
 }
 
 .table th {
-  padding: 1.25rem 1.5rem;
-  background: #fbf9f6;
-  font-size: 0.65rem;
-  text-transform: uppercase;
-  color: var(--text-muted);
-  border-bottom: 1px solid var(--border);
+  padding: 1.5rem;
+  background: #F8F9FA;
+  font-size: 0.75rem;
   font-weight: 700;
+  color: #888;
+  text-transform: uppercase;
   letter-spacing: 0.1em;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.03);
 }
 
 .table td {
-  padding: 1.25rem 1.5rem;
-  border-bottom: 1px solid var(--border);
-  font-size: 0.85rem;
-  transition: var(--transition-fast);
+  padding: 1.5rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.03);
+  font-size: 0.9rem;
+  color: #1A1A1A;
 }
 
 .table tr:last-child td {
@@ -105,73 +140,34 @@
 }
 
 .table tr:hover td {
-  background: #fdfcfb;
+  background: #FCFBFA;
 }
 
 .guestInfo strong {
   display: block;
-  margin-bottom: 0.1rem;
-  font-weight: 600;
-  color: var(--secondary);
+  font-size: 1rem;
+  font-weight: 700;
+  margin-bottom: 0.25rem;
 }
 
 .guestInfo span {
-  font-size: 0.75rem;
-  color: var(--text-muted);
+  font-size: 0.8rem;
+  color: #888;
+  font-weight: 500;
 }
 
 .badge {
-  padding: 0.35rem 0.75rem;
-  font-size: 0.6rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  border-radius: 4px;
-  letter-spacing: 0.05em;
-}
-
-.pendingdeposit { background: #fff4e5; color: #b76e00; }
-.depositpaid { background: #edf7ed; color: #1e4620; }
-.fullypaid { background: #e3f2fd; color: #0d47a1; }
-.cancelled { background: #fdeded; color: #5f2120; }
-
-.controls {
-  display: flex;
-  gap: 1.5rem;
-  margin-bottom: 2rem;
-  align-items: center;
-}
-
-.searchBox {
-  flex: 1;
-  position: relative;
-}
-
-.searchBox input {
-  width: 100%;
-  padding: 0.85rem 1.25rem;
-  border: 1px solid var(--border);
-  background: var(--surface);
-  font-size: 0.85rem;
-  border-radius: 8px;
-  box-shadow: inset 0 2px 4px rgba(0,0,0,0.02);
-}
-
-.searchBox input:focus {
-  border-color: var(--primary);
-  background: white;
-}
-
-.filterBox select {
-  padding: 0.85rem 1.25rem;
-  border: 1px solid var(--border);
-  background: var(--surface);
+  padding: 0.5rem 1rem;
+  border-radius: 2rem;
   font-size: 0.75rem;
   font-weight: 700;
   text-transform: uppercase;
-  border-radius: 8px;
-  cursor: pointer;
-  letter-spacing: 0.05em;
 }
+
+.pendingdeposit { background: #FFF9E6; color: #B38F00; }
+.depositpaid { background: #E6FAF0; color: #007D3E; }
+.fullypaid { background: #E6F3FF; color: #0056B3; }
+.cancelled { background: #FEE2E2; color: #DC2626; }
 
 .actionsCell {
   display: flex;
@@ -179,18 +175,28 @@
 }
 
 .viewLink {
-  color: var(--primary);
+  padding: 0.5rem 1rem;
+  background: #F8F9FA;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  border-radius: 0.75rem;
+  font-size: 0.8rem;
   font-weight: 700;
-  font-size: 0.7rem;
+  color: var(--primary);
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  padding: 0.4rem 0.8rem;
-  border: 1px solid var(--border);
-  border-radius: 4px;
+  transition: all 0.2s ease;
 }
 
 .viewLink:hover {
   background: var(--primary);
   color: white;
   border-color: var(--primary);
+  transform: translateY(-2px);
+}
+
+@media (max-width: 768px) {
+  .controls {
+    flex-direction: column;
+    align-items: stretch;
+  }
 }

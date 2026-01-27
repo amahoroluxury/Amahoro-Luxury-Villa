@@ -1,59 +1,47 @@
 .wrapper {
   min-height: 100vh;
+  background: var(--admin-content-bg);
 }
 
-.header {
-  background: var(--surface);
-  border-bottom: 1px solid var(--border);
-  padding: 2rem 0;
+.pageHeader {
+  padding: 4rem 0 3rem;
+  background: white;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  margin-bottom: 4rem;
 }
 
-.headerContent {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+.pageHeader h1 {
+  font-family: var(--font-serif);
+  font-size: 2.5rem;
+  color: #1A1A1A;
+  margin-bottom: 0.75rem;
 }
 
-.headerContent h1 {
-  font-size: 1.5rem;
-}
-
-.adminNav {
-  display: flex;
-  gap: 2rem;
-}
-
-.adminNav a {
-  font-size: 0.7rem;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  font-weight: 600;
-  color: var(--text-muted);
-}
-
-.active {
-  color: var(--primary) !important;
+.subtitle {
+  color: #666;
+  font-size: 1rem;
+  font-weight: 500;
 }
 
 .contentCard {
-  max-width: 600px;
+  max-width: 800px;
   margin: 0 auto;
-  background: var(--surface);
-  padding: 4rem;
-  border: 1px solid var(--border);
+  background: white;
+  padding: 3.5rem;
+  border-radius: 2rem;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  box-shadow: 0 4px 25px rgba(0, 0, 0, 0.03);
 }
 
 .section {
-  margin-bottom: 3rem;
+  margin-bottom: 3.5rem;
 }
 
 .section h2 {
-  font-size: 1.1rem;
-  margin-bottom: 2rem;
-  padding-bottom: 1rem;
-  border-bottom: 1px solid var(--border);
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
+  font-family: var(--font-serif);
+  font-size: 1.75rem;
+  color: #1A1A1A;
+  margin-bottom: 2.5rem;
 }
 
 .form {
@@ -67,53 +55,86 @@
 
 .field label {
   display: block;
-  font-size: 0.75rem;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #888;
   text-transform: uppercase;
-  font-weight: 600;
-  color: var(--text-muted);
-  margin-bottom: 0.75rem;
+  letter-spacing: 0.05em;
+  margin-bottom: 1rem;
 }
 
 .field input {
   width: 100%;
-  padding: 1rem;
-  border: 1px solid var(--border);
-  background: var(--background);
-  font-size: 1rem;
+  padding: 1.25rem 1.5rem;
+  background: #F8F9FA;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  border-radius: 1rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #1A1A1A;
+  transition: all 0.2s ease;
+}
+
+.field input:focus {
+  background: white;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 4px rgba(197, 160, 89, 0.1);
   outline: none;
 }
 
 .hint {
-  font-size: 0.75rem;
-  color: var(--text-muted);
-  margin-top: 0.5rem;
+  font-size: 0.85rem;
+  color: #888;
+  margin-top: 0.75rem;
   font-style: italic;
+  font-weight: 500;
 }
 
 .saveBtn {
   background: var(--primary);
   color: white;
-  padding: 1.25rem;
+  padding: 1.5rem;
   width: 100%;
-  font-size: 0.8rem;
-  font-weight: 600;
+  border-radius: 1rem;
+  font-size: 1rem;
+  font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.1em;
   cursor: pointer;
+  transition: all 0.2s ease;
+  border: none;
+}
+
+.saveBtn:hover {
+  background: #B38F00;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(197, 160, 89, 0.3);
+}
+
+.saveBtn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
 }
 
 .success {
-  background: #dcfce7;
-  color: #166534;
-  padding: 1rem;
-  margin-bottom: 2rem;
+  background: #E6FAF0;
+  color: #007D3E;
+  padding: 1.25rem;
+  border-radius: 1rem;
+  margin-bottom: 2.5rem;
   text-align: center;
+  font-weight: 700;
+  border: 1px solid rgba(0, 125, 62, 0.1);
 }
 
 .error {
-  background: #fef2f2;
-  color: #dc2626;
-  padding: 1rem;
-  margin-bottom: 2rem;
+  background: #FEE2E2;
+  color: #DC2626;
+  padding: 1.25rem;
+  border-radius: 1rem;
+  margin-bottom: 2.5rem;
   text-align: center;
+  font-weight: 700;
+  border: 1px solid rgba(220, 38, 38, 0.1);
 }

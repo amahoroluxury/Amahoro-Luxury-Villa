@@ -1,25 +1,25 @@
 .wrapper {
   min-height: 100vh;
-  background: #FDFCFB;
+  background: var(--admin-content-bg);
 }
 
 .pageHeader {
-  padding: 3rem 0 2rem;
-  border-bottom: 1px solid var(--border);
-  margin-bottom: 3rem;
+  padding: 4rem 0 3rem;
   background: white;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  margin-bottom: 4rem;
 }
 
 .pageHeader h1 {
   font-family: var(--font-serif);
-  font-size: 2rem;
-  color: var(--secondary);
-  margin-bottom: 0.5rem;
+  font-size: 2.5rem;
+  color: #1A1A1A;
+  margin-bottom: 0.75rem;
 }
 
 .subtitle {
-  color: var(--text-muted);
-  font-size: 0.9rem;
+  color: #666;
+  font-size: 1rem;
   font-weight: 500;
 }
 
@@ -59,87 +59,87 @@
 
 .statsGrid {
   display: grid;
-  gap: 1.5rem;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  margin-bottom: 3rem;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 2rem;
+  margin-bottom: 4rem;
 }
 
 .statCard {
-  background: var(--grad-surface);
-  padding: 2rem;
-  border: 1px solid var(--glass-border);
-  border-radius: 12px;
-  box-shadow: var(--shadow-executive);
-  transition: var(--transition-smooth);
+  background: white;
+  padding: 2.5rem 2rem;
+  border-radius: 1.5rem;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
+  transition: all 0.3s ease;
   position: relative;
   overflow: hidden;
 }
 
-.statCard:hover {
-  transform: translateY(-5px);
-  box-shadow: var(--shadow-hover);
-}
-
-.statCard::after {
+.statCard::before {
   content: '';
   position: absolute;
-  bottom: 0;
+  top: 0;
   left: 0;
-  width: 100%;
-  height: 3px;
-  background: var(--grad-accent);
-  opacity: 0.3;
+  width: 4px;
+  height: 100%;
+  background: var(--primary);
+  opacity: 0;
+  transition: opacity 0.3s ease;
 }
 
-.statCard span {
+.statCard:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.06);
+}
+
+.statCard:hover::before {
+  opacity: 1;
+}
+
+.statLabel {
   display: block;
-  font-size: 0.65rem;
-  text-transform: uppercase;
-  color: var(--text-muted);
-  margin-bottom: 0.5rem;
+  font-size: 0.85rem;
   font-weight: 700;
-  letter-spacing: 0.15em;
+  color: #888;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 1rem;
 }
 
-.statCard strong {
+.statValue {
+  display: block;
   font-size: 2.25rem;
-  color: var(--secondary);
-  font-weight: 300;
+  font-weight: 800;
+  color: #1A1A1A;
   font-family: var(--font-serif);
 }
 
-.mainContent {
+.contentGrid {
   display: grid;
-  gap: 2rem;
-}
-
-@media (min-width: 1024px) {
-  .mainContent {
-    grid-template-columns: 2fr 1fr;
-  }
+  grid-template-columns: 1.5fr 1fr;
+  gap: 3rem;
+  align-items: start;
 }
 
 .section {
-  background: var(--surface);
+  background: white;
+  border-radius: 2rem;
   padding: 2.5rem;
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  box-shadow: var(--shadow-executive);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  box-shadow: 0 4px 25px rgba(0, 0, 0, 0.03);
 }
 
 .sectionHeader {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 2rem;
-  border-bottom: 1px solid var(--border);
-  padding-bottom: 1.25rem;
+  margin-bottom: 2.5rem;
 }
 
 .sectionHeader h2 {
   font-family: var(--font-serif);
-  font-size: 1.25rem;
-  color: var(--secondary);
+  font-size: 1.75rem;
+  color: #1A1A1A;
 }
 
 .bookingItem {

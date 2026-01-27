@@ -35,16 +35,16 @@ export default async function AdminBookingsPage() {
       <div className="admin-container">
         <div className={styles.stats}>
           <div className={styles.statCard}>
-            <span>Total Bookings</span>
-            <strong>{bookings.length}</strong>
+            <span className={styles.statLabel}>Total Bookings</span>
+            <strong className={styles.statValue}>{bookings.length}</strong>
           </div>
           <div className={styles.statCard}>
-            <span>Pending Deposit</span>
-            <strong>{bookings.filter((b: any) => b.status === 'PendingDeposit').length}</strong>
+            <span className={styles.statLabel}>Pending Deposit</span>
+            <strong className={styles.statValue}>{bookings.filter((b: any) => b.status === 'PendingDeposit').length}</strong>
           </div>
           <div className={styles.statCard}>
-            <span>Confirmed</span>
-            <strong>{bookings.filter((b: any) => b.status === 'DepositPaid' || b.status === 'FullyPaid').length}</strong>
+            <span className={styles.statLabel}>Confirmed</span>
+            <strong className={styles.statValue}>{bookings.filter((b: any) => b.status === 'DepositPaid' || b.status === 'FullyPaid').length}</strong>
           </div>
         </div>
 

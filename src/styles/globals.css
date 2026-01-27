@@ -118,19 +118,51 @@ input:focus, textarea:focus {
 }
 
 /* Admin Specific Layouts */
+:root {
+  --admin-sidebar-bg: #1A1A1A;
+  --admin-sidebar-hover: rgba(255, 255, 255, 0.05);
+  --admin-sidebar-active: var(--primary);
+  --admin-content-bg: #F5F5F7;
+  --admin-card-glass: rgba(255, 255, 255, 0.7);
+  --admin-card-border: rgba(255, 255, 255, 0.3);
+  --admin-card-shadow: 0 8px 32px rgba(0, 0, 0, 0.05);
+  --admin-accent: #C5A059;
+}
+
 .admin-container {
   width: 100%;
-  max-width: 1600px;
+  max-width: 1440px;
   margin: 0 auto;
-  padding: 2rem;
+  padding: 0 2.5rem 3rem;
 }
 
 .admin-card {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  box-shadow: var(--shadow-executive);
+  background: var(--admin-card-glass);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--admin-card-border);
+  box-shadow: var(--admin-card-shadow);
+  border-radius: 1.25rem;
   padding: 1.5rem;
+  transition: all 0.3s ease;
+}
+
+.admin-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
+}
+
+.admin-glass-button {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 0.75rem;
+  padding: 0.75rem 1.25rem;
+  font-weight: 600;
+  font-size: 0.875rem;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
 @media (max-width: 768px) {

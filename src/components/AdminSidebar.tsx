@@ -17,39 +17,37 @@ export default function AdminSidebar() {
 
   return (
     <aside className={styles.sidebar}>
-      <div className={styles.top}>
-        <Link href="/admin" className={styles.logoLink}>
-          <Logo height={40} className={styles.logo} />
+      <div className={styles.logoContainer}>
+        <Link href="/admin">
+          <Logo height={35} className={styles.logo} />
         </Link>
       </div>
 
       <nav className={styles.nav}>
-        <div className={styles.navSection}>
-          <span className={styles.sectionTitle}>Main Menu</span>
-          {navItems.map((item) => {
-            const isActive = pathname === item.href;
-            return (
-              <Link 
-                key={item.href} 
-                href={item.href} 
-                className={`${styles.navItem} ${isActive ? styles.active : ''}`}
-              >
-                <span className={styles.icon}>{item.icon}</span>
-                <span className={styles.label}>{item.label}</span>
-              </Link>
-            );
-          })}
-        </div>
+        <span className={styles.sectionTitle}>Main Menu</span>
+        {navItems.map((item) => {
+          const isActive = pathname === item.href;
+          return (
+            <Link 
+              key={item.href} 
+              href={item.href} 
+              className={`${styles.navLink} ${isActive ? styles.active : ''}`}
+            >
+              <span className={styles.icon}>{item.icon}</span>
+              <span>{item.label}</span>
+            </Link>
+          );
+        })}
       </nav>
 
-      <div className={styles.bottom}>
+      <div className={styles.footer}>
         <Link href="/" className={styles.mainSiteLink}>
-          <span className={styles.icon}>🏠</span>
-          <span className={styles.label}>Main Site</span>
+          <span>🏠</span>
+          <span>Main Site</span>
         </Link>
-        <div className={styles.status}>
-          <span className={styles.statusDot}></span>
-          <span>Live Tracking</span>
+        <div className={styles.statusIndicator}>
+          <div className={styles.dot}></div>
+          <span className={styles.statusText}>Live Tracking</span>
         </div>
       </div>
     </aside>

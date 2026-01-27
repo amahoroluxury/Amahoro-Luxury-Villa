@@ -1,237 +1,291 @@
 .wrapper {
   min-height: 100vh;
+  background: var(--admin-content-bg);
 }
 
-.header {
-  background: var(--surface);
-  border-bottom: 1px solid var(--border);
-  padding: 2rem 0;
+.pageHeader {
+  padding: 4rem 0 3rem;
+  background: white;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  margin-bottom: 4rem;
 }
 
-.headerContent {
-  display: flex;
-  align-items: center;
-  gap: 2rem;
+.breadcrumb {
+  margin-bottom: 1.5rem;
 }
 
-.backLink {
-  font-size: 0.8rem;
-  font-weight: 600;
+.breadcrumb a {
+  font-size: 0.85rem;
+  font-weight: 700;
   color: var(--primary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  transition: all 0.2s ease;
+}
+
+.breadcrumb a:hover {
+  opacity: 0.7;
+  transform: translateX(-5px);
+  display: inline-block;
+}
+
+.pageHeader h1 {
+  font-family: var(--font-serif);
+  font-size: 2.5rem;
+  color: #1A1A1A;
+  margin-bottom: 0.75rem;
+}
+
+.subtitle {
+  color: #666;
+  font-size: 1rem;
+  font-weight: 500;
 }
 
 .grid {
   display: grid;
-  gap: 4rem;
+  gap: 3rem;
+  align-items: start;
 }
 
 @media (min-width: 1024px) {
   .grid {
-    grid-template-columns: 2fr 1.2fr;
+    grid-template-columns: 1.5fr 1fr;
   }
 }
 
 .section {
-  background: var(--surface);
-  padding: 3rem;
-  border: 1px solid var(--border);
-  margin-bottom: 2rem;
+  background: white;
+  padding: 2.5rem;
+  border-radius: 2rem;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  box-shadow: 0 4px 25px rgba(0, 0, 0, 0.03);
+  margin-bottom: 2.5rem;
 }
 
 .section h2 {
-  font-size: 1.25rem;
+  font-family: var(--font-serif);
+  font-size: 1.5rem;
+  color: #1A1A1A;
   margin-bottom: 2rem;
-  border-bottom: 1px solid var(--border);
+  border-bottom: 1px solid rgba(0,0,0,0.03);
   padding-bottom: 1rem;
 }
 
 .infoRow {
   display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  margin-bottom: 1.5rem;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.02);
 }
 
-@media (min-width: 768px) {
-  .infoRow {
-    flex-direction: row;
-    justify-content: space-between;
-  }
+.infoRow:last-child {
+  border-bottom: none;
 }
 
 .infoRow span {
-  font-size: 0.8rem;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #888;
   text-transform: uppercase;
-  color: var(--text-muted);
+  letter-spacing: 0.05em;
+}
+
+.infoRow strong {
+  font-size: 1rem;
+  color: #1A1A1A;
+  font-weight: 600;
 }
 
 .requestNote {
-  background: var(--background);
-  padding: 1rem;
-  font-size: 0.9rem;
+  background: #F8F9FA;
+  padding: 1.5rem;
+  border-radius: 1rem;
+  font-size: 0.95rem;
+  color: #444;
   line-height: 1.6;
-  border-left: 3px solid var(--primary);
+  margin-top: 1rem;
+  border-left: 4px solid var(--primary);
 }
 
 .statusBadge {
-  margin-bottom: 2rem;
+  margin-bottom: 2.5rem;
   text-align: center;
 }
 
 .badge {
   padding: 0.75rem 1.5rem;
-  font-size: 0.8rem;
-  font-weight: 700;
+  font-size: 0.85rem;
+  font-weight: 800;
   text-transform: uppercase;
-  border-radius: 4px;
+  border-radius: 2rem;
+  letter-spacing: 0.05em;
 }
 
-.pendingdeposit { background: #fff8e1; color: #f57c00; }
-.depositpaid { background: #e8f5e9; color: #2e7d32; }
-.fullypaid { background: #e3f2fd; color: #1565c0; }
+.pendingdeposit { background: #FFF9E6; color: #B38F00; }
+.depositpaid { background: #E6FAF0; color: #007D3E; }
+.fullypaid { background: #E6F3FF; color: #0056B3; }
+.cancelled { background: #FEE2E2; color: #DC2626; }
 
-.due {
-  color: #c62828;
-  font-size: 1.25rem;
-}
+.paid { color: #007D3E !important; font-weight: 800 !important; }
+.due { color: #DC2626 !important; font-weight: 800 !important; }
 
 .actions {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
-  margin-top: 3rem;
+  gap: 1.25rem;
+  margin-top: 2.5rem;
 }
 
 .primaryBtn {
-  background-color: var(--primary);
+  background: var(--primary);
   color: white;
   padding: 1.25rem;
-  font-size: 0.8rem;
-  font-weight: 600;
-  letter-spacing: 0.1em;
+  border-radius: 1rem;
+  font-weight: 700;
+  font-size: 0.95rem;
   text-transform: uppercase;
+  letter-spacing: 0.05em;
+  transition: all 0.2s ease;
+  border: none;
+  cursor: pointer;
+}
+
+.primaryBtn:hover:not(:disabled) {
+  background: #B38F00;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(197, 160, 89, 0.3);
 }
 
 .secondaryBtn {
-  background: none;
-  border: 1px solid var(--border);
-  color: var(--secondary);
+  background: white;
+  border: 2px solid var(--primary);
+  color: var(--primary);
   padding: 1.25rem;
-  font-size: 0.8rem;
-  font-weight: 600;
-  letter-spacing: 0.1em;
+  border-radius: 1rem;
+  font-weight: 700;
+  font-size: 0.95rem;
   text-transform: uppercase;
-  cursor: pointer;
+  letter-spacing: 0.05em;
   transition: all 0.2s ease;
+  cursor: pointer;
 }
 
 .secondaryBtn:hover:not(:disabled) {
-  border-color: var(--primary);
-  color: var(--primary);
-}
-
-.primaryBtn:disabled,
-.secondaryBtn:disabled {
-  opacity: 0.6;
-  cursor: not-allowed;
-}
-
-.dangerBtn {
-  background: transparent;
-  border: 1px solid #dc2626;
-  color: #dc2626;
-  padding: 1rem;
-  font-size: 0.75rem;
-  font-weight: 600;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  cursor: pointer;
-  margin-top: 2rem;
-  width: 100%;
-  transition: all 0.2s ease;
-}
-
-.dangerBtn:hover:not(:disabled) {
-  background: #dc2626;
-  color: white;
-}
-
-.success {
-  background: #dcfce7;
-  color: #166534;
-  padding: 1rem;
-  margin-bottom: 2rem;
-  border: 1px solid #bbf7d0;
-}
-
-.error {
-  background: #fef2f2;
-  color: #dc2626;
-  padding: 1rem;
-  margin-bottom: 2rem;
-  border: 1px solid #fecaca;
-}
-
-.paid {
-  color: #16a34a !important;
-}
-
-.cancelled {
-  background: #fef2f2;
-  color: #dc2626;
-}
-
-.paymentLinkBox {
-  margin-top: 1.5rem;
-  padding: 1rem;
-  background: var(--background);
-  border: 1px solid var(--border);
-}
-
-.paymentLinkBox label {
-  display: block;
-  font-size: 0.75rem;
-  text-transform: uppercase;
-  color: var(--text-muted);
-  margin-bottom: 0.5rem;
-}
-
-.paymentLinkBox input {
-  width: 100%;
-  padding: 0.75rem;
-  font-size: 0.85rem;
-  border: 1px solid var(--border);
-  margin-bottom: 0.5rem;
-}
-
-.copyBtn {
   background: var(--primary);
   color: white;
-  padding: 0.5rem 1rem;
-  font-size: 0.75rem;
-  font-weight: 600;
-  cursor: pointer;
-  border: none;
 }
 
 .utilityBtn {
   width: 100%;
   padding: 1rem;
-  background: var(--background);
-  border: 1px solid var(--border);
-  color: var(--text);
-  font-size: 0.75rem;
-  font-weight: 600;
+  background: #F8F9FA;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  color: #666;
+  border-radius: 0.75rem;
+  font-size: 0.85rem;
+  font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.1em;
-  cursor: pointer;
+  letter-spacing: 0.05em;
   margin-top: 1.5rem;
-  margin-bottom: 1rem;
   transition: all 0.2s ease;
+  cursor: pointer;
 }
 
 .utilityBtn:hover:not(:disabled) {
   background: white;
-  border-color: var(--primary);
-  color: var(--primary);
+  color: #1A1A1A;
+  border-color: #1A1A1A;
+}
+
+.dangerBtn {
+  width: 100%;
+  padding: 1rem;
+  background: transparent;
+  border: 1px solid #DC2626;
+  color: #DC2626;
+  border-radius: 0.75rem;
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-top: 2rem;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.dangerBtn:hover:not(:disabled) {
+  background: #DC2626;
+  color: white;
+}
+
+.paymentLinkBox {
+  margin-top: 2rem;
+  padding: 1.5rem;
+  background: #F8F9FA;
+  border-radius: 1.25rem;
+  border: 1px solid rgba(0, 0, 0, 0.03);
+}
+
+.paymentLinkBox label {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #888;
+  text-transform: uppercase;
+  margin-bottom: 0.75rem;
+}
+
+.paymentLinkBox input {
+  width: 100%;
+  padding: 0.875rem;
+  background: white;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 0.5rem;
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+}
+
+.copyBtn {
+  background: #1A1A1A;
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.75rem;
+  font-size: 0.85rem;
+  font-weight: 700;
+  cursor: pointer;
+  border: none;
+  transition: all 0.2s ease;
+}
+
+.copyBtn:hover {
+  background: #333;
+}
+
+.success {
+  background: #E6FAF0;
+  color: #007D3E;
+  padding: 1.25rem;
+  border-radius: 1rem;
+  margin-bottom: 2.5rem;
+  text-align: center;
+  font-weight: 700;
+  border: 1px solid rgba(0, 125, 62, 0.1);
+}
+
+.error {
+  background: #FEE2E2;
+  color: #DC2626;
+  padding: 1.25rem;
+  border-radius: 1rem;
+  margin-bottom: 2.5rem;
+  text-align: center;
+  font-weight: 700;
+  border: 1px solid rgba(220, 38, 38, 0.1);
+}
+
+:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }

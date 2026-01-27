@@ -9,14 +9,16 @@ export default function AdminLayout({
 }) {
   return (
     <div className="admin-layout">
-      <AdminSidebar />
-      <div className="admin-main">
-        <AdminHeader />
-        <main className="admin-page-content">
-          {children}
-        </main>
-        <AdminFooter />
+      <div className="admin-body">
+        <AdminSidebar />
+        <div className="admin-main">
+          <AdminHeader />
+          <main className="admin-page-content">
+            {children}
+          </main>
+        </div>
       </div>
+      <AdminFooter />
     </div>
   );
 }

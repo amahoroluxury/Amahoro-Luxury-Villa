@@ -37,7 +37,12 @@ export default function AdminHeader() {
           <div className={styles.avatar}>A</div>
           <div className={styles.userInfo}>
             <span className={styles.userName}>Admin</span>
-            <span className={styles.userRole}>Manager</span>
+            <button onClick={async () => {
+              try {
+                await fetch('/api/admin/auth', { method: 'DELETE' });
+                window.location.href = '/admin/login';
+              } catch (err) { console.error(err); }
+            }} className={styles.logoutLink}>Sign Out</button>
           </div>
         </div>
       </div>

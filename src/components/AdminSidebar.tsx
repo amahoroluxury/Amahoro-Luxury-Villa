@@ -52,9 +52,6 @@ export default function AdminSidebar() {
         <Link href="/" className={styles.websiteLink}>
           View Website ↗
         </Link>
-        <button onClick={handleLogout} className={styles.logoutBtn}>
-          Sign Out
-        </button>
       </div>
     </aside>
   );

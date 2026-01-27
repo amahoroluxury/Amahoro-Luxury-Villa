@@ -13,7 +13,7 @@ export default function AdminFooter() {
             <p>&copy; {currentYear} Amahoro Luxury Villa. Admin Portal.</p>
           </div>
           <div className={styles.right}>
-            <p>Built with Precision for Kigali&apos;s Finest Stays.</p>
+            <p>Developed by <a href="https://getrwanda.rw" target="_blank" rel="noopener noreferrer" className={styles.link}>#TeamGet</a></p>
           </div>
         </div>
       </div>

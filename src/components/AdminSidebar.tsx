@@ -17,12 +17,8 @@ export default function AdminSidebar() {
 
   const handleLogout = async () => {
     try {
-      const res = await fetch('/api/admin/auth', {
-        method: 'DELETE',
-      });
-      if (res.ok) {
-        window.location.href = '/admin/login';
-      }
+      const res = await fetch('/api/admin/auth', { method: 'DELETE' });
+      if (res.ok) window.location.href = '/admin/login';
     } catch (err) {
       console.error('Logout failed:', err);
     }
@@ -30,14 +26,12 @@ export default function AdminSidebar() {
 
   return (
     <aside className={styles.sidebar}>
-      <div className={styles.logoContainer}>
-        <Link href="/admin">
-          <Logo height={35} className={styles.logo} />
-        </Link>
+      <div className={styles.logoWrapper}>
+        <Logo height={40} className={styles.logo} />
       </div>
 
       <nav className={styles.nav}>
-        <span className={styles.sectionTitle}>Main Menu</span>
+        <div className={styles.sectionLabel}>Menu</div>
         {navItems.map((item) => {
           const isActive = pathname === item.href;
           return (
@@ -46,26 +40,21 @@ export default function AdminSidebar() {
               href={item.href} 
               className={`${styles.navLink} ${isActive ? styles.active : ''}`}
             >
-              <span className={styles.icon}>{item.icon}</span>
-              <span>{item.label}</span>
+              <div className={styles.iconWrapper}>{item.icon}</div>
+              <span className={styles.linkText}>{item.label}</span>
+              {isActive && <div className={styles.activeIndicator} />}
             </Link>
           );
         })}
       </nav>
 
       <div className={styles.footer}>
-        <Link href="/" className={styles.mainSiteLink}>
-          <span>🏠</span>
-          <span>Main Site</span>
+        <Link href="/" className={styles.websiteLink}>
+          View Website ↗
         </Link>
         <button onClick={handleLogout} className={styles.logoutBtn}>
-          <span>🚪</span>
-          <span>Logout</span>
+          Sign Out
         </button>
-        <div className={styles.statusIndicator}>
-          <div className={styles.dot}></div>
-          <span className={styles.statusText}>Live Tracking</span>
-        </div>
       </div>
     </aside>
   );

@@ -25,13 +25,6 @@ export default async function AdminBookingsPage() {
 
   return (
     <div className={styles.wrapper}>
-      <header className={styles.pageHeader}>
-        <div className="admin-container">
-          <h1>Manage Bookings</h1>
-          <p className={styles.subtitle}>Review and manage your villa reservations.</p>
-        </div>
-      </header>
-
       <div className="admin-container">
         <div className={styles.stats}>
           <div className={styles.statCard}>

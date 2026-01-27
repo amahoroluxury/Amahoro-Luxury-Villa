@@ -64,13 +64,6 @@ export default function AdminSettingsPage() {
 
   return (
     <div className={styles.wrapper}>
-      <header className={styles.pageHeader}>
-        <div className="admin-container">
-          <h1>Site Settings</h1>
-          <p className={styles.subtitle}>Configure global villa parameters and pricing.</p>
-        </div>
-      </header>
-
       <div className="admin-container">
         <div className={styles.contentCard}>
           {message && <div className={styles.success}>{message}</div>}

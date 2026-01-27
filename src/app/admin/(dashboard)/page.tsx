@@ -49,35 +49,28 @@ export default async function AdminDashboardPage() {
 
   return (
     <div className={styles.wrapper}>
-      <header className={styles.pageHeader}>
-        <div className="admin-container">
-          <h1>Dashboard Overview</h1>
-          <p className={styles.subtitle}>Welcome back to the Amahoro Admin Portal.</p>
-        </div>
-      </header>
-
       <div className="admin-container">
         <div className={styles.statsGrid}>
-          <div className={styles.statCard}>
+          <div className="admin-card">
             <span className={styles.statLabel}>Lifetime Revenue</span>
             <strong className={styles.statValue}>${data.stats.totalRevenue.toLocaleString()}</strong>
           </div>
-          <div className={styles.statCard}>
+          <div className="admin-card">
             <span className={styles.statLabel}>Revenue (This Month)</span>
             <strong className={styles.statValue}>${data.stats.monthlyRevenue.toLocaleString()}</strong>
           </div>
-          <div className={styles.statCard}>
+          <div className="admin-card">
             <span className={styles.statLabel}>Confirmed Stays</span>
             <strong className={styles.statValue}>{data.stats.confirmedCount}</strong>
           </div>
-          <div className={styles.statCard}>
+          <div className="admin-card">
             <span className={styles.statLabel}>Pending Bookings</span>
             <strong className={styles.statValue}>{data.stats.pendingCount}</strong>
           </div>
         </div>
 
         <div className={styles.contentGrid}>
-          <section className={styles.section}>
+          <section className={`admin-card ${styles.section}`}>
             <div className={styles.sectionHeader}>
               <h2>Upcoming Check-ins</h2>
               <Link href="/admin/bookings" className={styles.viewBtn}>View All &rarr;</Link>
@@ -104,7 +97,7 @@ export default async function AdminDashboardPage() {
             </div>
           </section>
 
-          <section className={styles.section}>
+          <section className={`admin-card ${styles.section}`}>
             <div className={styles.sectionHeader}>
               <h2>Management</h2>
             </div>

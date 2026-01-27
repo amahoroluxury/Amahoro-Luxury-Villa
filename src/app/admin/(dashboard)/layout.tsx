@@ -1,7 +1,8 @@
 import AdminSidebar from '@/components/AdminSidebar';
 import AdminFooter from '@/components/AdminFooter';
+import AdminHeader from '@/components/AdminHeader';
 
-export default function DashboardLayout({
+export default function AdminLayout({
   children,
 }: {
   children: React.ReactNode;
@@ -10,6 +11,7 @@ export default function DashboardLayout({
     <div className="admin-layout">
       <AdminSidebar />
       <div className="admin-main">
+        <AdminHeader />
         <main className="admin-page-content">
           {children}
         </main>

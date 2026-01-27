@@ -46,13 +46,6 @@ export default async function AdminCalendarPage() {
 
   return (
     <div className={styles.wrapper}>
-      <header className={styles.pageHeader}>
-        <div className="admin-container">
-          <h1>Booking Calendar</h1>
-          <p className={styles.subtitle}>Manage availability and view scheduled stays.</p>
-        </div>
-      </header>
-
       <div className="admin-container">
         <div className={styles.mainGrid}>
           <div className={styles.calendarSection}>

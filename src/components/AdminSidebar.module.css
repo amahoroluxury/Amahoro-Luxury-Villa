@@ -106,6 +106,29 @@
   color: #1A1A1A;
 }
 
+.logoutBtn {
+  padding: 0.875rem;
+  background: rgba(220, 38, 38, 0.1);
+  border: 1px solid rgba(220, 38, 38, 0.2);
+  border-radius: 0.75rem;
+  color: #FCA5A5;
+  font-size: 0.85rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  width: 100%;
+}
+
+.logoutBtn:hover {
+  background: #DC2626;
+  color: white;
+  border-color: #DC2626;
+}
+
 .statusIndicator {
   display: flex;
   align-items: center;
@@ -138,7 +161,7 @@
 
 @media (max-width: 1024px) {
   .sidebar { width: 80px; }
-  .sectionTitle, .statusText, .mainSiteLink span, .navLink span { display: none; }
-  .navLink, .mainSiteLink { justify-content: center; padding: 1rem; }
+  .sectionTitle, .statusText, .mainSiteLink span:nth-child(2), .logoutBtn span:nth-child(2), .navLink span:nth-child(2) { display: none; }
+  .navLink, .mainSiteLink, .logoutBtn { justify-content: center; padding: 1rem; }
   .logoContainer { padding: 2rem 1rem; display: flex; justify-content: center; }
 }

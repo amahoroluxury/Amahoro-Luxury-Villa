@@ -15,6 +15,19 @@ export default function AdminSidebar() {
     { label: 'Settings', href: '/admin/settings', icon: '⚙️' },
   ];
 
+  const handleLogout = async () => {
+    try {
+      const res = await fetch('/api/admin/auth', {
+        method: 'DELETE',
+      });
+      if (res.ok) {
+        window.location.href = '/admin/login';
+      }
+    } catch (err) {
+      console.error('Logout failed:', err);
+    }
+  };
+
   return (
     <aside className={styles.sidebar}>
       <div className={styles.logoContainer}>
@@ -45,6 +58,10 @@ export default function AdminSidebar() {
           <span>🏠</span>
           <span>Main Site</span>
         </Link>
+        <button onClick={handleLogout} className={styles.logoutBtn}>
+          <span>🚪</span>
+          <span>Logout</span>
+        </button>
         <div className={styles.statusIndicator}>
           <div className={styles.dot}></div>
           <span className={styles.statusText}>Live Tracking</span>

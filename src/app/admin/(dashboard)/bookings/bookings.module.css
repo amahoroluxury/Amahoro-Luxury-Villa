@@ -104,6 +104,55 @@
   transition: all 0.2s ease;
 }
 
+.actionBox {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.exportBtn {
+  padding: 1rem 1.5rem;
+  background: white;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 1rem;
+  color: #666;
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  transition: all 0.2s ease;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.exportBtn:hover {
+  border-color: #666;
+  color: #1A1A1A;
+  transform: translateY(-2px);
+}
+
+.newBtn {
+  padding: 1rem 1.75rem;
+  background: #1A1A1A;
+  border: 1px solid #1A1A1A;
+  border-radius: 1rem;
+  color: white;
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.newBtn:hover {
+  background: #000;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
 .tableWrapper {
   background: white;
   border-radius: 2rem;

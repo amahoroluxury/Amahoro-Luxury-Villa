@@ -5,6 +5,9 @@ import { format, differenceInDays } from 'date-fns';
 import Link from 'next/link';
 import styles from './bookings.module.css';
 
+import QuickAddBooking from '@/components/QuickAddBooking';
+import { useRouter } from 'next/navigation';
+
 interface Booking {
   id: string;
   guestName: string;
@@ -23,6 +26,8 @@ interface BookingListProps {
 export default function BookingList({ initialBookings }: BookingListProps) {
   const [searchTerm, setSearchTerm] = useState('');
   const [statusFilter, setStatusFilter] = useState('ALL');
+  const [isQuickAddOpen, setIsQuickAddOpen] = useState(false);
+  const router = useRouter();
 
   const filteredBookings = useMemo(() => {
     return initialBookings.filter((booking) => {
@@ -68,7 +73,24 @@ export default function BookingList({ initialBookings }: BookingListProps) {
             <option value="CANCELLED">Cancelled</option>
           </select>
         </div>
+        <div className={styles.actionBox}>
+          <a href="/api/admin/bookings/export" className={styles.exportBtn} target="_blank" rel="noopener noreferrer">
+             Export CSV
+          </a>
+          <button onClick={() => setIsQuickAddOpen(true)} className={styles.newBtn}>
+            + New Booking
+          </button>
+        </div>
       </div>
+
+      {isQuickAddOpen && (
+        <QuickAddBooking 
+          onClose={() => setIsQuickAddOpen(false)} 
+          onSuccess={() => {
+            router.refresh();
+          }} 
+        />
+      )}
 
       <div className={styles.tableWrapper}>
         <table className={styles.table}>

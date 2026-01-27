@@ -34,12 +34,14 @@ Amahoro Luxury Villa is a bespoke web application built with modern technologies
 ### Installation
 
 1. **Clone the repository**:
+
    ```bash
    git clone https://github.com/your-username/amahoro-luxury-villa.git
    cd amahoro-luxury-villa
    ```
 
 2. **Install dependencies**:
+
    ```bash
    npm install
    ```
@@ -48,15 +50,18 @@ Amahoro Luxury Villa is a bespoke web application built with modern technologies
    Create a `.env` file in the root directory and populate it based on `.env.example`.
 
 4. **Initialize Database**:
+
    ```bash
    npx prisma db push
    npx prisma db seed
    ```
 
 5. **Run the development server**:
+
    ```bash
    npm run dev
    ```
+
    Open [http://localhost:3000](http://localhost:3000) to view the site.
 
 ## 📄 License

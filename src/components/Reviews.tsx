@@ -2,8 +2,7 @@ import React from 'react';
 import styles from './Reviews.module.css';
 import { reviews } from './reviewsData';
 import Link from 'next/link';
-// Optimized image loading if you prefer next/image, but standard img tag is fine for external URLs if domain not configured
-// Using standard img for simplicity with external Airbnb avatars
+import Image from 'next/image';
 
 const Reviews = () => {
   return (
@@ -24,11 +23,12 @@ const Reviews = () => {
           {reviews.map((review) => (
             <div key={review.id} className={styles.reviewCard}>
               <div className={styles.userInfo}>
-                <img 
-                  src={review.image} 
-                  alt={review.name} 
+                <Image
+                  src={review.image}
+                  alt={review.name}
+                  width={48}
+                  height={48}
                   className={styles.avatar}
-                  loading="lazy"
                 />
                 <div className={styles.userDetails}>
                   <span className={styles.userName}>{review.name}</span>
@@ -44,9 +44,9 @@ const Reviews = () => {
         </div>
 
         <div className={styles.sourceLink}>
-          <a 
-            href="https://www.airbnb.co.za/rooms/1446485293192029182?source_impression_id=p3_1768820276_P3IfJEcaCRXBsYVI" 
-            target="_blank" 
+          <a
+            href="https://www.airbnb.co.za/rooms/1446485293192029182?source_impression_id=p3_1768820276_P3IfJEcaCRXBsYVI"
+            target="_blank"
             rel="noopener noreferrer"
             className={styles.viewAllBtn}
           >

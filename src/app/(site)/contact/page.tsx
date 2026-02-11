@@ -9,7 +9,7 @@ export default function ContactPage() {
           <span className={styles.label}>Get in Touch</span>
           <h1>Contact us & plan your stay</h1>
           <p className={styles.lead}>
-            Have questions, special requests, or want to arrange a private chef or airport pickup? 
+            Have questions, special requests, or want to arrange a private chef or airport pickup?
             Send us a message and our team will respond promptly.
           </p>
         </div>
@@ -23,25 +23,26 @@ export default function ContactPage() {
                 <div className={styles.icon}><MessageSquare size={24} /></div>
                 <div>
                   <h3>WhatsApp</h3>
-                  <p>Chat with us instantly</p>
-                  <a href="https://wa.me/250781871487" className={styles.link}>+250 781 871 487</a>
+                  <p>Inquire via WhatsApp</p>
+                  <a href="https://wa.me/250781871487?text=I'm%20interested%20in%20booking%20Amahoro%20Luxury%20Villa" className={styles.link}>Chat with us</a>
                 </div>
               </div>
 
-                <div className={styles.infoItem}>
-                  <Mail className={styles.infoIcon} />
-                  <div>
-                    <h3>Email</h3>
-                    <p><a href="mailto:booking@amahoroluxuryvilla.com">booking@amahoroluxuryvilla.com</a></p>
-                  </div>
+              <div className={styles.infoCard}>
+                <div className={styles.icon}><Mail size={24} /></div>
+                <div>
+                  <h3>Email</h3>
+                  <p>General inquiries</p>
+                  <a href="mailto:booking@amahoroluxuryvilla.com" className={styles.link}>booking@amahoroluxuryvilla.com</a>
                 </div>
+              </div>
 
               <div className={styles.infoCard}>
                 <div className={styles.icon}><Phone size={24} /></div>
                 <div>
                   <h3>Phone</h3>
-                  <p>Call our house manager</p>
-                  <a href="tel:+250781871487" className={styles.link}>+250 781 871 487</a>
+                  <p>House Management</p>
+                  <a href="tel:+250781871487" className={styles.link}>Call for urgent matters</a>
                 </div>
               </div>
             </div>

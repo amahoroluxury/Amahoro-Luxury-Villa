@@ -1,5 +1,6 @@
 import prisma from '@/lib/prisma';
 import { NextResponse } from 'next/server';
+import { getExchangeRate } from '@/lib/exchange-rate';
 
 export const dynamic = 'force-dynamic';
 
@@ -15,14 +16,15 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: 'Booking not found' }, { status: 404 });
     }
 
+
     // Base amount in USD
     const amountUsd = type === 'deposit' ? booking.depositAmountUsd : booking.totalAmountUsd;
-    
-    // Convert to RWF if requested (simplified for now, using a fixed rate)
-    const RWF_RATE = 1300;
-    const finalAmount = currency === 'RWF' ? Math.round(amountUsd * RWF_RATE) : amountUsd;
+
+    // Get dynamic exchange rate
+    const rwfRate = await getExchangeRate();
+    const finalAmount = currency === 'RWF' ? Math.round(amountUsd * rwfRate) : amountUsd;
     const finalCurrency = currency;
-    
+
     const tx_ref = `AMH-${booking.id.slice(0, 8)}-${Date.now()}`;
 
     // Flutterwave Standard Payment Request

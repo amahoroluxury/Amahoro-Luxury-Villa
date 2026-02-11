@@ -23,12 +23,13 @@ export default function PaymentPage() {
   const router = useRouter();
   const params = useParams();
   const bookingId = params.id as string;
-  
+
   const [booking, setBooking] = useState<Booking | null>(null);
   const [loading, setLoading] = useState(true);
   const [processing, setProcessing] = useState(false);
   const [error, setError] = useState('');
   const [currency, setCurrency] = useState<'USD' | 'RWF'>('USD');
+  const [rwfRate, setRwfRate] = useState(1300);
 
   useEffect(() => {
     async function fetchBooking() {
@@ -47,8 +48,21 @@ export default function PaymentPage() {
       }
     }
 
+    async function fetchRate() {
+      try {
+        const res = await fetch('/api/availability/exchange-rate');
+        if (res.ok) {
+          const data = await res.json();
+          setRwfRate(data.rate);
+        }
+      } catch (err) {
+        console.error('Failed to fetch rate');
+      }
+    }
+
     if (bookingId) {
       fetchBooking();
+      fetchRate();
     }
   }, [bookingId]);
 
@@ -118,7 +132,7 @@ export default function PaymentPage() {
   };
 
   const nights = Math.ceil(
-    (new Date(booking.checkOut).getTime() - new Date(booking.checkIn).getTime()) / 
+    (new Date(booking.checkOut).getTime() - new Date(booking.checkIn).getTime()) /
     (1000 * 60 * 60 * 24)
   );
 
@@ -126,10 +140,9 @@ export default function PaymentPage() {
   const showBalanceOption = booking.amountPaidUsd > 0 && booking.balanceDueUsd > 0;
   const isFullyPaid = booking.status === 'FullyPaid';
 
-  const RWF_RATE = 1300; // Fixed rate for calculation display
   const getAmountDisplay = (usd: number) => {
     if (currency === 'USD') return `$${usd.toFixed(2)}`;
-    return `RWF ${(usd * RWF_RATE).toLocaleString()}`;
+    return `RWF ${(usd * rwfRate).toLocaleString()}`;
   };
 
   if (isFullyPaid) {
@@ -172,18 +185,18 @@ export default function PaymentPage() {
               <strong>{nights}</strong>
             </div>
             <hr />
-            
+
             <div className={styles.currencyToggle}>
               <span>Pay in:</span>
               <div className={styles.toggleButtons}>
-                <button 
-                  className={currency === 'USD' ? styles.active : ''} 
+                <button
+                  className={currency === 'USD' ? styles.active : ''}
                   onClick={() => setCurrency('USD')}
                 >
                   USD
                 </button>
-                <button 
-                  className={currency === 'RWF' ? styles.active : ''} 
+                <button
+                  className={currency === 'RWF' ? styles.active : ''}
                   onClick={() => setCurrency('RWF')}
                 >
                   RWF
@@ -209,12 +222,12 @@ export default function PaymentPage() {
 
           <div className={styles.paymentOptions}>
             <h2>Select Payment Option</h2>
-            
+
             {error && <div className={styles.error}>{error}</div>}
 
             <div className={styles.methodNote}>
-              {currency === 'USD' 
-                ? 'Best for Cards and PayPal' 
+              {currency === 'USD'
+                ? 'Best for Cards and PayPal'
                 : 'Best for Mobile Money (MTN/Airtel)'}
             </div>
 

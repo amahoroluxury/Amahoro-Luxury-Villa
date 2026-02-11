@@ -5,22 +5,22 @@ import styles from './FeaturedSpaces.module.css';
 const spaces = [
   {
     id: 1,
-    title: 'Master Bedroom',
-    description: 'A spacious retreat with king-sized comfort and private balcony access.',
+    title: 'Master Suite',
+    description: 'A spacious retreat with spa bath and direct access to the garden terrace.',
     image: '/images/gallery/gallery-7.jpg',
     span: 'normal'
   },
   {
     id: 2,
-    title: 'Modern Living Area',
-    description: 'Open-concept design blending indoor luxury with outdoor breeze.',
-    image: '/images/gallery/gallery-4.jpg',
+    title: 'Chef\'s Kitchen',
+    description: 'High-end appliances, coffee station, and fully stocked for culinary needs.',
+    image: '/images/gallery/gallery-5.jpg',
     span: 'wide'
   },
   {
     id: 3,
-    title: 'Tropical Garden',
-    description: 'Lush greenery and a fire pit for unforgettable evening relaxation.',
+    title: 'Fire Pit',
+    description: 'Enjoy a night cap with friends in the private outdoor fire pit area.',
     image: '/images/gallery/gallery-14.jpg',
     span: 'normal'
   }

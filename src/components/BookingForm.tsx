@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 import { format, differenceInDays } from 'date-fns';
 import styles from './booking.module.css';
 
@@ -11,7 +12,8 @@ export default function BookingForm() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [price, setPrice] = useState({ nightlyRate: 500, total: 0, deposit: 0, balance: 0, depositPercent: 50 });
-  
+  const [acceptedTerms, setAcceptedTerms] = useState(false);
+
   const [formData, setFormData] = useState({
     checkIn: '',
     checkOut: '',
@@ -22,7 +24,7 @@ export default function BookingForm() {
     requests: '',
   });
 
-  const nights = formData.checkIn && formData.checkOut 
+  const nights = formData.checkIn && formData.checkOut
     ? differenceInDays(new Date(formData.checkOut), new Date(formData.checkIn))
     : 0;
 
@@ -50,14 +52,14 @@ export default function BookingForm() {
         setError('Please select valid check-in and check-out dates.');
         return;
       }
-      
+
       setLoading(true);
       setError('');
-      
+
       try {
         const res = await fetch(`/api/availability?checkIn=${formData.checkIn}&checkOut=${formData.checkOut}`);
         const data = await res.json();
-        
+
         if (data.available) {
           setStep(2);
         } else {
@@ -112,32 +114,32 @@ export default function BookingForm() {
           <div className={styles.grid}>
             <div className={styles.field}>
               <label htmlFor="checkIn">Check-in</label>
-              <input 
+              <input
                 id="checkIn"
-                type="date" 
+                type="date"
                 value={formData.checkIn}
-                onChange={(e) => setFormData({...formData, checkIn: e.target.value})}
+                onChange={(e) => setFormData({ ...formData, checkIn: e.target.value })}
                 min={new Date().toISOString().split('T')[0]}
               />
             </div>
             <div className={styles.field}>
               <label htmlFor="checkOut">Check-out</label>
-              <input 
+              <input
                 id="checkOut"
-                type="date" 
+                type="date"
                 value={formData.checkOut}
-                onChange={(e) => setFormData({...formData, checkOut: e.target.value})}
+                onChange={(e) => setFormData({ ...formData, checkOut: e.target.value })}
                 min={formData.checkIn || new Date().toISOString().split('T')[0]}
               />
             </div>
             <div className={styles.field}>
               <label htmlFor="guests">Guests</label>
-              <select 
+              <select
                 id="guests"
                 value={formData.guests}
-                onChange={(e) => setFormData({...formData, guests: parseInt(e.target.value)})}
+                onChange={(e) => setFormData({ ...formData, guests: parseInt(e.target.value) })}
               >
-                {[1,2,3,4,5,6,7,8].map(n => (
+                {[1, 2, 3, 4, 5, 6, 7, 8].map(n => (
                   <option key={n} value={n}>{n} Guests</option>
                 ))}
               </select>
@@ -153,8 +155,8 @@ export default function BookingForm() {
             </div>
           )}
 
-          <button 
-            className={styles.primaryBtn} 
+          <button
+            className={styles.primaryBtn}
             onClick={handleNext}
             disabled={loading}
           >
@@ -169,48 +171,66 @@ export default function BookingForm() {
           <div className={styles.grid}>
             <div className={styles.field}>
               <label htmlFor="fullName">Full Name</label>
-              <input 
+              <input
                 id="fullName"
-                type="text" 
+                type="text"
                 value={formData.name}
-                onChange={(e) => setFormData({...formData, name: e.target.value})}
+                onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                 required
               />
             </div>
             <div className={styles.field}>
               <label htmlFor="email">Email Address</label>
-              <input 
+              <input
                 id="email"
-                type="email" 
+                type="email"
                 value={formData.email}
-                onChange={(e) => setFormData({...formData, email: e.target.value})}
+                onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                 required
               />
             </div>
             <div className={styles.field}>
               <label htmlFor="phone">Phone Number</label>
-              <input 
+              <input
                 id="phone"
-                type="tel" 
+                type="tel"
                 value={formData.phone}
-                onChange={(e) => setFormData({...formData, phone: e.target.value})}
+                onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                 required
               />
             </div>
           </div>
           <div className={styles.field}>
             <label htmlFor="requests">Special Requests</label>
-            <textarea 
+            <textarea
               id="requests"
               value={formData.requests}
-              onChange={(e) => setFormData({...formData, requests: e.target.value})}
+              onChange={(e) => setFormData({ ...formData, requests: e.target.value })}
               rows={4}
             />
           </div>
 
+          <div className={styles.checkboxField}>
+            <input
+              type="checkbox"
+              id="acceptedTerms"
+              className={styles.checkboxInput}
+              checked={acceptedTerms}
+              onChange={(e) => setAcceptedTerms(e.target.checked)}
+              required
+            />
+            <label htmlFor="acceptedTerms" className={styles.checkboxLabel}>
+              I have read and agree to the <Link href="/house-rules" target="_blank">House Rules</Link> and <Link href="/policies" target="_blank">Cancellation Policy</Link>.
+            </label>
+          </div>
+
           <div className={styles.actions}>
             <button type="button" onClick={() => setStep(1)} className={styles.secondaryBtn}>Back</button>
-            <button type="submit" className={styles.primaryBtn} disabled={loading}>
+            <button
+              type="submit"
+              className={styles.primaryBtn}
+              disabled={loading || !acceptedTerms}
+            >
               {loading ? 'Processing...' : 'Continue to Payment'}
             </button>
           </div>

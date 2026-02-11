@@ -7,7 +7,7 @@ export default function AboutPage() {
     <div className={styles.wrapper}>
       <section className={styles.hero}>
         <div className="container">
-          <h1 className={styles.heroTitle}> Amahoro Luxury Villa  means Peace</h1>
+          <h1 className={styles.heroTitle}>Amahoro means Peace</h1>
         </div>
       </section>
 
@@ -18,11 +18,11 @@ export default function AboutPage() {
               <span className={styles.label}>Our Story</span>
               <h2>A Sanctuary of Calm</h2>
               <p>
-                 Amahoro Luxury Villa  means peace in Kinyarwanda. It embodies the spirit of calm that defines our villa. 
-                We celebrate Rwandan culture through the craftsmanship that went into building and furnishing the home.
+                Amahoro means peace in Kinyarwanda. It embodies the spirit of calm that defines our villa.
+                We celebrate Rwandan culture through the craftsmanship and local materials that went into building and furnishing the home, highlighting the work of talented local craftsmen.
               </p>
               <p>
-                The space is intended to have the luxury feel of a 5-star hotel and the comfort and privacy of a home. 
+                The space is intended to have the luxury feel of a 5-star hotel and the comfort and privacy of a home.
                 Our mission is to complement your stay with the level of service that will make your experience memorable.
               </p>
             </div>
@@ -44,8 +44,8 @@ export default function AboutPage() {
             <div className={styles.expText}>
               <h2>A home built for unforgettable moments</h2>
               <p>
-                From morning coffee at the espresso bar to sunset dinners on the terrace, every space at  Amahoro Luxury Villa   
-                is designed to feel warm, elegant, and effortless. Whether you’re hosting family, relaxing with friends, 
+                From morning coffee at the espresso bar to sunset dinners on the terrace, every space at  Amahoro Luxury Villa
+                is designed to feel warm, elegant, and effortless. Whether you’re hosting family, relaxing with friends,
                 or enjoying a quiet escape, the villa offers comfort you can truly settle into.
               </p>
               <Link href="/rooms" className={styles.primaryBtn}>View Rooms</Link>

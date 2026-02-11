@@ -16,21 +16,19 @@ const amenities = [
   {
     icon: (
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+        <path d="M12 2s-8 4-8 10v7h16v-7c0-6-8-10-8-10z" />
+        <path d="M12 22v-4" />
       </svg>
     ),
-    label: '24/7 Security'
+    label: 'Easy Check-in'
   },
   {
     icon: (
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M3 3h18v18H3zM12 8v8M8 12h8" />
-        <path d="M15 16s1 2 2 2 2-2 2-2" />
-        <rect x="5" y="5" width="14" height="14" rx="2" />
-        <path d="M12 3v18" />
+        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
       </svg>
     ),
-    label: 'Garden & Firepit'
+    label: 'Security'
   },
   {
     icon: (
@@ -46,11 +44,13 @@ const amenities = [
   {
     icon: (
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M3 21h18M5 21V7a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v14" />
-        <path d="M9 10a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2" />
+        <circle cx="12" cy="13" r="4" />
+        <path d="M12 9v1" />
+        <path d="M16 13a4 4 0 1 1-8 0" />
+        <rect x="3" y="3" width="18" height="18" rx="2" />
       </svg>
     ),
-    label: 'Chef Available'
+    label: 'Washer/Dryer'
   }
 ];
 

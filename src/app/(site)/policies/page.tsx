@@ -1,58 +1,50 @@
-import styles from './policies.module.css';
+import styles from '../faq/faq.module.css';
 
 export default function PoliciesPage() {
   return (
     <div className={styles.wrapper}>
       <header className={styles.pageHeader}>
         <div className="container">
-          <span className={styles.label}>Guest Information</span>
-          <h1>Policies & House Rules</h1>
+          <span className={styles.label}>Legal & Terms</span>
+          <h1>Our Policies</h1>
           <p className={styles.lead}>
-            To ensure a peaceful and high-quality experience for all guests, please review our policies.
+            Transparent terms to ensure a smooth and professional relationship with our guests.
           </p>
         </div>
       </header>
 
       <section className="section-padding">
         <div className="container">
-          <div className={styles.grid}>
-            <div className={styles.policySection}>
-              <h2>Booking & Payment</h2>
-              <p>
-                A minimum 50% deposit is required to confirm your booking. 
-                The remaining balance must be paid before check-in. 
-                We accept online payments via Flutterwave (Credit/Debit, Mobile Money) or Bank Transfers.
-              </p>
-            </div>
+          <div className={styles.policyContainer}>
 
-            <div className={styles.policySection}>
-              <h2>Cancellation</h2>
-              <ul>
-                <li><strong>Full Refund:</strong> Cancellations made at least 7 days before check-in.</li>
-                <li><strong>50% Refund:</strong> Cancellations made between 2-7 days before check-in.</li>
-                <li><strong>No Refund:</strong> Cancellations made less than 48 hours before check-in.</li>
-              </ul>
-            </div>
+            <article className={styles.policyArticle}>
+              <h2 className={styles.policyTitle}>Cancellation & Refund Policy</h2>
+              <div className={styles.policyContent}>
+                <p>We understand that plans can change. Our cancellation policy is designed to be fair to both our guests and our operations:</p>
+                <ul className={styles.policyList}>
+                  <li><strong>Full Refund:</strong> Cancellations made at least 30 days before the check-in date will receive a 100% refund of the deposit.</li>
+                  <li><strong>Partial Refund:</strong> Cancellations made between 14 and 29 days before check-in will receive a 50% refund of the deposit.</li>
+                  <li><strong>No Refund:</strong> Cancellations made less than 14 days before check-in are non-refundable.</li>
+                </ul>
+                <p>Refunds are processed within 7-10 business days via the original payment method (Flutterwave/Card).</p>
+              </div>
+            </article>
 
-            <div className={styles.policySection}>
-              <h2>House Rules</h2>
-              <ul>
-                <li>Check-in: 2:00 PM | Check-out: 11:00 AM</li>
-                <li>No smoking indoors.</li>
-                <li>Outdoor quiet hours begin at 10:00 PM.</li>
-                <li>Small gatherings allowed only with prior approval.</li>
-                <li>Maximum occupancy: 8 guests.</li>
-              </ul>
-            </div>
+            <article className={styles.policyArticle}>
+              <h2 className={styles.policyTitle}>Booking & Payments</h2>
+              <div className={styles.policyContent}>
+                <p>To confirm a reservation, a 50% deposit is required at the time of booking. The remaining 50% must be settled prior to check-in.</p>
+                <p>We accept online payments via Flutterwave, which supports Visa, Mastercard, MTN Mobile Money, and PayPal.</p>
+              </div>
+            </article>
 
-            <div className={styles.policySection}>
-              <h2>Safety & Privacy</h2>
-              <p>
-                Amahoro Luxury Villa  is located in a secure gated neighborhood with 24/7 security. 
-                Our house manager is available on-site for any assistance during your stay. 
-                Your privacy is our priority—the entire villa is for your exclusive use.
-              </p>
-            </div>
+            <article className={styles.policyArticle}>
+              <h2 className={styles.policyTitle}>Liability</h2>
+              <div className={styles.policyContent}>
+                <p>While we take every precaution to ensure guest safety and security, Amahoro Luxury Villa is not liable for loss of personal belongings or injuries sustained on the property. We recommend all guests carry valid travel insurance.</p>
+              </div>
+            </article>
+
           </div>
         </div>
       </section>

@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import prisma from '@/lib/prisma';
 import { sendPaymentConfirmation, sendAdminPaymentNotification } from '@/lib/email';
+import { getExchangeRate } from '@/lib/exchange-rate';
 
 export const dynamic = 'force-dynamic';
 
@@ -26,18 +27,19 @@ export async function POST(request: Request) {
     if (status === 'successful') {
       if (transaction.status !== 'success') {
         const booking = transaction.booking;
-        
+
         // Convert RWF back to USD for internal tracking
-        const paidAmountUsd = flwCurrency === 'RWF' ? (flwAmount / 1300) : flwAmount;
+        const rwfRate = await getExchangeRate();
+        const paidAmountUsd = flwCurrency === 'RWF' ? (flwAmount / rwfRate) : flwAmount;
         const newPaidAmount = booking.amountPaidUsd + paidAmountUsd;
         const isFullyPaid = (booking.totalAmountUsd - newPaidAmount) < 0.01;
 
         // Update Transaction
         await prisma.paymentTransaction.update({
           where: { id: transaction.id },
-          data: { 
-            status: 'success', 
-            flutterwaveTransactionId: flw_id.toString() 
+          data: {
+            status: 'success',
+            flutterwaveTransactionId: flw_id.toString()
           },
         });
 

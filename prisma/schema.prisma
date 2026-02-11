@@ -60,5 +60,7 @@ model Settings {
   id           String   @id @default("site-settings")
   nightlyRate  Float    @default(500)
   depositPercent Int    @default(50)
+  rwfRate        Float    @default(1300)
+  airbnbIcalUrl String?
   updatedAt    DateTime @updatedAt
 }

@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { Instagram, Facebook, Mail, MapPin, Phone } from 'lucide-react';
+import { Instagram, Mail, MapPin, MessageSquare } from 'lucide-react';
 import styles from './Footer.module.css';
 import Logo from '@/components/Logo';
 
@@ -14,20 +14,17 @@ export default function Footer() {
               <Logo height={80} theme="light" />
             </Link>
             <p className={styles.tagline}>A sanctuary of peace in the heart of Kigali, offering an unmatched blend of luxury, comfort, and serenity.</p>
-            
+
             <div className={styles.socials}>
               <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className={styles.socialIcon} aria-label="Instagram">
                 <Instagram size={20} />
-              </a>
-              <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className={styles.socialIcon} aria-label="Facebook">
-                <Facebook size={20} />
               </a>
               <a href="mailto:booking@amahoroluxuryvilla.com" className={styles.socialIcon} aria-label="Email">
                 <Mail size={20} />
               </a>
             </div>
           </div>
-          
+
           {/* Explore Column */}
           <div className={styles.column}>
             <h3>Explore</h3>
@@ -47,7 +44,7 @@ export default function Footer() {
             <Link href="/reviews">Guest Reviews</Link>
             <Link href="/book">Book Now</Link>
           </div>
-          
+
           {/* Contact Column */}
           <div className={styles.column}>
             <h3>Contact Us</h3>
@@ -59,8 +56,8 @@ export default function Footer() {
               </span>
             </div>
             <div className={styles.contactItem}>
-              <Phone className={styles.contactIcon} />
-              <span>+250 781 871 487</span>
+              <MessageSquare className={styles.contactIcon} />
+              <span>WhatsApp House Manager</span>
             </div>
             <div className={styles.contactItem}>
               <Mail className={styles.contactIcon} />
@@ -68,10 +65,10 @@ export default function Footer() {
             </div>
           </div>
         </div>
-        
+
         <div className={styles.bottom}>
           <p>&copy; {new Date().getFullYear()} Amahoro Luxury Villa. All rights reserved.</p>
-          
+
           <div className={styles.legal}>
             <Link href="/policies">Terms & Conditions</Link>
             <Link href="/privacy">Privacy Policy</Link>

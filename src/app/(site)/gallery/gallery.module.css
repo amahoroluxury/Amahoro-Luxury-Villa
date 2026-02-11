@@ -8,8 +8,8 @@
   align-items: center;
   justify-content: center;
   text-align: center;
-  background: linear-gradient(to bottom, rgba(0,0,0,0.6), rgba(0,0,0,0.8)), 
-              url('/images/gallery/gallery-11.jpg') center/cover no-repeat;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.8)),
+    url('/images/gallery/gallery-11.jpg') center/cover no-repeat;
   color: white;
   padding: 150px 0 6rem;
 }
@@ -30,8 +30,37 @@
   font-size: 1.25rem;
   color: rgba(255, 255, 255, 0.95);
   max-width: 700px;
-  margin: 0 auto;
+  margin: 0 auto 3rem;
   line-height: 1.8;
+}
+
+.tabs {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.tab {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: white;
+  padding: 0.75rem 1.5rem;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.tab:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.activeTab {
+  background: var(--primary);
+  border-color: var(--primary);
 }
 
 .label {
@@ -88,7 +117,7 @@
   left: 0;
   width: 100%;
   padding: 2rem;
-  background: linear-gradient(transparent, rgba(0,0,0,0.5));
+  background: linear-gradient(transparent, rgba(0, 0, 0, 0.5));
   color: white;
   opacity: 0;
   transition: opacity 0.4s ease;

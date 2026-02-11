@@ -1,0 +1,120 @@
+.container {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    background: #F9FAFB;
+}
+
+.card {
+    background: white;
+    width: 100%;
+    max-width: 500px;
+    padding: 3rem;
+    border-radius: 2rem;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.05);
+    text-align: center;
+}
+
+.title {
+    font-family: var(--font-serif);
+    font-size: 2rem;
+    color: #1a1a1a;
+    margin-bottom: 0.5rem;
+}
+
+.subtitle {
+    color: #c5a059;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-size: 0.9rem;
+    margin-bottom: 2.5rem;
+}
+
+.details {
+    background: #F8F9FA;
+    padding: 2rem;
+    border-radius: 1.5rem;
+    margin-bottom: 2.5rem;
+    text-align: left;
+}
+
+.row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+    font-size: 1rem;
+    color: #666;
+}
+
+.row strong {
+    color: #1a1a1a;
+}
+
+.divider {
+    border: none;
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
+    margin: 1.5rem 0;
+}
+
+.totalRow {
+    font-weight: 700;
+    font-size: 1.2rem;
+    color: #1a1a1a;
+    margin-bottom: 0;
+}
+
+.paid {
+    color: #059669;
+}
+
+.due {
+    color: #1a1a1a;
+}
+
+.payButton {
+    background: #1a1a1a;
+    color: white;
+    width: 100%;
+    padding: 1.25rem;
+    border-radius: 1rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border: none;
+    margin-bottom: 1.5rem;
+}
+
+.payButton:hover:not(:disabled) {
+    background: #333;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.payButton:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.secureHint {
+    font-size: 0.85rem;
+    color: #888;
+    font-style: italic;
+}
+
+.error {
+    color: #dc2626;
+    font-weight: 600;
+}
+
+.successMessage {
+    background: #ecfdf5;
+    color: #059669;
+    padding: 1.5rem;
+    border-radius: 1rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+}

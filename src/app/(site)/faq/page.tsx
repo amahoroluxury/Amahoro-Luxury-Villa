@@ -10,20 +10,20 @@ const faqs = [
     answer: 'Yes, with advance notice. We can arrange a private driver to meet you at Kigali International Airport and bring you directly to the villa.'
   },
   {
-    question: 'Is early check-in allowed?',
-    answer: 'Based on availability. Please request early check-in before your departure, and we will do our best to accommodate your schedule.'
+    question: 'Is early check-in or late check-out allowed?',
+    answer: 'Based on availability. Please request early check-in or late check-out before your arrival, and we will do our best to accommodate your schedule.'
   },
   {
     question: 'Are events allowed?',
     answer: 'Small gatherings are permitted with prior approval. However, we maintain a 10 PM outdoor curfew to respect the peace and quiet of the Kibagabaga community.'
   },
   {
-    question: 'How do payments work?',
-    answer: 'A minimum 50% deposit is required to confirm your reservation. The remaining balance must be paid before check-in. Payments can be made securely online via Flutterwave or marked as paid by our admin for offline transfers.'
+    question: 'How do payments work and what is Flutterwave?',
+    answer: 'A minimum 50% deposit is required to confirm your reservation. Flutterwave is our secure payment gateway that accepts Visa, Mastercard, MTN Mobile Money, and PayPal. The remaining balance must be paid before check-in.'
   },
   {
-    question: 'Is the villa suitable for families?',
-    answer: 'Absolutely.  Amahoro Luxury Villa  is ideal for families, offering 4 private bedrooms, a large garden for children to play, and a secure environment.'
+    question: 'Is the villa family friendly?',
+    answer: 'Absolutely. Amahoro Luxury Villa is ideal for families. We provide a portable crib, high chair, and children&apos;s dishes upon request to make your stay comfortable.'
   },
   {
     question: 'Do you offer monthly rentals?',
@@ -54,12 +54,12 @@ export default function FAQPage() {
         <div className="container">
           <div className={styles.faqList}>
             {faqs.map((faq, index) => (
-              <div 
-                key={index} 
+              <div
+                key={index}
                 className={`${styles.faqItem} ${activeIndex === index ? styles.active : ''}`}
               >
-                <button 
-                  className={styles.question} 
+                <button
+                  className={styles.question}
                   onClick={() => toggleFAQ(index)}
                 >
                   {faq.question}

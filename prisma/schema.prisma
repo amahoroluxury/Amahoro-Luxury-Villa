@@ -28,6 +28,7 @@ model Booking {
   paymentStatus      String   @default("Unpaid")        // Unpaid, Partial, Paid
   createdAt          DateTime @default(now())
   updatedAt          DateTime @updatedAt
+  remindersSent      String[] @default([])
   transactions       PaymentTransaction[]
 }
 
@@ -59,8 +60,12 @@ model Admin {
 model Settings {
   id           String   @id @default("site-settings")
   nightlyRate  Float    @default(500)
+  weekendRate   Float?
   depositPercent Int    @default(50)
   rwfRate        Float    @default(1300)
   airbnbIcalUrl String?
+  lastIcalSync DateTime?
+  icalSyncError String?
   updatedAt    DateTime @updatedAt
+  remindersSent      String[] @default([])
 }

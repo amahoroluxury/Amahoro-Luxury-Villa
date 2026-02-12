@@ -17,16 +17,19 @@ const playfair = Playfair_Display({
 
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.SITE_URL || 'http://localhost:3000'),
-  title: "Amahoro Luxury Villa | Luxury Villa Stay in Kigali",
-  description: "Amahoro Luxury Villa — Kigali's premier luxury short-term rental home. Experience Afro-Modern luxury, comfort, and unforgettable hospitality.",
-  keywords: "luxury villa Kigali, Kibagabaga villa rental, Kigali short-term rental, boutique stay Rwanda",
+  title: {
+    default: "Amahoro Luxury Villa | A Sanctuary of Peace in Kigali",
+    template: "%s | Amahoro Luxury Villa"
+  },
+  description: "Amahoro Luxury Villa — Experience Afro-Modern luxury, comfort, and peace in the heart of Kigali. Book your stay at our premium boutique villa.",
+  keywords: "luxury villa Kigali, Kibagabaga villa rental, Kigali short-term rental, boutique stay Rwanda, luxury kigali home",
   icons: {
     icon: "/favicon.png",
   },
   openGraph: {
     title: "Amahoro Luxury Villa | Luxury Villa Stay in Kigali",
     description: "Experience Afro-Modern luxury at Amahoro Luxury Villa. Kigali's premier stay with world-class amenities.",
-    url: "https://amahoro-villa.com", // Placeholder URL, should be updated when domain is final
+    url: "https://www.amahoroluxuryvilla.com",
     siteName: "Amahoro Luxury Villa",
     images: [
       {

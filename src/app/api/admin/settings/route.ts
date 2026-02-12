@@ -27,7 +27,7 @@ export async function GET() {
 export async function POST(request: Request) {
   try {
     const body = await request.json();
-    const { nightlyRate, depositPercent, rwfRate, airbnbIcalUrl } = body;
+    const { nightlyRate, depositPercent, rwfRate, airbnbIcalUrl, weekendRate } = body;
 
     const settings = await prisma.settings.upsert({
       where: { id: 'site-settings' },
@@ -35,14 +35,16 @@ export async function POST(request: Request) {
         nightlyRate,
         depositPercent,
         rwfRate,
-        airbnbIcalUrl
+        airbnbIcalUrl,
+        weekendRate
       },
       create: {
         id: 'site-settings',
         nightlyRate,
         depositPercent,
         rwfRate,
-        airbnbIcalUrl
+        airbnbIcalUrl,
+        weekendRate
       },
     });
 

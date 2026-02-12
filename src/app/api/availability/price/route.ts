@@ -6,13 +6,15 @@ export const dynamic = 'force-dynamic';
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
   const nights = parseInt(searchParams.get('nights') || '0');
+  const checkInStr = searchParams.get('checkIn');
 
   if (nights <= 0) {
     return NextResponse.json({ error: 'Invalid number of nights' }, { status: 400 });
   }
 
   try {
-    const price = await calculatePrice(nights);
+    const checkIn = checkInStr ? new Date(checkInStr) : undefined;
+    const price = await calculatePrice(nights, checkIn);
     return NextResponse.json(price);
   } catch (error) {
     console.error('Price API Error:', error);

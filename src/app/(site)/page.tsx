@@ -8,8 +8,31 @@ import AmenitiesStrip from '@/components/AmenitiesStrip';
 import MapPreview from '@/components/MapPreview';
 
 export default function Home() {
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Hotel",
+    "name": "Amahoro Luxury Villa",
+    "description": "Amahoro Luxury Villa — A private sanctuary of peace in Kigali. Experience Afro-Modern luxury with 4 bedrooms, tropical garden, and world-class hospitality.",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Kigali",
+      "addressCountry": "RW"
+    },
+    "image": "https://www.amahoroluxuryvilla.com/og-image.jpg",
+    "amenityFeature": [
+      { "@type": "LocationFeatureSpecification", "name": "Free Wi-Fi", "value": "true" },
+      { "@type": "LocationFeatureSpecification", "name": "Outdoor Kitchen", "value": "true" },
+      { "@type": "LocationFeatureSpecification", "name": "4 Bedrooms", "value": "4" }
+    ]
+  };
+
   return (
     <div className={styles.wrapper}>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+
       <section className={styles.hero}>
         <video
           autoPlay

@@ -177,3 +177,17 @@
   font-weight: 700;
   border: 1px solid rgba(220, 38, 38, 0.1);
 }
+
+.syncStatus {
+  margin-top: 1rem;
+  font-size: 0.85rem;
+  color: #059669;
+  font-weight: 600;
+}
+
+.syncError {
+  margin-top: 1rem;
+  font-size: 0.85rem;
+  color: #DC2626;
+  font-weight: 600;
+}

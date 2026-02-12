@@ -61,7 +61,7 @@ async function sendEmail(to: string, subject: string, html: string) {
     });
 
     const data = await response.json();
-    
+
     if (!response.ok) {
       console.error('Email send failed:', data);
       return { success: false, error: data };
@@ -157,8 +157,8 @@ export async function sendBookingConfirmation(booking: BookingEmailData) {
 }
 
 export async function sendPaymentConfirmation(data: PaymentEmailData) {
-  const statusMessage = data.isFullyPaid 
-    ? 'Your booking is now fully paid!' 
+  const statusMessage = data.isFullyPaid
+    ? 'Your booking is now fully paid!'
     : `Deposit received! Remaining balance: $${data.balanceDue.toFixed(2)}`;
 
   const html = `
@@ -324,6 +324,171 @@ export async function sendAdminPaymentNotification(data: PaymentEmailData) {
   return sendEmail(
     ADMIN_EMAIL,
     `Payment Received: $${data.amountPaid.toFixed(2)} from ${data.guestName}`,
+    html
+  );
+}
+
+export async function sendBalanceReminder(data: PaymentEmailData, daysUntilCheckIn: number) {
+  const html = `
+    <!DOCTYPE html>
+    <html>
+    <head>
+      <style>
+        body { font-family: 'Helvetica Neue', Arial, sans-serif; line-height: 1.6; color: #333; }
+        .container { max-width: 600px; margin: 0 auto; padding: 20px; }
+        .header { text-align: center; border-bottom: 2px solid #8B5A3C; padding-bottom: 20px; }
+        .logo { font-size: 24px; font-weight: bold; color: #8B5A3C; }
+        .content { padding: 30px 0; }
+        .details { background: #f9f5f1; padding: 20px; margin: 20px 0; }
+        .details-row { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #eee; }
+        .details-row:last-child { border-bottom: none; }
+        .cta-box { text-align: center; margin: 30px 0; }
+        .cta-button { background: #8B5A3C; color: white; padding: 15px 30px; text-decoration: none; font-weight: bold; display: inline-block; }
+        .footer { text-align: center; font-size: 12px; color: #888; margin-top: 30px; }
+        .urgent { color: #c62828; font-weight: bold; }
+      </style>
+    </head>
+    <body>
+      <div class="container">
+        <div class="header">
+          <div class="logo">Amahoro Luxury Villa</div>
+          <p>Upcoming Stay Reminder</p>
+        </div>
+        
+        <div class="content">
+          <p>Dear ${data.guestName},</p>
+          
+          <p>We're looking forward to your upcoming stay at Amahoro Luxury Villa in ${daysUntilCheckIn} days!</p>
+          
+          <p>This is a friendly reminder regarding the remaining balance for your booking.</p>
+          
+          <div class="details">
+            <div class="details-row">
+              <span>Booking Reference:</span>
+              <strong>${data.bookingId.slice(0, 8).toUpperCase()}</strong>
+            </div>
+            <div class="details-row">
+              <span>Check-in:</span>
+              <strong>${formatDate(data.checkIn)}</strong>
+            </div>
+            <div class="details-row">
+              <span>Total Amount:</span>
+              <strong>$${data.totalAmountUsd.toFixed(2)}</strong>
+            </div>
+            <div class="details-row">
+              <span>Amount Paid:</span>
+              <strong>$${(data.totalAmountUsd - data.balanceDue).toFixed(2)}</strong>
+            </div>
+            <div class="details-row">
+              <span>Remaining Balance:</span>
+              <strong class="urgent">$${data.balanceDue.toFixed(2)}</strong>
+            </div>
+          </div>
+          
+          <div class="cta-box">
+            <p>Please complete your payment before check-in to ensure a smooth arrival.</p>
+            <a href="${process.env.SITE_URL}/pay-balance/${data.bookingId}" class="cta-button">Pay Remaining Balance</a>
+          </div>
+          
+          <p>If you have already made this payment or have questions, please reach out to us.</p>
+          
+          <p>Warm regards,<br>Amahoro Luxury Villa Team</p>
+        </div>
+        
+        <div class="footer">
+          <p>Kibagabaga, Kigali, Rwanda</p>
+          <p>© ${new Date().getFullYear()} Amahoro Luxury Villa. All rights reserved.</p>
+        </div>
+      </div>
+    </body>
+    </html>
+  `;
+
+  return sendEmail(
+    data.guestEmail,
+    `Reminder: Your stay at Amahoro Luxury Villa is in ${daysUntilCheckIn} days`,
+    html
+  );
+}
+
+export async function sendPreArrivalInfo(data: BookingEmailData) {
+  const html = `
+    <!DOCTYPE html>
+    <html>
+    <head>
+      <style>
+        body { font-family: 'Helvetica Neue', Arial, sans-serif; line-height: 1.6; color: #333; }
+        .container { max-width: 600px; margin: 0 auto; padding: 20px; }
+        .header { text-align: center; border-bottom: 2px solid #8B5A3C; padding-bottom: 20px; }
+        .logo { font-size: 24px; font-weight: bold; color: #8B5A3C; }
+        .content { padding: 30px 0; }
+        .welcome-hero { background: #8B5A3C; color: white; padding: 40px 20px; text-align: center; margin-bottom: 30px; }
+        .guide-section { margin-bottom: 30px; border-left: 2px solid #8B5A3C; padding-left: 20px; }
+        .guide-section h3 { color: #8B5A3C; margin-top: 0; }
+        .footer { text-align: center; font-size: 12px; color: #888; margin-top: 30px; }
+      </style>
+    </head>
+    <body>
+      <div class="container">
+        <div class="header">
+          <div class="logo">Amahoro Luxury Villa</div>
+        </div>
+        
+        <div class="welcome-hero">
+          <h1>Welcome to Kigali!</h1>
+          <p>We're getting everything ready for your stay.</p>
+        </div>
+        
+        <div class="content">
+          <p>Dear ${data.guestName},</p>
+          
+          <p>Your stay at Amahoro Luxury Villa is just around the corner. To make your arrival as smooth as possible, please find some helpful information below.</p>
+          
+          <div class="guide-section">
+            <h3>📍 Getting Here</h3>
+            <p><strong>Address:</strong> Kibagabaga, Kigali, Rwanda</p>
+            <p>You can find us on Google Maps by searching for "Amahoro Luxury Villa".</p>
+          </div>
+          
+          <div class="guide-section">
+            <h3>⏰ Arrival & Departure</h3>
+            <p><strong>Check-in:</strong> After 3:00 PM</p>
+            <p><strong>Check-out:</strong> By 11:00 AM</p>
+            <p>If you need an early check-in, please let us know and we will do our best to accommodate based on availability.</p>
+          </div>
+          
+          <div class="guide-section">
+            <h3>🔑 Entry Instructions</h3>
+            <p>Our House Manager will be there to welcome you and provide a tour of the villa. Please share your approximate arrival time via WhatsApp.</p>
+          </div>
+          
+          <div class="guide-section">
+            <h3>🏡 House Rules</h3>
+            <p>A few quick reminders:</p>
+            <ul>
+              <li>Quiet hours: 10 PM – 7 AM</li>
+              <li>No smoking inside the villa</li>
+              <li>Small gatherings require prior approval</li>
+            </ul>
+          </div>
+          
+          <p>We look forward to meeting you soon!</p>
+          
+          <p>Warm regards,<br>Toby & The Amahoro Team</p>
+        </div>
+        
+        <div class="footer">
+          <p>Kibagabaga, Kigali, Rwanda</p>
+          <p>© ${new Date().getFullYear()} Amahoro Luxury Villa. All rights reserved.</p>
+        </div>
+      </div>
+    </body>
+    </html>
+  `;
+
+  return sendEmail(
+    data.guestEmail,
+    `Important Stay Information - Amahoro Luxury Villa`,
     html
   );
 }

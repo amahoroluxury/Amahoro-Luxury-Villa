@@ -1,0 +1,62 @@
+.bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
+    padding: 1rem 1.5rem;
+    padding-bottom: calc(1rem + env(safe-area-inset-bottom, 0px));
+    z-index: 1000;
+    display: block;
+}
+
+@media (min-width: 768px) {
+    .bar {
+        display: none;
+    }
+}
+
+.content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: var(--container-width);
+    margin: 0 auto;
+}
+
+.info {
+    display: flex;
+    flex-direction: column;
+}
+
+.price {
+    font-family: var(--font-serif);
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #1A1A1A;
+}
+
+.unit {
+    font-size: 0.75rem;
+    color: #666;
+    font-weight: 500;
+}
+
+.bookBtn {
+    background: var(--primary);
+    color: white;
+    padding: 0.85rem 1.5rem;
+    border-radius: 0.75rem;
+    font-size: 0.9rem;
+    font-weight: 700;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 15px rgba(197, 160, 89, 0.2);
+}
+
+.bookBtn:active {
+    transform: scale(0.98);
+}

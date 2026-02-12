@@ -9,6 +9,9 @@ interface Settings {
   depositPercent: number;
   rwfRate: number;
   airbnbIcalUrl: string;
+  weekendRate?: number;
+  lastIcalSync?: string;
+  icalSyncError?: string;
 }
 
 export default function AdminSettingsPage() {
@@ -16,7 +19,8 @@ export default function AdminSettingsPage() {
     nightlyRate: 500,
     depositPercent: 50,
     rwfRate: 1300,
-    airbnbIcalUrl: ''
+    airbnbIcalUrl: '',
+    weekendRate: 500
   });
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
@@ -37,7 +41,10 @@ export default function AdminSettingsPage() {
           nightlyRate: data.nightlyRate ?? 500,
           depositPercent: data.depositPercent ?? 50,
           rwfRate: data.rwfRate ?? 1300,
-          airbnbIcalUrl: data.airbnbIcalUrl ?? ''
+          airbnbIcalUrl: data.airbnbIcalUrl ?? '',
+          weekendRate: data.weekendRate ?? data.nightlyRate ?? 500,
+          lastIcalSync: data.lastIcalSync,
+          icalSyncError: data.icalSyncError
         });
       }
     } catch (err) {
@@ -90,6 +97,7 @@ export default function AdminSettingsPage() {
       setError('An error occurred');
     } finally {
       setActionLoading(false);
+      fetchSettings(); // Refresh to show new sync time/error
     }
   }
 
@@ -126,6 +134,18 @@ export default function AdminSettingsPage() {
                     required
                   />
                   <p className={styles.hint}>Global nightly rate for the villa.</p>
+                </div>
+
+                <div className={styles.field}>
+                  <label htmlFor="weekendRate">Weekend Rate (Fri-Sat, USD)</label>
+                  <input
+                    id="weekendRate"
+                    type="number"
+                    value={settings.weekendRate}
+                    onChange={(e) => setSettings({ ...settings, weekendRate: parseFloat(e.target.value) })}
+                    required
+                  />
+                  <p className={styles.hint}>Applied to Friday and Saturday nights stay.</p>
                 </div>
 
                 <div className={styles.field}>
@@ -168,6 +188,16 @@ export default function AdminSettingsPage() {
                   onChange={(e) => setSettings({ ...settings, airbnbIcalUrl: e.target.value })}
                 />
                 <p className={styles.hint}>Paste your Airbnb calendar export URL here to sync blocked dates.</p>
+                {settings.lastIcalSync && (
+                  <p className={styles.syncStatus}>
+                    Last synced: {new Date(settings.lastIcalSync).toLocaleString()}
+                  </p>
+                )}
+                {settings.icalSyncError && (
+                  <p className={styles.syncError}>
+                    Sync Error: {settings.icalSyncError}
+                  </p>
+                )}
               </div>
             </section>
 

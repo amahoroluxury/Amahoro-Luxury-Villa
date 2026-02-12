@@ -31,7 +31,7 @@ export default function BookingForm() {
   useEffect(() => {
     async function updatePrice() {
       try {
-        const res = await fetch(`/api/availability/price?nights=${nights}`);
+        const res = await fetch(`/api/availability/price?nights=${nights}&checkIn=${formData.checkIn}`);
         if (res.ok) {
           const data = await res.json();
           setPrice(data);
@@ -44,7 +44,7 @@ export default function BookingForm() {
     if (nights > 0) {
       updatePrice();
     }
-  }, [nights]);
+  }, [nights, formData.checkIn]);
 
   const handleNext = async () => {
     if (step === 1) {
@@ -148,7 +148,7 @@ export default function BookingForm() {
 
           {nights > 0 && (
             <div className={styles.summary}>
-              <p><span>Nightly Rate:</span> <span>${price.nightlyRate}</span></p>
+              <p><span>Nightly Rate (Avg):</span> <span>${Math.round(price.total / nights)}</span></p>
               <p><span>Nights:</span> <span>{nights}</span></p>
               <p className={styles.total}><span>Total:</span> <span>${price.total}</span></p>
               <p className={styles.deposit}><span>{price.depositPercent}% Deposit Due:</span> <span>${price.deposit}</span></p>

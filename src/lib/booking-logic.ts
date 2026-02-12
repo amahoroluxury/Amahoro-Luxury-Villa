@@ -82,19 +82,42 @@ export async function getAvailability(checkIn: Date, checkOut: Date) {
   return !hasOverlap;
 }
 
-export async function calculatePrice(nights: number) {
+export async function calculatePrice(nights: number, checkIn?: Date) {
   // Fetch settings from DB
   const settings = await prisma.settings.findFirst() as any;
 
-  const nightlyRate = settings?.nightlyRate ?? 500;
+  const standardRate = settings?.nightlyRate ?? 500;
+  const weekendRate = settings?.weekendRate ?? standardRate;
   const depositPercent = (settings?.depositPercent ?? 50) / 100;
 
-  const total = nights * nightlyRate;
+  let total = 0;
+
+  if (checkIn) {
+    const startDate = startOfDay(new Date(checkIn));
+    // Calculate precise total based on day of week
+    for (let i = 0; i < nights; i++) {
+      const currentDate = new Date(startDate);
+      currentDate.setDate(startDate.getDate() + i);
+      const dayOfWeek = currentDate.getDay(); // 0 = Sunday, 5 = Friday, 6 = Saturday
+
+      // Friday and Saturday nights are typically considered "weekends" in rental terms
+      if (dayOfWeek === 5 || dayOfWeek === 6) {
+        total += weekendRate;
+      } else {
+        total += standardRate;
+      }
+    }
+  } else {
+    // Fallback to standard calculation if no start date provided
+    total = nights * standardRate;
+  }
+
   const deposit = total * depositPercent;
   const balance = total - deposit;
 
   return {
-    nightlyRate,
+    nightlyRate: standardRate,
+    weekendRate,
     total,
     deposit,
     balance

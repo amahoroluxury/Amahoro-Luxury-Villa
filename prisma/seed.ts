@@ -11,7 +11,7 @@ async function main() {
     update: {},
     create: {
       id: 'site-settings',
-      nightlyRate: 500,
+      nightlyRate: 200,
       depositPercent: 50,
     },
   })
@@ -20,7 +20,7 @@ async function main() {
   // Seed Admin (password now hashed)
   const bcrypt = require('bcryptjs');
   const hashedPassword = bcrypt.hashSync('adminpassword123', 10);
-  
+
   const admin = await prisma.admin.upsert({
     where: { email: 'admin@amahoroluxuryvilla.com' },
     update: {},

@@ -86,7 +86,7 @@ export async function calculatePrice(nights: number, checkIn?: Date) {
   // Fetch settings from DB
   const settings = await prisma.settings.findFirst() as any;
 
-  const standardRate = settings?.nightlyRate ?? 500;
+  const standardRate = settings?.nightlyRate ?? 200;
   const weekendRate = settings?.weekendRate ?? standardRate;
   const depositPercent = (settings?.depositPercent ?? 50) / 100;
 

@@ -11,7 +11,7 @@ export default function BookingForm() {
   const [step, setStep] = useState(1);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
-  const [price, setPrice] = useState({ nightlyRate: 500, total: 0, deposit: 0, balance: 0, depositPercent: 50 });
+  const [price, setPrice] = useState({ nightlyRate: 200, total: 0, deposit: 0, balance: 0, depositPercent: 50 });
   const [acceptedTerms, setAcceptedTerms] = useState(false);
 
   const [formData, setFormData] = useState({

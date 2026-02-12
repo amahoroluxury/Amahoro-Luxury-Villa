@@ -16,7 +16,7 @@ export default function MobileBookingBar() {
         <div className={styles.bar}>
             <div className={styles.content}>
                 <div className={styles.info}>
-                    <span className={styles.price}>From $500</span>
+                    <span className={styles.price}>From $200</span>
                     <span className={styles.unit}>/ night</span>
                 </div>
                 <Link href="/book" className={styles.bookBtn}>

@@ -16,11 +16,11 @@ interface Settings {
 
 export default function AdminSettingsPage() {
   const [settings, setSettings] = useState<Settings>({
-    nightlyRate: 500,
+    nightlyRate: 200,
     depositPercent: 50,
     rwfRate: 1300,
     airbnbIcalUrl: '',
-    weekendRate: 500
+    weekendRate: 200
   });
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
@@ -38,11 +38,11 @@ export default function AdminSettingsPage() {
       if (res.ok) {
         const data = await res.json();
         setSettings({
-          nightlyRate: data.nightlyRate ?? 500,
+          nightlyRate: data.nightlyRate ?? 200,
           depositPercent: data.depositPercent ?? 50,
           rwfRate: data.rwfRate ?? 1300,
           airbnbIcalUrl: data.airbnbIcalUrl ?? '',
-          weekendRate: data.weekendRate ?? data.nightlyRate ?? 500,
+          weekendRate: data.weekendRate ?? data.nightlyRate ?? 200,
           lastIcalSync: data.lastIcalSync,
           icalSyncError: data.icalSyncError
         });

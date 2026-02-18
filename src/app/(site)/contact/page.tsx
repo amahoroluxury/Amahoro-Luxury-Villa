@@ -3,7 +3,7 @@ import { Metadata } from 'next';
 import styles from './contact.module.css';
 
 export const metadata: Metadata = {
-  title: 'Contact',
+  title: 'Contact & Inquiries',
   description: 'Have questions or special requests? Reach out via WhatsApp, email, or our contact form to plan your perfect Kigali stay.',
 };
 
@@ -26,7 +26,7 @@ export default function ContactPage() {
           <div className={styles.grid}>
             <div className={styles.contactInfo}>
               <div className={styles.infoCard}>
-                <div className={styles.icon}><MessageSquare size={24} /></div>
+                <div className={styles.icon} aria-hidden="true"><MessageSquare size={24} aria-hidden="true" /></div>
                 <div>
                   <h3>WhatsApp</h3>
                   <p>Inquire via WhatsApp</p>
@@ -35,7 +35,7 @@ export default function ContactPage() {
               </div>
 
               <div className={styles.infoCard}>
-                <div className={styles.icon}><Mail size={24} /></div>
+                <div className={styles.icon} aria-hidden="true"><Mail size={24} aria-hidden="true" /></div>
                 <div>
                   <h3>Email</h3>
                   <p>General inquiries</p>
@@ -44,7 +44,7 @@ export default function ContactPage() {
               </div>
 
               <div className={styles.infoCard}>
-                <div className={styles.icon}><Phone size={24} /></div>
+                <div className={styles.icon} aria-hidden="true"><Phone size={24} aria-hidden="true" /></div>
                 <div>
                   <h3>Phone</h3>
                   <p>House Management</p>

@@ -14,14 +14,14 @@ const spaces = [
     id: 2,
     title: 'Chef\'s Kitchen',
     description: 'High-end appliances, coffee station, and fully stocked for culinary needs.',
-    image: '/images/gallery/gallery-5.jpg',
+    image: '/images/gallery/gallery-5.jpeg',
     span: 'wide'
   },
   {
     id: 3,
     title: 'Fire Pit',
     description: 'Enjoy a night cap with friends in the private outdoor fire pit area.',
-    image: '/images/gallery/gallery-14.jpg',
+    image: '/images/gallery/FIRE PIT.jpg',
     span: 'normal'
   }
 ];

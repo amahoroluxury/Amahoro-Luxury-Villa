@@ -67,6 +67,32 @@
   border-radius: 4px;
 }
 
+.initialPrice {
+  margin: 2rem 0;
+  padding: 2rem;
+  background: var(--background);
+  border: 1px dashed var(--border);
+  text-align: center;
+  border-radius: 4px;
+}
+
+.initialPrice p {
+  font-size: 1.25rem;
+  margin-bottom: 0.5rem;
+}
+
+.initialPrice strong {
+  color: var(--primary);
+  font-size: 1.5rem;
+}
+
+.priceSubtext {
+  font-size: 0.85rem !important;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
 .summary p {
   display: flex;
   justify-content: space-between;

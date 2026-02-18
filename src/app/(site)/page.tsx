@@ -10,19 +10,30 @@ import MapPreview from '@/components/MapPreview';
 export default function Home() {
   const jsonLd = {
     "@context": "https://schema.org",
-    "@type": "Hotel",
+    "@type": "LodgingBusiness",
     "name": "Amahoro Luxury Villa",
     "description": "Amahoro Luxury Villa — A private sanctuary of peace in Kigali. Experience Afro-Modern luxury with 4 bedrooms, tropical garden, and world-class hospitality.",
+    "url": "https://www.amahoroluxuryvilla.com",
+    "telephone": "+250XXXXXXXXX", // Placeholder for actual number
     "address": {
       "@type": "PostalAddress",
-      "addressLocality": "Kigali",
+      "streetAddress": "KG 123", // Refine from footer if possible
+      "addressLocality": "Kibagabaga, Kigali",
+      "addressRegion": "Kigali City",
       "addressCountry": "RW"
     },
     "image": "https://www.amahoroluxuryvilla.com/og-image.jpg",
+    "priceRange": "$$$",
+    "starRating": {
+      "@type": "Rating",
+      "ratingValue": "5"
+    },
     "amenityFeature": [
       { "@type": "LocationFeatureSpecification", "name": "Free Wi-Fi", "value": "true" },
       { "@type": "LocationFeatureSpecification", "name": "Outdoor Kitchen", "value": "true" },
-      { "@type": "LocationFeatureSpecification", "name": "4 Bedrooms", "value": "4" }
+      { "@type": "LocationFeatureSpecification", "name": "4 Bedrooms", "value": "4" },
+      { "@type": "LocationFeatureSpecification", "name": "Tropical Garden", "value": "true" },
+      { "@type": "LocationFeatureSpecification", "name": "Security", "value": "true" }
     ]
   };
 
@@ -57,6 +68,10 @@ export default function Home() {
             </div>
 
             <div className={styles.heroActions}>
+              <div className={styles.priceCallout}>
+                <span className={styles.price}>From $200</span>
+                <span className={styles.perNight}>/ night</span>
+              </div>
               <Link href="/book" className={styles.primaryBtn}>Book Your Stay</Link>
               <Link href="/amenities" className={styles.secondaryBtn}>View Amenities</Link>
             </div>
@@ -110,7 +125,7 @@ export default function Home() {
         <div className="container">
           <div className={styles.ctaCard}>
             <h2>Ready to experience  Amahoro Luxury Villa ?</h2>
-            <p>Book your stay in Kigali&apos;s most peaceful luxury retreat.</p>
+            <p>Book your stay from <strong>$200 / night</strong> in Kigali&apos;s most peaceful luxury retreat.</p>
             <Link href="/book" className={styles.primaryBtn}>Check Availability</Link>
           </div>
         </div>

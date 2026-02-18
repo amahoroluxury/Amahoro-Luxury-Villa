@@ -5,7 +5,7 @@ import styles from './about.module.css';
 import Reviews from '@/components/Reviews';
 
 export const metadata: Metadata = {
-  title: 'Our Story',
+  title: 'Our Story & Philosophy',
   description: 'Learn about the vision and craftsmanship behind Amahoro Luxury Villa — a sanctuary of peace in the heart of Kigali.',
 };
 

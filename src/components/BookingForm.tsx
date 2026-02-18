@@ -146,12 +146,17 @@ export default function BookingForm() {
             </div>
           </div>
 
-          {nights > 0 && (
+          {nights > 0 ? (
             <div className={styles.summary}>
               <p><span>Nightly Rate (Avg):</span> <span>${Math.round(price.total / nights)}</span></p>
               <p><span>Nights:</span> <span>{nights}</span></p>
               <p className={styles.total}><span>Total:</span> <span>${price.total}</span></p>
               <p className={styles.deposit}><span>{price.depositPercent}% Deposit Due:</span> <span>${price.deposit}</span></p>
+            </div>
+          ) : (
+            <div className={styles.initialPrice}>
+              <p>Stays from <strong>$200 / night</strong></p>
+              <p className={styles.priceSubtext}>Select dates to see total price and availability</p>
             </div>
           )}
 

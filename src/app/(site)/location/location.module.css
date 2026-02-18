@@ -8,8 +8,8 @@
   align-items: center;
   justify-content: center;
   text-align: center;
-  background: linear-gradient(to bottom, rgba(0,0,0,0.6), rgba(0,0,0,0.8)), 
-              url('/images/gallery/gallery-13.jpg') center/cover no-repeat;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.8)),
+    url('/images/gallery/gallery-13.jpg') center/cover no-repeat;
   color: white;
   padding: 150px 0 6rem;
 }
@@ -44,40 +44,98 @@
   font-weight: 600;
 }
 
-.mapSection {
-  border: 1px solid var(--border);
-  padding: 1rem;
-  background-color: var(--surface);
+.neighborhoodSection {
+  padding: 0 1rem 6rem;
+  margin-top: -3rem;
+  position: relative;
+  z-index: 10;
 }
 
-.mapPlaceholder {
-  aspect-ratio: 21/9;
-  background-color: #e0e0e0;
+.neighborhoodImageWrapper {
+  position: relative;
+  width: 100%;
+  height: 500px;
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.15);
+}
+
+.neighborhoodImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 1.5s ease;
+  filter: contrast(1.1) brightness(0.9);
+}
+
+.neighborhoodImageWrapper:hover .neighborhoodImage {
+  transform: scale(1.05);
+}
+
+.imageOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
   display: flex;
   align-items: center;
-  justify-content: center;
-  position: relative;
-  background-image: url('https://images.unsplash.com/photo-1526772662000-3f88f10405ff?q=80&w=2034&auto=format&fit=crop');
-  background-size: cover;
-  background-position: center;
+  padding: 4rem;
 }
 
-.mapPlaceholder iframe {
-  border: 0;
+.overlayContent {
+  color: #ffffff;
+  max-width: 600px;
+  text-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
 }
 
-.mapOverlay {
-  background: rgba(255, 255, 255, 0.9);
-  padding: 2rem;
+.overlayLabel {
+  display: block;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.3em;
+  color: #ffffff;
+  margin-bottom: 1.25rem;
+  font-weight: 800;
+  opacity: 0.9;
+}
+
+.overlayContent h2 {
+  font-size: 2.8rem;
+  line-height: 1.2;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.sectionHeader {
   text-align: center;
-  border-radius: 4px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  margin-bottom: 3rem;
 }
 
-.mapOverlay p {
-  margin-top: 1rem;
+.labelDark {
+  display: block;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.3em;
+  color: var(--text-muted);
+  margin-bottom: 1rem;
   font-weight: 600;
-  color: var(--secondary);
+}
+
+.mapSection {
+  border: 1px solid var(--border);
+  background-color: var(--background);
+}
+
+.mapFrame {
+  width: 100%;
+  height: 500px;
+}
+
+.iframe {
+  border: 0;
+  height: 100%;
 }
 
 .highlightsSection {

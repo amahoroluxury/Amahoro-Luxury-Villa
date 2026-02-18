@@ -62,7 +62,7 @@ const AmenitiesStrip = () => {
           <div className={styles.grid}>
             {amenities.map((item, index) => (
               <div key={index} className={styles.item}>
-                <div className={styles.iconWrapper}>
+                <div className={styles.iconWrapper} aria-hidden="true">
                   {item.icon}
                 </div>
                 <span className={styles.label}>{item.label}</span>

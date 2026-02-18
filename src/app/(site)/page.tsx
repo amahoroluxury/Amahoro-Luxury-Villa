@@ -39,6 +39,12 @@ export default function Home() {
 
   return (
     <div className={styles.wrapper}>
+      <link
+        rel="preload"
+        href="/og-image.jpg"
+        as="image"
+        type="image/jpeg"
+      />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
@@ -50,7 +56,7 @@ export default function Home() {
           muted
           loop
           playsInline
-          preload="metadata"
+          preload="auto"
           poster="/og-image.jpg"
           className={styles.videoBackground}
           src="/Amahoroluxury-video.mp4"

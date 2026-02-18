@@ -10,22 +10,24 @@ interface LogoProps {
 
 const Logo: React.FC<LogoProps> = ({ className, height = 60, variant = 'full', theme = 'dark' }) => {
   // Determine height class if predefined
-  const heightClass = typeof height === 'number' && [40, 60, 70, 80, 90, 120, 140, 200].includes(height) 
-    ? styles[`height_${height}`] 
+  const heightClass = typeof height === 'number' && [40, 60, 70, 80, 90, 120, 140, 200].includes(height)
+    ? styles[`height_${height}`]
     : '';
 
   // Color schemes based on theme
-  const colors = theme === 'light' 
+  const colors = theme === 'light'
     ? { primary: '#FFFFFF', secondary: '#F5E6D3', accent: '#D4C4B0', mountain: '#FFFFFF' }
     : { primary: '#4B3621', secondary: '#F5E6D3', accent: '#36454F', mountain: '#4B3621' };
 
   return (
     <div className={`${styles.logoContainer} ${heightClass} ${className || ''}`}>
-      <svg 
-        viewBox="0 0 400 120" 
+      <svg
+        viewBox="0 0 400 120"
         className={styles.svg}
         xmlns="http://www.w3.org/2000/svg"
         preserveAspectRatio="xMidYMid meet"
+        role="img"
+        aria-label="Amahoro Luxury Villa"
       >
         <g transform="translate(10, 10) scale(0.8)">
           <path d="M20 60 C 20 20, 100 20, 100 60" fill="none" stroke={colors.secondary} strokeWidth="4" strokeLinecap="round" />

@@ -5,33 +5,28 @@ import type { NextRequest } from 'next/server';
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
+  // 1. Identify protected routes
   const isAdminPath = pathname.startsWith('/admin');
   const isAdminApiPath = pathname.startsWith('/api/admin');
 
-  if (!isAdminPath && !isAdminApiPath) {
-    return NextResponse.next();
-  }
+  if (!isAdminPath && !isAdminApiPath) return NextResponse.next();
 
-  // Allow access to login and auth API
-  if (pathname === '/admin/login' || pathname === '/api/admin/auth') {
-    return NextResponse.next();
-  }
+  // 2. Allow public-facing auth routes
+  const isPublicAuthRoute = pathname === '/admin/login' || pathname === '/api/admin/auth';
+  if (isPublicAuthRoute) return NextResponse.next();
 
-  // Check for admin auth cookie
-  const adminToken = request.cookies.get('admin_auth_token');
+  // 3. Verify Authentication
+  const adminToken = request.cookies.get('admin_auth_token')?.value;
 
-  // Basic validation of token format (amt_... and length)
-  const isValidToken = adminToken?.value &&
-    adminToken.value.startsWith('amt_') &&
-    adminToken.value.length > 20;
+  const hasValidFormat = adminToken &&
+    adminToken.startsWith('amt_') &&
+    adminToken.length > 20;
 
-  if (!isValidToken) {
-    // If it's an API request, return 401 instead of redirecting
+  if (!hasValidFormat) {
     if (isAdminApiPath) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
-    // Redirect dashboard requests to login
     const loginUrl = new URL('/admin/login', request.url);
     return NextResponse.redirect(loginUrl);
   }

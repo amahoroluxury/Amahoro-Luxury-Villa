@@ -1,6 +1,13 @@
 import Link from 'next/link';
+import Image from 'next/image';
+import { Metadata } from 'next';
 import styles from './about.module.css';
 import Reviews from '@/components/Reviews';
+
+export const metadata: Metadata = {
+  title: 'Our Story',
+  description: 'Learn about the vision and craftsmanship behind Amahoro Luxury Villa — a sanctuary of peace in the heart of Kigali.',
+};
 
 export default function AboutPage() {
   return (
@@ -28,7 +35,13 @@ export default function AboutPage() {
             </div>
             <div className={styles.sideContent}>
               <div className={styles.imagePlaceholder}>
-                {/* Image of Afro-centric interior details */}
+                <Image
+                  src="/images/1 A Sanctuary of Calm section.jpeg"
+                  alt="Afro-centric interior details at Amahoro Luxury Villa"
+                  fill
+                  style={{ objectFit: 'cover' }}
+                  sizes="(min-width: 1024px) 50vw, 100vw"
+                />
               </div>
             </div>
           </div>
@@ -39,7 +52,13 @@ export default function AboutPage() {
         <div className="container">
           <div className={styles.expGrid}>
             <div className={styles.expImage}>
-              {/* Image of building front elevation */}
+              <Image
+                src="/images/2 A HOME BUILT FOR FORGETTABLE MOMENTS.jpeg"
+                alt="Amahoro Luxury Villa front elevation"
+                fill
+                style={{ objectFit: 'cover' }}
+                sizes="(min-width: 1024px) 50vw, 100vw"
+              />
             </div>
             <div className={styles.expText}>
               <h2>A home built for unforgettable moments</h2>

@@ -1,6 +1,12 @@
 import Link from 'next/link';
 import { MapPin, Plane, Building2, Landmark } from 'lucide-react';
+import { Metadata } from 'next';
 import styles from './location.module.css';
+
+export const metadata: Metadata = {
+  title: 'Location',
+  description: 'Stay in the heart of Kibagabaga, Kigali’s most upscale neighborhood. Minutes away from the airport, convention centre, and top-rated restaurants.',
+};
 
 const highlights = [
   { icon: <Plane size={24} />, name: 'Kigali International Airport', distance: '15 Minutes' },
@@ -45,7 +51,7 @@ export default function LocationPage() {
             <div className={styles.info}>
               <h2>Prime Location in Kibagabaga</h2>
               <p>
-                Amahoro Luxury Villa  offers the perfect balance of serenity and accessibility. 
+                Amahoro Luxury Villa  offers the perfect balance of serenity and accessibility.
                 Whether you’re here for business or leisure, you’ll find everything you need within minutes.
               </p>
               <ul className={styles.localLinks}>
@@ -54,10 +60,10 @@ export default function LocationPage() {
                 <li>Hospitals & pharmacies</li>
                 <li>Supermarkets & banks</li>
               </ul>
-              <a 
-                href="https://maps.google.com/?q=-1.931113,30.124857" 
-                target="_blank" 
-                rel="noopener noreferrer" 
+              <a
+                href="https://maps.google.com/?q=-1.931113,30.124857"
+                target="_blank"
+                rel="noopener noreferrer"
                 className={styles.primaryBtn}
               >
                 Get Directions

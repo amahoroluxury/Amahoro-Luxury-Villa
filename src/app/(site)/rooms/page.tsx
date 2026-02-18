@@ -1,6 +1,12 @@
 import Link from 'next/link';
 import Image from 'next/image';
+import { Metadata } from 'next';
 import styles from './rooms.module.css';
+
+export const metadata: Metadata = {
+  title: 'Accommodation',
+  description: 'Explore our Afro-Modern suites designed for rest and privacy. 4 luxurious bedrooms with ensuite bathrooms and private vistas.',
+};
 
 const rooms = [
   {
@@ -8,28 +14,28 @@ const rooms = [
     name: 'Master Suite',
     description: 'The ultimate sanctuary featuring private balcony views and a spa-like ensuite.',
     features: ['King bed', 'Ensuite bath', 'Balcony views', 'Walk out to terrace', 'Spa bath with soaker tub'],
-    image: '/images/gallery/gallery-2.jpg'
+    image: '/images/gallery/Bed Rooms page/MASTER SUITE.jpg'
   },
   {
     id: 'bedroom-2',
     name: 'Bedroom 2',
     description: 'Elegantly designed with sliding doors to the patio and natural ventilation.',
     features: ['Queen bed', 'Ensuite bathroom', 'Sliding doors to patios', 'Mosquito nets', 'Quiet ceiling fans'],
-    image: '/images/gallery/gallery-3.jpg'
+    image: '/images/gallery/Bed Rooms page/2nd-bedroom.jpg'
   },
   {
     id: 'bedroom-3',
     name: 'Bedroom 3',
     description: 'A peaceful retreat with direct access to the lush outdoor spaces.',
     features: ['Queen bed', 'Ensuite bathroom', 'Sliding doors to patios', 'Mosquito nets', 'Quiet ceiling fans'],
-    image: '/images/gallery/gallery-4.jpg'
+    image: '/images/gallery/Bed Rooms page/3rd bedrooms.png'
   },
   {
     id: 'bedroom-4',
     name: 'Bedroom 4',
     description: 'Perfect for guests needing a quiet workspace without compromising on comfort.',
     features: ['Full bed', 'Workspace desk', 'Sliding door to patio', 'Ensuite bathroom'],
-    image: '/images/gallery/gallery-5.jpg'
+    image: '/images/gallery/Bed Rooms page/4TH BEDROOM.jpeg'
   }
 ];
 
@@ -51,8 +57,8 @@ export default function RoomsPage() {
           {rooms.map((room, index) => (
             <div key={room.id} className={`${styles.roomRow} ${index % 2 !== 0 ? styles.reverse : ''}`}>
               <div className={styles.roomImage}>
-                <Image 
-                  src={room.image} 
+                <Image
+                  src={room.image}
                   alt={room.name}
                   fill
                   sizes="(max-width: 768px) 100vw, 50vw"

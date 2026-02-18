@@ -1,5 +1,11 @@
 import { Mail, Phone, MessageSquare } from 'lucide-react';
+import { Metadata } from 'next';
 import styles from './contact.module.css';
+
+export const metadata: Metadata = {
+  title: 'Contact',
+  description: 'Have questions or special requests? Reach out via WhatsApp, email, or our contact form to plan your perfect Kigali stay.',
+};
 
 export default function ContactPage() {
   return (

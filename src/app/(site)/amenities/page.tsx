@@ -1,6 +1,12 @@
 import Link from 'next/link';
 import { Wifi, Tv, Coffee, Utensils, Shield, Car, Wind, User } from 'lucide-react';
+import { Metadata } from 'next';
 import styles from './amenities.module.css';
+
+export const metadata: Metadata = {
+  title: 'Amenities',
+  description: 'Luxury living refined. High-speed WiFi, chef-grade kitchen, tropical garden, and on-site support for a seamless Kigali stay.',
+};
 
 const amenities = [
   { icon: <Wifi size={32} />, name: 'High-speed Fiber WiFi', description: 'Stay connected with reliable, fast internet throughout the villa.' },
@@ -21,7 +27,7 @@ export default function AmenitiesPage() {
           <span className={styles.label}>Luxury Living</span>
           <h1>Everything you need for a seamless stay</h1>
           <p className={styles.lead}>
-             Amahoro Luxury Villa  is designed for comfort, privacy, and elevated hospitality—indoors and out.
+            Amahoro Luxury Villa  is designed for comfort, privacy, and elevated hospitality—indoors and out.
           </p>
         </div>
       </header>
@@ -46,7 +52,7 @@ export default function AmenitiesPage() {
             <div className={styles.outdoorText}>
               <h2>Outdoor living, refined</h2>
               <p>
-                Experience the rare luxury of private indoor-outdoor living in Kigali. 
+                Experience the rare luxury of private indoor-outdoor living in Kigali.
                 Our tropical garden, fire pit, and alfresco dining areas are perfect for sunset moments.
               </p>
               <ul className={styles.outdoorList}>

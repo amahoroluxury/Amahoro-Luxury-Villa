@@ -1,5 +1,11 @@
 import BookingForm from '@/components/BookingForm';
+import { Metadata } from 'next';
 import styles from './book.module.css';
+
+export const metadata: Metadata = {
+  title: 'Book Your Stay',
+  description: 'Secure your reservation at Amahoro Luxury Villa. Afro-Modern comfort and peace await you in Kigali.',
+};
 
 export default function BookPage() {
   return (

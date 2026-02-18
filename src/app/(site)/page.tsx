@@ -39,7 +39,7 @@ export default function Home() {
           muted
           loop
           playsInline
-          preload="auto"
+          preload="metadata"
           poster="/og-image.jpg"
           className={styles.videoBackground}
           src="/Amahoroluxury-video.mp4"

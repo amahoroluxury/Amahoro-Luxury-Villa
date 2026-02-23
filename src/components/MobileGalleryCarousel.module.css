@@ -45,6 +45,8 @@
     overflow-x: auto;
     padding: 0 1.5rem 2rem;
     scroll-snap-type: x mandatory;
+    -ms-overflow-style: none;
+    /* IE and Edge */
     scrollbar-width: none;
     /* Firefox */
 }

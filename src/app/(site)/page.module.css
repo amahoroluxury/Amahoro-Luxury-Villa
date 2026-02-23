@@ -14,6 +14,13 @@
   margin-top: 0;
 }
 
+@media (min-width: 1024px) {
+  .hero {
+    padding-top: 10rem;
+    /* Increased gap between navbar and headline */
+  }
+}
+
 .videoBackground {
   position: absolute;
   top: 0;
@@ -32,11 +39,10 @@
   left: 0;
   width: 100%;
   height: 100%;
-  /* Even darker brand-tinted gradient for maximum text clarity */
-  background: linear-gradient(to bottom,
-      rgba(0, 0, 0, 0.85) 0%,
-      rgba(0, 0, 0, 0.7) 50%,
-      rgba(0, 0, 0, 0.95) 100%);
+  /* Refined overlay: darker base with subtle gradient for text pop */
+  background: linear-gradient(rgba(0, 0, 0, 0.5),
+      rgba(0, 0, 0, 0.35) 50%,
+      rgba(0, 0, 0, 0.55));
   z-index: 2;
 }
 
@@ -55,15 +61,18 @@
 }
 
 .title {
-  font-size: 3.5rem;
+  font-size: 2.25rem;
   line-height: 1.1;
-  margin-bottom: 1.5rem;
+  margin-bottom: 3.5rem;
+  /* Increased gap between title and specs */
   color: white;
+  font-weight: 300;
+  /* More understated */
 }
 
 @media (min-width: 768px) {
   .title {
-    font-size: 5rem;
+    font-size: 3.5rem;
   }
 }
 
@@ -96,26 +105,14 @@
   display: flex;
   gap: 2rem;
   align-items: center;
+  margin-top: 10rem;
+  /* Push actions down for 'breathing room' */
 }
 
 @media (max-width: 768px) {
   .heroActions {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 1.5rem;
-  }
-
-  .primaryBtn {
-    width: 100%;
-    text-align: center;
-  }
-
-  .priceCallout {
-    width: 100%;
-    justify-content: center;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    padding-bottom: 1rem;
-    margin-bottom: 0.5rem;
+    display: none;
+    /* Hidden on mobile as requested */
   }
 }
 
@@ -186,14 +183,14 @@
 }
 
 .introText h2 {
-  font-size: 2.5rem;
+  font-size: 1.75rem;
   margin-bottom: 2rem;
   color: var(--secondary);
 }
 
 @media (min-width: 768px) {
   .introText h2 {
-    font-size: 3.5rem;
+    font-size: 2.5rem;
   }
 }
 
@@ -252,8 +249,14 @@
 }
 
 .ctaCard h2 {
-  font-size: 2.5rem;
+  font-size: 1.75rem;
   margin-bottom: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .ctaCard h2 {
+    font-size: 2.5rem;
+  }
 }
 
 .ctaCard p {

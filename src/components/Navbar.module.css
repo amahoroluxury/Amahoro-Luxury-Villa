@@ -80,7 +80,7 @@
 }
 
 .link {
-  font-size: 0.65rem;
+  font-size: 0.85rem;
   text-transform: uppercase;
   letter-spacing: 0.1em;
   font-weight: 600;
@@ -117,7 +117,7 @@
   background-color: var(--primary);
   color: #fff;
   padding: 0.75rem 1.5rem;
-  font-size: 0.7rem;
+  font-size: 0.85rem;
   font-weight: 600;
   letter-spacing: 0.1em;
   text-transform: uppercase;
@@ -169,7 +169,7 @@
 
 .mobileLink {
   font-family: var(--font-serif);
-  font-size: 2rem;
+  font-size: 1.5rem;
   color: var(--secondary);
 }
 
@@ -184,6 +184,7 @@
   color: #fff;
   padding: 1.25rem;
   text-align: center;
+  font-size: 1.1rem;
   font-weight: 600;
   letter-spacing: 0.1em;
   text-transform: uppercase;

@@ -5,7 +5,9 @@ import GuestFavoriteBanner from '@/components/GuestFavoriteBanner';
 import FeaturedSpaces from '@/components/FeaturedSpaces';
 import TestimonialsCarousel from '@/components/TestimonialsCarousel';
 import AmenitiesStrip from '@/components/AmenitiesStrip';
+import PropertyCarousel from '@/components/PropertyCarousel';
 import MapPreview from '@/components/MapPreview';
+import MobileGalleryCarousel from '@/components/MobileGalleryCarousel';
 
 export default function Home() {
   const jsonLd = {
@@ -39,12 +41,6 @@ export default function Home() {
 
   return (
     <div className={styles.wrapper}>
-      <link
-        rel="preload"
-        href="/og-image.jpg"
-        as="image"
-        type="image/jpeg"
-      />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
@@ -65,7 +61,6 @@ export default function Home() {
         <div className="container">
           <div className={styles.heroContent}>
             <h1 className={styles.title}>A Sanctuary of Peace in the Heart of Kigali</h1>
-            <p className={styles.subtitle}>Amahoro means peace. Experience Afro-Modern luxury and unforgettable hospitality.</p>
 
             <div className={styles.specs}>
               <div className={styles.specItem}>4 Bedrooms</div>
@@ -79,7 +74,6 @@ export default function Home() {
                 <span className={styles.perNight}>/ night</span>
               </div>
               <Link href="/book" className={styles.primaryBtn}>Book Your Stay</Link>
-              <Link href="/amenities" className={styles.secondaryBtn}>View Amenities</Link>
             </div>
           </div>
         </div>
@@ -116,12 +110,16 @@ export default function Home() {
         </div>
       </section>
 
+      <PropertyCarousel />
+
       <AmenitiesStrip />
 
       <FeaturedSpaces />
 
       <GuestFavoriteBanner />
       <TestimonialsCarousel />
+
+      <MobileGalleryCarousel />
 
       <InstagramFeed />
 

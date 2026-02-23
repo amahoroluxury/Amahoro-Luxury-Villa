@@ -7,22 +7,37 @@ const spaces = [
     id: 1,
     title: 'Master Suite',
     description: 'A spacious retreat with spa bath and direct access to the garden terrace.',
-    image: '/images/gallery/gallery-7.jpg',
-    span: 'normal'
+    image: '/images/gallery/gallery-7.jpg'
   },
   {
     id: 2,
     title: 'Chef\'s Kitchen',
     description: 'High-end appliances, coffee station, and fully stocked for culinary needs.',
-    image: '/images/gallery/gallery-5.jpeg',
-    span: 'wide'
+    image: '/images/gallery/gallery-5.jpeg'
   },
   {
     id: 3,
     title: 'Fire Pit',
-    description: 'Enjoy a night cap with friends in the private outdoor fire pit area.',
-    image: '/images/gallery/FIRE PIT.jpg',
-    span: 'normal'
+    description: 'Enjoy a night cap with friends in our private, stone-lined outdoor fire pit.',
+    image: '/images/gallery/FIRE PIT.jpg'
+  },
+  {
+    id: 4,
+    title: 'Tropical Garden',
+    description: 'A lush sanctuary featuring a zen water fountain and exotic Rwandan flora.',
+    image: '/images/gallery/TROPICAL GARDEN.jpg'
+  },
+  {
+    id: 5,
+    title: 'Outdoor Barbecue',
+    description: 'A fully equipped outdoor kitchen and dining area for al fresco entertaining.',
+    image: '/images/gallery/OUTDOOR BARBECUE.jpeg'
+  },
+  {
+    id: 6,
+    title: 'Cinema Room',
+    description: 'State-of-the-art cinematic experience with plush seating and surround sound.',
+    image: '/images/gallery/movie-room.png'
   }
 ];
 
@@ -37,7 +52,7 @@ const FeaturedSpaces = () => {
 
         <div className={styles.grid}>
           {spaces.map((space) => (
-            <div key={space.id} className={`${styles.card} ${space.span === 'wide' ? styles.wide : ''}`}>
+            <div key={space.id} className={styles.card}>
               <div className={styles.imageWrapper}>
                 <Image
                   src={space.image}

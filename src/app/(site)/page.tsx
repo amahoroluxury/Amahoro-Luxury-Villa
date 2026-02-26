@@ -8,6 +8,7 @@ import AmenitiesStrip from '@/components/AmenitiesStrip';
 import PropertyCarousel from '@/components/PropertyCarousel';
 import MapPreview from '@/components/MapPreview';
 import MobileGalleryCarousel from '@/components/MobileGalleryCarousel';
+import Image from 'next/image';
 
 export default function Home() {
   const jsonLd = {
@@ -92,19 +93,15 @@ export default function Home() {
               </p>
               <Link href="/about" className={styles.textLink}>Our Story &rarr;</Link>
             </div>
-            <div className={styles.highlights}>
-              <div className={styles.highlightCard}>
-                <h3>4 Bedrooms & 4 en-suite Baths</h3>
-                <p>Spacious, elegant, and designed for ultimate privacy.</p>
-              </div>
-              <div className={styles.highlightCard}>
-                <h3>Tropical Garden</h3>
-                <p>Full outdoor kitchen, BBQ grill, and zen water fountain.</p>
-              </div>
-              <div className={styles.highlightCard}>
-                <h3>Stocked Chef&apos;s Kitchen</h3>
-                <p>High-end appliances and everything needed for culinary excellence.</p>
-              </div>
+            <div className={styles.introImageContainer}>
+              <Image
+                src="/images/gallery/gallery-4.jpg"
+                alt="Amahoro Luxury Villa Exterior"
+                fill
+                className={styles.introImage}
+                sizes="(max-width: 1024px) 100vw, 50vw"
+                priority
+              />
             </div>
           </div>
         </div>

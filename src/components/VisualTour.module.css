@@ -1,0 +1,73 @@
+.tourWrapper {
+    width: 100%;
+    position: relative;
+}
+
+.header {
+    margin-bottom: 2rem;
+}
+
+.label {
+    display: block;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--primary);
+    margin-bottom: 1rem;
+    font-weight: 600;
+}
+
+.title {
+    font-size: 1.5rem;
+    color: var(--secondary);
+    font-weight: 400;
+}
+
+.scrollContainer {
+    display: flex;
+    overflow-x: auto;
+    gap: 1.5rem;
+    scroll-snap-type: x mandatory;
+    -ms-overflow-style: none;
+    padding-bottom: 1rem;
+}
+
+.scrollContainer::-webkit-scrollbar {
+    display: none;
+}
+
+.slide {
+    flex: 0 0 100%;
+    aspect-ratio: 4/3;
+    position: relative;
+    scroll-snap-align: start;
+    overflow: hidden;
+    border-radius: 4px;
+}
+
+.image {
+    object-fit: cover;
+    transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.slide:hover .image {
+    transform: scale(1.05);
+}
+
+.caption {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 2rem 1.5rem 1rem;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.6), transparent);
+    color: white;
+    font-size: 0.9rem;
+    font-family: var(--font-serif);
+}
+
+@media (min-width: 1024px) {
+    .slide {
+        aspect-ratio: 4/3;
+    }
+}

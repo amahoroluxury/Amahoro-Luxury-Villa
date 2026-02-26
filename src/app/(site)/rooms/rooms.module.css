@@ -131,12 +131,14 @@
   margin-right: 0.75rem;
 }
 
-.reverse .roomImage {
-  order: 2;
-}
+@media (min-width: 1024px) {
+  .reverse .roomImage {
+    order: 2;
+  }
 
-.reverse .roomContent {
-  order: 1;
+  .reverse .roomContent {
+    order: 1;
+  }
 }
 
 .globalFeatures {

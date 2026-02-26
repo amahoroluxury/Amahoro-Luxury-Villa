@@ -13,7 +13,7 @@ const navLinks = [
   { name: 'Rooms', href: '/rooms' },
   { name: 'Amenities', href: '/amenities' },
   { name: 'Gallery', href: '/gallery' },
-  { name: 'Location', href: '/location' },
+  { name: 'Policies', href: '/policies' },
   { name: 'Reviews', href: '/reviews' },
   { name: 'FAQ', href: '/faq' },
   { name: 'Contact', href: '/contact' },
@@ -59,8 +59,8 @@ export default function Navbar() {
             </Link>
           </div>
 
-          <button 
-            className={styles.mobileOpen} 
+          <button
+            className={styles.mobileOpen}
             onClick={() => setIsOpen(true)}
             aria-label="Open Menu"
           >
@@ -82,8 +82,8 @@ export default function Navbar() {
               <div className={styles.logo}>
                 <Logo height={80} />
               </div>
-              <button 
-                className={styles.mobileClose} 
+              <button
+                className={styles.mobileClose}
                 onClick={() => setIsOpen(false)}
                 aria-label="Close Menu"
               >

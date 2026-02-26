@@ -69,3 +69,13 @@ model Settings {
   updatedAt    DateTime @updatedAt
   remindersSent      String[] @default([])
 }
+
+model GalleryImage {
+  id       String @id @default(uuid())
+  url      String
+  category String
+  span     String @default("normal") // normal, tall
+  order    Int    @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}

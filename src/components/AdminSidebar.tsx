@@ -12,6 +12,7 @@ export default function AdminSidebar() {
     { label: 'Overview', href: '/admin', icon: '📊' },
     { label: 'Bookings', href: '/admin/bookings', icon: '📅' },
     { label: 'Calendar', href: '/admin/calendar', icon: '🗓️' },
+    { label: 'Gallery', href: '/admin/gallery', icon: '🖼️' },
     { label: 'Settings', href: '/admin/settings', icon: '⚙️' },
   ];
 
@@ -35,9 +36,9 @@ export default function AdminSidebar() {
         {navItems.map((item) => {
           const isActive = pathname === item.href;
           return (
-            <Link 
-              key={item.href} 
-              href={item.href} 
+            <Link
+              key={item.href}
+              href={item.href}
               className={`${styles.navLink} ${isActive ? styles.active : ''}`}
             >
               <div className={styles.iconWrapper}>{item.icon}</div>

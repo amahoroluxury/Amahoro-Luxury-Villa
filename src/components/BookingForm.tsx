@@ -4,12 +4,15 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { format, differenceInDays } from 'date-fns';
+import VisualCalendar from './VisualCalendar';
 import styles from './booking.module.css';
 
 export default function BookingForm() {
   const router = useRouter();
   const [step, setStep] = useState(1);
   const [loading, setLoading] = useState(false);
+  const [calendarLoading, setCalendarLoading] = useState(true);
+  const [calendarData, setCalendarData] = useState({ blocked: [], bookings: [] });
   const [error, setError] = useState('');
   const [price, setPrice] = useState({ nightlyRate: 200, total: 0, deposit: 0, balance: 0, depositPercent: 100, damageFee: 0, grandTotal: 0 });
   const [acceptedTerms, setAcceptedTerms] = useState(false);
@@ -27,6 +30,23 @@ export default function BookingForm() {
   const nights = formData.checkIn && formData.checkOut
     ? differenceInDays(new Date(formData.checkOut), new Date(formData.checkIn))
     : 0;
+
+  useEffect(() => {
+    async function fetchCalendar() {
+      try {
+        const res = await fetch('/api/calendar/public');
+        if (res.ok) {
+          const data = await res.json();
+          setCalendarData(data);
+        }
+      } catch (err) {
+        console.error('Failed to fetch calendar data');
+      } finally {
+        setCalendarLoading(false);
+      }
+    }
+    fetchCalendar();
+  }, []);
 
   useEffect(() => {
     async function updatePrice() {
@@ -111,6 +131,17 @@ export default function BookingForm() {
       {step === 1 && (
         <div className={styles.formSection}>
           <h2>Select Dates</h2>
+          <div className={styles.calendarPreview}>
+            {calendarLoading ? (
+              <div className={styles.calendarLoader}>Loading availability...</div>
+            ) : (
+              <VisualCalendar
+                initialBlocked={calendarData.blocked}
+                initialBookings={calendarData.bookings}
+              />
+            )}
+          </div>
+
           <div className={styles.grid}>
             <div className={styles.field}>
               <label htmlFor="checkIn">Check-in</label>
@@ -156,7 +187,7 @@ export default function BookingForm() {
             </div>
           ) : (
             <div className={styles.initialPrice}>
-              <p>Stays from <strong>$200 / night</strong></p>
+              <p>Stays are <strong>$200 / night</strong></p>
               <p className={styles.priceSubtext}>Select dates to see total price and availability</p>
             </div>
           )}

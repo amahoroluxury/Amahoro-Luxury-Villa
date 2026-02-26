@@ -18,7 +18,7 @@ async function getDashboardData() {
   ]);
 
   const confirmedBookings = bookings.filter((b: any) => b.status === 'DepositPaid' || b.status === 'FullyPaid');
-  
+
   // Calculate revenue this month
   const monthlyRevenue = confirmedBookings
     .filter((b: any) => isAfter(new Date(b.createdAt), monthStart))
@@ -112,6 +112,10 @@ export default async function AdminDashboardPage() {
               </Link>
               <Link href="/admin/bookings" className={styles.actionBtn}>
                 Review Bookings
+                <span>&rarr;</span>
+              </Link>
+              <Link href="/admin/gallery" className={styles.actionBtn}>
+                Manage Gallery
                 <span>&rarr;</span>
               </Link>
             </div>

@@ -4,10 +4,10 @@ import InstagramFeed from '@/components/InstagramFeed';
 import GuestFavoriteBanner from '@/components/GuestFavoriteBanner';
 import FeaturedSpaces from '@/components/FeaturedSpaces';
 import TestimonialsCarousel from '@/components/TestimonialsCarousel';
-import AmenitiesStrip from '@/components/AmenitiesStrip';
 import PropertyCarousel from '@/components/PropertyCarousel';
 import MapPreview from '@/components/MapPreview';
 import MobileGalleryCarousel from '@/components/MobileGalleryCarousel';
+import VisualTour from '@/components/VisualTour';
 import Image from 'next/image';
 
 export default function Home() {
@@ -17,10 +17,10 @@ export default function Home() {
     "name": "Amahoro Luxury Villa",
     "description": "Amahoro Luxury Villa — A private sanctuary of peace in Kigali. Experience Afro-Modern luxury with 4 bedrooms, tropical garden, and world-class hospitality.",
     "url": "https://www.amahoroluxuryvilla.com",
-    "telephone": "+250XXXXXXXXX", // Placeholder for actual number
+    "telephone": "+250781871487",
     "address": {
       "@type": "PostalAddress",
-      "streetAddress": "KG 123", // Refine from footer if possible
+      "streetAddress": "KG 123 St",
       "addressLocality": "Kibagabaga, Kigali",
       "addressRegion": "Kigali City",
       "addressCountry": "RW"
@@ -71,7 +71,7 @@ export default function Home() {
 
             <div className={styles.heroActions}>
               <div className={styles.priceCallout}>
-                <span className={styles.price}>From $200</span>
+                <span className={styles.price}>$200</span>
                 <span className={styles.perNight}>/ night</span>
               </div>
               <Link href="/book" className={styles.primaryBtn}>Book Your Stay</Link>
@@ -94,22 +94,13 @@ export default function Home() {
               <Link href="/about" className={styles.textLink}>Our Story &rarr;</Link>
             </div>
             <div className={styles.introImageContainer}>
-              <Image
-                src="/images/gallery/gallery-4.jpg"
-                alt="Amahoro Luxury Villa Exterior"
-                fill
-                className={styles.introImage}
-                sizes="(max-width: 1024px) 100vw, 50vw"
-                priority
-              />
+              <VisualTour />
             </div>
           </div>
         </div>
       </section>
 
       <PropertyCarousel />
-
-      <AmenitiesStrip />
 
       <FeaturedSpaces />
 
@@ -126,7 +117,7 @@ export default function Home() {
         <div className="container">
           <div className={styles.ctaCard}>
             <h2>Ready to experience  Amahoro Luxury Villa ?</h2>
-            <p>Book your stay from <strong>$200 / night</strong> in Kigali&apos;s most peaceful luxury retreat.</p>
+            <p>Book your stay <strong>$200 / night</strong> in Kigali&apos;s most peaceful luxury retreat.</p>
             <Link href="/book" className={styles.primaryBtn}>Check Availability</Link>
           </div>
         </div>

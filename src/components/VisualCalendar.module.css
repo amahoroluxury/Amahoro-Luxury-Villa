@@ -1,8 +1,12 @@
 .calendarContainer {
   background: var(--surface);
-  border: 1px solid var(--border);
-  padding: 2.5rem;
-  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.1);
+  padding: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .calendarContainer {
+    padding: 2rem;
+  }
 }
 
 .header {
@@ -65,10 +69,17 @@
 
 .cell {
   background: var(--surface);
-  min-height: 100px;
-  padding: 0.75rem;
+  min-height: 60px;
+  padding: 0.5rem;
   position: relative;
-  transition: background 0.2s ease;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+@media (min-width: 768px) {
+  .cell {
+    min-height: 80px;
+  }
 }
 
 .cell:hover {
@@ -105,13 +116,36 @@
   text-transform: uppercase;
 }
 
-.booked { background: #e8f5e9; }
-.booked .event { background: #2e7d32; color: white; }
-.booked .dayNumber { color: #2e7d32; }
+.booked {
+  background: #e8f5e9;
+}
 
-.blocked { background: #ffebee; }
-.blocked .event { background: #c62828; color: white; }
-.blocked .dayNumber { color: #c62828; }
+.booked .event {
+  background: #2e7d32;
+  color: white;
+}
+
+.booked .dayNumber {
+  color: #2e7d32;
+}
+
+.blocked {
+  background: #ffebee;
+}
+
+.blocked .event {
+  background: #c62828;
+  color: white;
+}
+
+.blocked .dayNumber {
+  color: #c62828;
+}
+
+.selected {
+  background: var(--primary) !important;
+  color: white !important;
+}
 
 .legend {
   margin-top: 2rem;
@@ -131,5 +165,16 @@
   color: var(--text-muted);
 }
 
-.bookedSample { width: 12px; height: 12px; background: #2e7d32; border-radius: 2px; }
-.blockedSample { width: 12px; height: 12px; background: #c62828; border-radius: 2px; }
+.bookedSample {
+  width: 12px;
+  height: 12px;
+  background: #2e7d32;
+  border-radius: 2px;
+}
+
+.blockedSample {
+  width: 12px;
+  height: 12px;
+  background: #c62828;
+  border-radius: 2px;
+}

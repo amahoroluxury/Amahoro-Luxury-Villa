@@ -13,7 +13,7 @@ export default function BookPage() {
       <header className={styles.pageHeader}>
         <div className="container">
           <span className={styles.label}>Reservations</span>
-          <h1>Book Your Stay at  Amahoro Luxury Villa </h1>
+          <h1>Book Your Stay at Amahoro Luxury Villa</h1>
           <p className={styles.lead}>
             Full payment (100%) is required at the time of booking. A 20% refundable damage fee is also collected and will be refunded within 12 hours after checkout supervision, provided the property is left in good condition.
           </p>

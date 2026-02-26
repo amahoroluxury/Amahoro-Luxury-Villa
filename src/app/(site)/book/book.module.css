@@ -3,7 +3,7 @@
 }
 
 .pageHeader {
-  min-height: 75vh;
+  min-height: 45vh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -11,7 +11,7 @@
   background: linear-gradient(to bottom, rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.55)),
     url('/images/gallery/FIRE PIT.jpg') center/cover no-repeat;
   color: white;
-  padding: 180px 0 4rem;
+  padding: 120px 0 3rem;
 }
 
 .pageHeader h1 {

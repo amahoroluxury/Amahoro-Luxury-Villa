@@ -1,4 +1,10 @@
+import { Metadata } from 'next';
 import styles from './house-rules.module.css';
+
+export const metadata: Metadata = {
+    title: 'House Rules',
+    description: 'To ensure a peaceful stay for everyone, please review our house rules regarding smoking, quiet hours, and property care.',
+};
 
 export default function HouseRulesPage() {
     const rules = [

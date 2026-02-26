@@ -1,4 +1,10 @@
+import { Metadata } from 'next';
 import styles from './privacy.module.css';
+
+export const metadata: Metadata = {
+  title: 'Privacy Policy',
+  description: 'Your privacy matters. Learn how Amahoro Luxury Villa handles and protects your personal data during your stay.',
+};
 
 export default function PrivacyPage() {
   return (

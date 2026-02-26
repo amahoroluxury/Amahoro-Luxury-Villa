@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { format, differenceInDays } from 'date-fns';
+import { X } from 'lucide-react';
 import VisualCalendar from './VisualCalendar';
 import styles from './booking.module.css';
 
@@ -16,6 +17,8 @@ export default function BookingForm() {
   const [error, setError] = useState('');
   const [price, setPrice] = useState({ nightlyRate: 200, total: 0, deposit: 0, balance: 0, depositPercent: 100, damageFee: 0, grandTotal: 0 });
   const [acceptedTerms, setAcceptedTerms] = useState(false);
+  const [showCalendar, setShowCalendar] = useState(false);
+  const [activeField, setActiveField] = useState<'checkIn' | 'checkOut' | null>(null);
 
   const [formData, setFormData] = useState({
     checkIn: '',
@@ -131,50 +134,95 @@ export default function BookingForm() {
       {step === 1 && (
         <div className={styles.formSection}>
           <h2>Select Dates</h2>
-          <div className={styles.calendarPreview}>
-            {calendarLoading ? (
-              <div className={styles.calendarLoader}>Loading availability...</div>
-            ) : (
-              <VisualCalendar
-                initialBlocked={calendarData.blocked}
-                initialBookings={calendarData.bookings}
-              />
-            )}
-          </div>
 
-          <div className={styles.grid}>
-            <div className={styles.field}>
-              <label htmlFor="checkIn">Check-in</label>
-              <input
-                id="checkIn"
-                type="date"
-                value={formData.checkIn}
-                onChange={(e) => setFormData({ ...formData, checkIn: e.target.value })}
-                min={new Date().toISOString().split('T')[0]}
-              />
+          <div className={styles.calendarWrapper}>
+            <div className={styles.grid}>
+              <div className={styles.field}>
+                <label htmlFor="checkIn">Check-in</label>
+                <div className={styles.calendarTrigger} onClick={() => { setActiveField('checkIn'); setShowCalendar(true); }}>
+                  <input
+                    id="checkIn"
+                    type="text"
+                    value={formData.checkIn ? format(new Date(formData.checkIn), 'MMM dd, yyyy') : ''}
+                    readOnly
+                    placeholder="Select Check-in Date"
+                  />
+                </div>
+              </div>
+              <div className={styles.field}>
+                <label htmlFor="checkOut">Check-out</label>
+                <div className={styles.calendarTrigger} onClick={() => { setActiveField('checkOut'); setShowCalendar(true); }}>
+                  <input
+                    id="checkOut"
+                    type="text"
+                    value={formData.checkOut ? format(new Date(formData.checkOut), 'MMM dd, yyyy') : ''}
+                    readOnly
+                    placeholder="Select Check-out Date"
+                  />
+                </div>
+              </div>
+              <div className={styles.field}>
+                <label htmlFor="guests">Guests</label>
+                <select
+                  id="guests"
+                  value={formData.guests}
+                  onChange={(e) => setFormData({ ...formData, guests: parseInt(e.target.value) })}
+                >
+                  {[1, 2, 3, 4, 5, 6, 7, 8].map(n => (
+                    <option key={n} value={n}>{n} Guests</option>
+                  ))}
+                </select>
+              </div>
             </div>
-            <div className={styles.field}>
-              <label htmlFor="checkOut">Check-out</label>
-              <input
-                id="checkOut"
-                type="date"
-                value={formData.checkOut}
-                onChange={(e) => setFormData({ ...formData, checkOut: e.target.value })}
-                min={formData.checkIn || new Date().toISOString().split('T')[0]}
-              />
-            </div>
-            <div className={styles.field}>
-              <label htmlFor="guests">Guests</label>
-              <select
-                id="guests"
-                value={formData.guests}
-                onChange={(e) => setFormData({ ...formData, guests: parseInt(e.target.value) })}
-              >
-                {[1, 2, 3, 4, 5, 6, 7, 8].map(n => (
-                  <option key={n} value={n}>{n} Guests</option>
-                ))}
-              </select>
-            </div>
+
+            {showCalendar && (
+              <div className={styles.calendarOverlay}>
+                <div className={styles.calendarContent}>
+                  <div className={styles.calendarHeader}>
+                    <h3>Availability Calendar</h3>
+                    <button className={styles.closeBtn} onClick={() => setShowCalendar(false)} title="Close Calendar" aria-label="Close Calendar">
+                      <X size={20} />
+                    </button>
+                  </div>
+                  {calendarLoading ? (
+                    <div className={styles.calendarLoader}>Loading availability...</div>
+                  ) : (
+                    <VisualCalendar
+                      initialBlocked={calendarData.blocked}
+                      initialBookings={calendarData.bookings}
+                      checkIn={formData.checkIn ? new Date(formData.checkIn) : null}
+                      checkOut={formData.checkOut ? new Date(formData.checkOut) : null}
+                      onDateClick={(date) => {
+                        const dateStr = format(date, 'yyyy-MM-dd');
+                        if (activeField === 'checkIn') {
+                          setFormData(prev => {
+                            const newCheckIn = dateStr;
+                            let newCheckOut = prev.checkOut;
+                            // If checkout is before new checkin, clear it
+                            if (newCheckOut && newCheckOut <= newCheckIn) {
+                              newCheckOut = '';
+                            }
+                            return { ...prev, checkIn: newCheckIn, checkOut: newCheckOut };
+                          });
+                        } else if (activeField === 'checkOut') {
+                          setFormData(prev => {
+                            const newCheckOut = dateStr;
+                            let newCheckIn = prev.checkIn;
+                            // If checkin is after new checkout, swap or clear? 
+                            // User wants flexibility. Let's just set it if valid, or clear checkin if invalid.
+                            if (newCheckIn && newCheckIn >= newCheckOut) {
+                              newCheckIn = '';
+                            }
+                            return { ...prev, checkIn: newCheckIn, checkOut: newCheckOut };
+                          });
+                        }
+                        setShowCalendar(false);
+                      }}
+                    />
+                  )}
+                </div>
+              </div>
+            )}
           </div>
 
           {nights > 0 ? (

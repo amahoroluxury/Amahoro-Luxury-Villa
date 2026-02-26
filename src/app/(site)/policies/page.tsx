@@ -1,4 +1,10 @@
+import { Metadata } from 'next';
 import styles from './policies.module.css';
+
+export const metadata: Metadata = {
+  title: 'Policies',
+  description: 'Review our booking, cancellation, and house rules. We strive to provide a seamless and transparent experience for all guests.',
+};
 
 export default function PoliciesPage() {
   return (

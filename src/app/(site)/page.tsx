@@ -116,7 +116,7 @@ export default function Home() {
       <section className={`${styles.ctaSection} section-padding`}>
         <div className="container">
           <div className={styles.ctaCard}>
-            <h2>Ready to experience  Amahoro Luxury Villa ?</h2>
+            <h2>Ready to experience Amahoro Luxury Villa?</h2>
             <p>Book your stay <strong>$200 / night</strong> in Kigali&apos;s most peaceful luxury retreat.</p>
             <Link href="/book" className={styles.primaryBtn}>Check Availability</Link>
           </div>

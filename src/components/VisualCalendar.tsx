@@ -1,16 +1,16 @@
 'use client';
 
 import { useState } from 'react';
-import { 
-  format, 
-  startOfMonth, 
-  endOfMonth, 
-  startOfWeek, 
-  endOfWeek, 
-  eachDayOfInterval, 
-  isSameMonth, 
-  isSameDay, 
-  addMonths, 
+import {
+  format,
+  startOfMonth,
+  endOfMonth,
+  startOfWeek,
+  endOfWeek,
+  eachDayOfInterval,
+  isSameMonth,
+  isSameDay,
+  addMonths,
   subMonths,
   isWithinInterval
 } from 'date-fns';
@@ -33,9 +33,18 @@ interface Booking {
 interface Props {
   initialBlocked: BlockedDate[];
   initialBookings: Booking[];
+  checkIn: Date | null;
+  checkOut: Date | null;
+  onDateClick: (date: Date) => void;
 }
 
-export default function VisualCalendar({ initialBlocked, initialBookings }: Props) {
+export default function VisualCalendar({
+  initialBlocked,
+  initialBookings,
+  checkIn,
+  checkOut,
+  onDateClick
+}: Props) {
   const [currentDate, setCurrentDate] = useState(new Date());
 
   const monthStart = startOfMonth(currentDate);
@@ -62,10 +71,18 @@ export default function VisualCalendar({ initialBlocked, initialBookings }: Prop
       const end = new Date(b.checkOut);
       return isWithinInterval(day, { start, end });
     });
-    
+
     if (booking) return { type: 'booked', label: booking.name, status: booking.status };
 
     return null;
+  };
+
+  const handleDayClick = (day: Date) => {
+    if (!isSameMonth(day, monthStart)) return;
+    const status = getDayStatus(day);
+    if (status) return; // Can't select blocked/booked
+
+    onDateClick(day);
   };
 
   return (
@@ -91,14 +108,20 @@ export default function VisualCalendar({ initialBlocked, initialBookings }: Prop
           const isCurrentMonth = isSameMonth(day, monthStart);
           const isToday = isSameDay(day, new Date());
 
+          const isSelected = (checkIn && isSameDay(day, checkIn)) ||
+            (checkOut && isSameDay(day, checkOut)) ||
+            (checkIn && checkOut && isWithinInterval(day, { start: checkIn, end: checkOut }));
+
           return (
-            <div 
-              key={idx} 
+            <div
+              key={idx}
+              onClick={() => handleDayClick(day)}
               className={`
-                ${styles.cell} 
-                ${!isCurrentMonth ? styles.disabled : ''} 
+                ${styles.cell}
+                ${!isCurrentMonth ? styles.disabled : ''}
                 ${isToday ? styles.today : ''}
                 ${status ? styles[status.type] : ''}
+                ${isSelected ? styles.selected : ''}
               `}
             >
               <span className={styles.dayNumber}>{format(day, 'd')}</span>

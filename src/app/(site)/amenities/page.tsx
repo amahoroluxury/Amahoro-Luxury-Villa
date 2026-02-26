@@ -27,7 +27,7 @@ export default function AmenitiesPage() {
           <span className={styles.label}>Luxury Living</span>
           <h1>Everything you need for a seamless stay</h1>
           <p className={styles.lead}>
-            Amahoro Luxury Villa  is designed for comfort, privacy, and elevated hospitality—indoors and out.
+            Amahoro Luxury Villa is designed for comfort, privacy, and elevated hospitality—indoors and out.
           </p>
         </div>
       </header>
@@ -72,7 +72,7 @@ export default function AmenitiesPage() {
       <section className={styles.ctaBanner}>
         <div className="container">
           <div className={styles.ctaCard}>
-            <h3>Ready to experience  Amahoro Luxury Villa ?</h3>
+            <h3>Ready to experience Amahoro Luxury Villa?</h3>
             <Link href="/book" className={styles.primaryBtn}>Book Your Stay</Link>
           </div>
         </div>

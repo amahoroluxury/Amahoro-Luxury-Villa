@@ -88,7 +88,7 @@ export async function calculatePrice(nights: number, checkIn?: Date) {
 
   const standardRate = settings?.nightlyRate ?? 200;
   const weekendRate = settings?.weekendRate ?? standardRate;
-  const depositPercent = (settings?.depositPercent ?? 50) / 100;
+  const depositPercent = (settings?.depositPercent ?? 100) / 100;
 
   let total = 0;
 
@@ -114,12 +114,17 @@ export async function calculatePrice(nights: number, checkIn?: Date) {
 
   const deposit = total * depositPercent;
   const balance = total - deposit;
+  const damageFee = Math.round(total * 0.2);
+  const grandTotal = total + damageFee;
 
   return {
     nightlyRate: standardRate,
     weekendRate,
     total,
     deposit,
-    balance
+    balance,
+    depositPercent: Math.round(depositPercent * 100),
+    damageFee,
+    grandTotal
   };
 }

@@ -123,14 +123,14 @@ export async function sendBookingConfirmation(booking: BookingEmailData) {
               <strong>$${booking.totalAmountUsd.toFixed(2)}</strong>
             </div>
             <div class="details-row">
-              <span>50% Deposit Required:</span>
-              <strong>$${booking.depositAmountUsd.toFixed(2)}</strong>
+              <span>Full Payment Required:</span>
+              <strong>$${booking.totalAmountUsd.toFixed(2)}</strong>
             </div>
           </div>
           
           <div class="note">
-            <strong>Next Step:</strong> Please complete your 50% deposit payment to confirm your booking. 
-            The remaining balance must be paid before check-in.
+            <strong>Next Step:</strong> Please complete your full payment to confirm your booking. 
+            A 20% refundable damage fee will also be collected and refunded within 12 hours after checkout supervision, provided the property is left in good condition.
           </div>
           
           <p>Booking Reference: <strong>${booking.bookingId.slice(0, 8).toUpperCase()}</strong></p>
@@ -271,7 +271,7 @@ export async function sendAdminNewBookingNotification(booking: BookingEmailData)
           <div class="details-row"><strong>Check-out:</strong> ${formatDate(booking.checkOut)}</div>
           <div class="details-row"><strong>Guests:</strong> ${booking.guestsCount}</div>
           <div class="details-row"><strong>Total:</strong> $${booking.totalAmountUsd.toFixed(2)}</div>
-          <div class="details-row"><strong>Status:</strong> Pending Deposit Payment</div>
+          <div class="details-row"><strong>Status:</strong> Pending Payment</div>
         </div>
         
         <a href="${process.env.SITE_URL}/admin/bookings/${booking.bookingId}" class="cta">View in Dashboard</a>

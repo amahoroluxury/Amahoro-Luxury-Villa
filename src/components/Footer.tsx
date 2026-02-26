@@ -55,14 +55,14 @@ export default function Footer() {
                 Rwanda
               </span>
             </div>
-            <div className={styles.contactItem}>
+            <a href="https://wa.me/250781871487" target="_blank" rel="noopener noreferrer" className={styles.contactItem}>
               <MessageSquare className={styles.contactIcon} />
               <span>WhatsApp House Manager</span>
-            </div>
-            <div className={styles.contactItem}>
+            </a>
+            <a href="mailto:booking@amahoroluxuryvilla.com" className={styles.contactItem}>
               <Mail className={styles.contactIcon} />
               <span>booking@amahoroluxuryvilla.com</span>
-            </div>
+            </a>
           </div>
         </div>
 

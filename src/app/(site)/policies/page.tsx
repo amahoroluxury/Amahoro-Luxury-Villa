@@ -33,7 +33,7 @@ export default function PoliciesPage() {
             <article className={styles.policyArticle}>
               <h2 className={styles.policyTitle}>Booking & Payments</h2>
               <div className={styles.policyContent}>
-                <p>To confirm a reservation, a 50% deposit is required at the time of booking. The remaining 50% must be settled prior to check-in.</p>
+                <p>Full payment (100%) of the rental amount is required at the time of booking. A 20% refundable damage fee is also collected and will be refunded within 12 hours after checkout supervision, provided the property is left in good condition.</p>
                 <p>We accept online payments via Flutterwave, which supports Visa, Mastercard, MTN Mobile Money, and PayPal.</p>
               </div>
             </article>

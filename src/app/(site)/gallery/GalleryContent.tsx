@@ -45,9 +45,6 @@ export default function GalleryContent() {
                 <div className="container">
                     <span className={styles.label}>Visual Experience</span>
                     <h1>A glimpse into your Kigali retreat</h1>
-                    <p className={styles.lead}>
-                        Explore the villa’s spaces—from bright interiors to sunset terraces and the tropical garden.
-                    </p>
 
                     <div className={styles.tabs}>
                         {categories.map(cat => (

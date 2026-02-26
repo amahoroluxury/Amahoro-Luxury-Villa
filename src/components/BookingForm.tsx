@@ -11,7 +11,7 @@ export default function BookingForm() {
   const [step, setStep] = useState(1);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
-  const [price, setPrice] = useState({ nightlyRate: 200, total: 0, deposit: 0, balance: 0, depositPercent: 50 });
+  const [price, setPrice] = useState({ nightlyRate: 200, total: 0, deposit: 0, balance: 0, depositPercent: 100, damageFee: 0, grandTotal: 0 });
   const [acceptedTerms, setAcceptedTerms] = useState(false);
 
   const [formData, setFormData] = useState({
@@ -150,8 +150,9 @@ export default function BookingForm() {
             <div className={styles.summary}>
               <p><span>Nightly Rate (Avg):</span> <span>${Math.round(price.total / nights)}</span></p>
               <p><span>Nights:</span> <span>{nights}</span></p>
-              <p className={styles.total}><span>Total:</span> <span>${price.total}</span></p>
-              <p className={styles.deposit}><span>{price.depositPercent}% Deposit Due:</span> <span>${price.deposit}</span></p>
+              <p className={styles.total}><span>Rental Total:</span> <span>${price.total}</span></p>
+              <p className={styles.deposit}><span>Refundable Damage Fee (20%):</span> <span>${price.damageFee}</span></p>
+              <p className={styles.grandTotal}><span><strong>Total Due at Booking:</strong></span> <span><strong>${price.grandTotal}</strong></span></p>
             </div>
           ) : (
             <div className={styles.initialPrice}>

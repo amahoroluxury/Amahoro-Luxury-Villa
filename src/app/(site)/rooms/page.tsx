@@ -45,7 +45,7 @@ export default function RoomsPage() {
       <header className={styles.pageHeader}>
         <div className="container">
           <span className={styles.label}>Accommodation</span>
-          <h1>Your private space, perfected for rest</h1>
+          <h1>Your perfect space for rest</h1>
           <p className={styles.lead}>
             Each room is thoughtfully designed with premium bedding, modern lighting, and calm comfort—so you wake up refreshed and ready for Kigali.
           </p>

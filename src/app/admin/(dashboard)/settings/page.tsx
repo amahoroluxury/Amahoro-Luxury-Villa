@@ -17,7 +17,7 @@ interface Settings {
 export default function AdminSettingsPage() {
   const [settings, setSettings] = useState<Settings>({
     nightlyRate: 200,
-    depositPercent: 50,
+    depositPercent: 100,
     rwfRate: 1300,
     airbnbIcalUrl: '',
     weekendRate: 200

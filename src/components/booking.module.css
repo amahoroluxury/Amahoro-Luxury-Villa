@@ -118,6 +118,14 @@
   font-weight: 600;
 }
 
+.grandTotal {
+  border-top: 1px solid var(--border);
+  padding-top: 1rem;
+  margin-top: 0.5rem;
+  font-size: 1.15rem !important;
+  color: var(--secondary);
+}
+
 .actions {
   display: flex;
   justify-content: space-between;

@@ -19,7 +19,7 @@ const faqs = [
     },
     {
         question: 'How do payments work and what is Flutterwave?',
-        answer: 'A minimum 50% deposit is required to confirm your reservation. Flutterwave is our secure payment gateway that accepts Visa, Mastercard, MTN Mobile Money, and PayPal. The remaining balance must be paid before check-in.'
+        answer: 'Full payment (100%) is required at the time of booking. Flutterwave is our secure payment gateway that accepts Visa, Mastercard, MTN Mobile Money, and PayPal. A 20% refundable damage fee is also collected and will be refunded within 12 hours after checkout supervision, provided the property is left in good condition.'
     },
     {
         question: 'Is the villa family friendly?',

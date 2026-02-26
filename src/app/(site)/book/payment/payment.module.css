@@ -210,6 +210,26 @@
   letter-spacing: 0.05em;
 }
 
+.breakdownRow {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5rem 0;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  border-bottom: 1px solid var(--border);
+}
+
+.breakdownRow:last-of-type {
+  margin-bottom: 0.5rem;
+}
+
+.damageNote {
+  font-size: 0.8rem !important;
+  color: var(--text-muted) !important;
+  font-style: italic;
+  line-height: 1.5;
+}
+
 /* Buttons */
 .primaryBtn {
   display: inline-block;
@@ -285,5 +305,7 @@
 }
 
 @keyframes spin {
-  to { transform: rotate(360deg); }
+  to {
+    transform: rotate(360deg);
+  }
 }

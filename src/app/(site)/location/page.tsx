@@ -20,7 +20,7 @@ export default function LocationPage() {
       <header className={styles.pageHeader}>
         <div className="container">
           <span className={styles.label}>The Neighborhood</span>
-          <h1>Stay close to everything—without the noise</h1>
+          <h1>Stay close to everything</h1>
           <p className={styles.lead}>
             Located in the upscale community of Kibagabaga,  Amahoro Luxury Villa  is surrounded by top-rated restaurants, gyms, pharmacies, and hospitals.
           </p>

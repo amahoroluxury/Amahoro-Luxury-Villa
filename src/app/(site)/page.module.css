@@ -215,6 +215,12 @@
   gap: 2rem;
 }
 
+@media (max-width: 768px) {
+  .highlights {
+    display: none;
+  }
+}
+
 .highlightCard {
   padding: 2.5rem;
   background: var(--surface);

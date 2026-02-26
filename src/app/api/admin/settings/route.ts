@@ -12,7 +12,7 @@ export async function GET() {
       settings = await prisma.settings.create({
         data: {
           nightlyRate: 500,
-          depositPercent: 50,
+          depositPercent: 100,
         },
       });
     }

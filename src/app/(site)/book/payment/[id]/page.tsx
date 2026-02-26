@@ -236,7 +236,7 @@ export default function PaymentPage() {
               <div className={styles.optionCard}>
                 <h3>Pay Remaining Balance</h3>
                 <p className={styles.amount}>{getAmountDisplay(booking.balanceDueUsd)}</p>
-                <p>Complete your payment before check-in</p>
+                <p>Complete your payment to confirm your booking.</p>
                 <button
                   className={styles.primaryBtn}
                   onClick={() => handlePayment('full')}
@@ -246,35 +246,26 @@ export default function PaymentPage() {
                 </button>
               </div>
             ) : (
-              // First payment - show deposit or full options
-              <>
-                <div className={styles.optionCard}>
-                  <div className={styles.recommended}>Recommended</div>
-                  <h3>Pay 50% Deposit</h3>
-                  <p className={styles.amount}>{getAmountDisplay(booking.depositAmountUsd)}</p>
-                  <p>Confirm your booking now. Pay the remaining balance before check-in.</p>
-                  <button
-                    className={styles.primaryBtn}
-                    onClick={() => handlePayment('deposit')}
-                    disabled={processing}
-                  >
-                    {processing ? 'Processing...' : 'Pay Deposit'}
-                  </button>
+              <div className={styles.optionCard}>
+                <h3>Pay Full Amount</h3>
+                <div className={styles.breakdownRow}>
+                  <span>Rental Total</span>
+                  <span>{getAmountDisplay(booking.totalAmountUsd)}</span>
                 </div>
-
-                <div className={styles.optionCard}>
-                  <h3>Pay Full Amount</h3>
-                  <p className={styles.amount}>{getAmountDisplay(booking.totalAmountUsd)}</p>
-                  <p>Pay everything now and enjoy a worry-free stay.</p>
-                  <button
-                    className={styles.secondaryBtn}
-                    onClick={() => handlePayment('full')}
-                    disabled={processing}
-                  >
-                    {processing ? 'Processing...' : 'Pay in Full'}
-                  </button>
+                <div className={styles.breakdownRow}>
+                  <span>Refundable Damage Fee (20%)</span>
+                  <span>{getAmountDisplay(Math.round(booking.totalAmountUsd * 0.2))}</span>
                 </div>
-              </>
+                <p className={styles.amount}>{getAmountDisplay(booking.totalAmountUsd + Math.round(booking.totalAmountUsd * 0.2))}</p>
+                <p className={styles.damageNote}>The 20% damage fee is fully refundable within 12 hours after checkout supervision, provided the property is left in good condition.</p>
+                <button
+                  className={styles.primaryBtn}
+                  onClick={() => handlePayment('full')}
+                  disabled={processing}
+                >
+                  {processing ? 'Processing...' : 'Pay Now'}
+                </button>
+              </div>
             )}
 
             <p className={styles.note}>

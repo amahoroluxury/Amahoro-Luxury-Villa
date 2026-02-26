@@ -71,14 +71,14 @@ export default function FAQContent() {
                                     <button
                                         className={styles.question}
                                         onClick={() => toggleFAQ(index)}
-                                        aria-expanded={isExpanded}
+                                        aria-expanded={isExpanded ? "true" : "false"}
                                         aria-controls={`faq-answer-${index}`}
                                     >
                                         {faq.question}
                                         {isExpanded ? (
-                                            <ChevronUp size={20} aria-hidden="true" />
+                                            <ChevronUp size={20} aria-hidden="false" />
                                         ) : (
-                                            <ChevronDown size={20} aria-hidden="true" />
+                                            <ChevronDown size={20} aria-hidden="false" />
                                         )}
                                     </button>
                                     <div

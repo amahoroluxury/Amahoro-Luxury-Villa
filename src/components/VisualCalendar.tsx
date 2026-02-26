@@ -33,17 +33,17 @@ interface Booking {
 interface Props {
   initialBlocked: BlockedDate[];
   initialBookings: Booking[];
-  checkIn: Date | null;
-  checkOut: Date | null;
-  onDateClick: (date: Date) => void;
+  checkIn?: Date | null;
+  checkOut?: Date | null;
+  onDateClick?: (date: Date) => void;
 }
 
 export default function VisualCalendar({
   initialBlocked,
   initialBookings,
-  checkIn,
-  checkOut,
-  onDateClick
+  checkIn = null,
+  checkOut = null,
+  onDateClick = () => { }
 }: Props) {
   const [currentDate, setCurrentDate] = useState(new Date());
 

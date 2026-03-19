@@ -1,12 +1,13 @@
 import prisma from '@/lib/prisma';
 import { NextResponse } from 'next/server';
 import { getExchangeRate } from '@/lib/exchange-rate';
+import { dpo } from '@/lib/dpo';
 
 export const dynamic = 'force-dynamic';
 
 export async function POST(request: Request) {
   try {
-    const { bookingId, type, currency = 'USD' } = await request.json(); // type: deposit, full, balance
+    const { bookingId, currency = 'USD' } = await request.json();
 
     const booking = await prisma.booking.findUnique({
       where: { id: bookingId },
@@ -16,68 +17,49 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: 'Booking not found' }, { status: 404 });
     }
 
-
-    // Base amount in USD
-    const amountUsd = type === 'deposit' ? booking.depositAmountUsd : booking.totalAmountUsd;
-
+    // Full payment = Total stay * 1.2 (for 20% refundable damage fee)
+    const amountUsdTotalPlusFee = Math.round(booking.totalAmountUsd * 1.2);
+    
     // Get dynamic exchange rate
     const rwfRate = await getExchangeRate();
-    const finalAmount = currency === 'RWF' ? Math.round(amountUsd * rwfRate) : amountUsd;
-    const finalCurrency = currency;
+    const finalAmount = currency === 'RWF' ? Math.round(amountUsdTotalPlusFee * rwfRate) : amountUsdTotalPlusFee;
 
-    const tx_ref = `AMH-${booking.id.slice(0, 8)}-${Date.now()}`;
-
-    // Flutterwave Standard Payment Request
-    const response = await fetch('https://api.flutterwave.com/v3/payments', {
-      method: 'POST',
-      headers: {
-        Authorization: `Bearer ${process.env.FLUTTERWAVE_SECRET_KEY}`,
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        tx_ref,
-        amount: finalAmount,
-        currency: finalCurrency,
-        redirect_url: `${process.env.SITE_URL}/book/payment/verify`,
-        customer: {
-          email: booking.guestEmail,
-          phonenumber: booking.guestPhone,
-          name: booking.guestName,
-        },
-        meta: {
-          booking_id: booking.id,
-          payment_type: type,
-        },
-        // Force specific options to ensure visibility
-        payment_options: currency === 'RWF' ? 'card,mobilemoneyrwanda' : 'card,paypal',
-        customizations: {
-          title: ' Amahoro Luxury Villa ',
-          description: `Payment for stay: ${type} (${currency})`,
-          logo: 'https://img.icons8.com/color/96/villa.png',
-        },
-      }),
+    // DPO Pay Request
+    const dpoResponse = await dpo.initiatePayment({
+      amount: finalAmount,
+      currency: currency,
+      bookingId: booking.id,
+      email: booking.guestEmail,
+      firstName: booking.guestName.split(' ')[0] || 'Guest',
+      lastName: booking.guestName.split(' ').slice(1).join(' ') || 'User',
+      phone: booking.guestPhone,
+      serviceDescription: `Amahoro Luxury Villa: Full stay + Refundable Fee (${currency})`,
     });
 
-    const data = await response.json();
-
-    if (data.status === 'success') {
+    if (dpoResponse.success && dpoResponse.redirectUrl) {
       // Log the transaction attempt
       await prisma.paymentTransaction.create({
         data: {
           bookingId: booking.id,
-          flutterwaveTxRef: tx_ref,
-          amountUsd: amountUsd, // Store the USD value for accounting
-          type,
+          provider: 'DPO',
+          providerToken: dpoResponse.transToken!,
+          providerReference: dpoResponse.transRef,
+          amountUsd: amountUsdTotalPlusFee, // Log the full USD value
+          type: 'full', // Always full now
           status: 'pending',
         }
       });
 
-      return NextResponse.json({ link: data.data.link });
+      return NextResponse.json({ link: dpoResponse.redirectUrl });
     } else {
-      return NextResponse.json({ error: 'Flutterwave error' }, { status: 500 });
+      console.error('DPO Error:', dpoResponse.error);
+      return NextResponse.json({ error: dpoResponse.error || 'DPO Pay initiation failed' }, { status: 500 });
     }
-  } catch (error) {
-    console.error('Payment Error:', error);
-    return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
+  } catch (error: any) {
+    console.error('[Payment Initialize] Error:', error);
+    return NextResponse.json({ 
+      error: 'Internal server error', 
+      details: process.env.NODE_ENV === 'development' ? error.message : undefined 
+    }, { status: 500 });
   }
 }

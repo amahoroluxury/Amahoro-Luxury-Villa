@@ -1,0 +1,129 @@
+.section {
+  padding: 3rem 1rem;
+  background-color: var(--surface);
+  display: flex;
+  justify-content: center;
+}
+
+.card {
+  background: white;
+  border: 1px solid #DDDDDD;
+  border-radius: 24px;
+  padding: 2rem 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 960px;
+  width: 100%;
+  gap: 2rem;
+}
+
+.badgeColumn {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  flex-shrink: 0;
+}
+
+.laurelIcon {
+  height: 50px;
+  width: auto;
+  color: #C19B23;
+}
+
+.flipped {
+  transform: scaleX(-1);
+}
+
+.badgeText {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  line-height: 0.95;
+  margin: 0 -6px;
+  z-index: 1;
+}
+
+.guestLabel {
+  font-weight: 800;
+  font-size: 1.1rem;
+  color: #222222;
+  text-transform: capitalize;
+  letter-spacing: -0.03em;
+}
+
+.separator {
+  width: 1px;
+  height: 60px;
+  background-color: #DDDDDD;
+  flex-shrink: 0;
+}
+
+.reviewColumn {
+  flex: 1;
+  text-align: center;
+  min-width: 0;
+}
+
+.reviewText {
+  font-size: 1rem;
+  color: #333;
+  line-height: 1.6;
+  font-style: italic;
+  margin-bottom: 0.75rem;
+}
+
+.reviewer {
+  font-size: 0.85rem;
+  color: #666;
+  font-weight: 500;
+}
+
+.ratingColumn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-shrink: 0;
+  gap: 0.25rem;
+}
+
+.ratingValue {
+  font-size: 1.75rem;
+  font-weight: 800;
+  color: #222;
+  line-height: 1;
+}
+
+.stars {
+  color: #222;
+  font-size: 0.6rem;
+  display: flex;
+  gap: 1px;
+}
+
+.reviewLink {
+  font-size: 0.75rem;
+  text-decoration: underline;
+  color: #222;
+  font-weight: 600;
+  margin-top: 0.25rem;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .card {
+    flex-direction: column;
+    padding: 2rem 1.5rem;
+    gap: 1.25rem;
+    text-align: center;
+  }
+
+  .separator {
+    width: 80%;
+    height: 1px;
+  }
+
+  .reviewText {
+    font-size: 0.95rem;
+  }
+}

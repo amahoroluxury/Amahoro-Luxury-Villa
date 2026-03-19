@@ -8,6 +8,18 @@ import { X } from 'lucide-react';
 import VisualCalendar from './VisualCalendar';
 import styles from './booking.module.css';
 
+/**
+ * Parse a date string timezone-safely.
+ */
+function parseLocalDate(dateStr: string): Date {
+  if (!dateStr) return new Date(NaN);
+  const parts = dateStr.split('-');
+  if (parts.length === 3) {
+    return new Date(parseInt(parts[0]), parseInt(parts[1]) - 1, parseInt(parts[2]));
+  }
+  return new Date(dateStr);
+}
+
 export default function BookingForm() {
   const router = useRouter();
   const [step, setStep] = useState(1);
@@ -17,6 +29,7 @@ export default function BookingForm() {
   const [error, setError] = useState('');
   const [price, setPrice] = useState({ nightlyRate: 200, total: 0, deposit: 0, balance: 0, depositPercent: 100, damageFee: 0, grandTotal: 0 });
   const [acceptedTerms, setAcceptedTerms] = useState(false);
+  const [acceptedCancellation, setAcceptedCancellation] = useState(false);
   const [showCalendar, setShowCalendar] = useState(false);
   const [activeField, setActiveField] = useState<'checkIn' | 'checkOut' | null>(null);
 
@@ -31,7 +44,7 @@ export default function BookingForm() {
   });
 
   const nights = formData.checkIn && formData.checkOut
-    ? differenceInDays(new Date(formData.checkOut), new Date(formData.checkIn))
+    ? differenceInDays(parseLocalDate(formData.checkOut), parseLocalDate(formData.checkIn))
     : 0;
 
   useEffect(() => {
@@ -96,10 +109,19 @@ export default function BookingForm() {
     }
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleDetailsSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    setLoading(true);
+    if (!acceptedTerms) return;
+    setStep(3); // Move to cancellation policy step
+  };
+
+  const handlePolicyAccept = async () => {
+    if (!acceptedCancellation) {
+      setError('Please confirm you have read the cancellation policy.');
+      return;
+    }
     setError('');
+    setLoading(true);
 
     try {
       const res = await fetch('/api/booking', {
@@ -126,7 +148,8 @@ export default function BookingForm() {
       <div className={styles.steps}>
         <div className={`${styles.step} ${step >= 1 ? styles.activeStep : ''}`}>1. Dates</div>
         <div className={`${styles.step} ${step >= 2 ? styles.activeStep : ''}`}>2. Details</div>
-        <div className={`${styles.step} ${step >= 3 ? styles.activeStep : ''}`}>3. Payment</div>
+        <div className={`${styles.step} ${step >= 3 ? styles.activeStep : ''}`}>3. Policy</div>
+        <div className={`${styles.step} ${step >= 4 ? styles.activeStep : ''}`}>4. Payment</div>
       </div>
 
       {error && <div className={styles.error}>{error}</div>}
@@ -143,7 +166,7 @@ export default function BookingForm() {
                   <input
                     id="checkIn"
                     type="text"
-                    value={formData.checkIn ? format(new Date(formData.checkIn), 'MMM dd, yyyy') : ''}
+                    value={formData.checkIn ? format(parseLocalDate(formData.checkIn), 'MMM dd, yyyy') : ''}
                     readOnly
                     placeholder="Select Check-in Date"
                   />
@@ -155,7 +178,7 @@ export default function BookingForm() {
                   <input
                     id="checkOut"
                     type="text"
-                    value={formData.checkOut ? format(new Date(formData.checkOut), 'MMM dd, yyyy') : ''}
+                    value={formData.checkOut ? format(parseLocalDate(formData.checkOut), 'MMM dd, yyyy') : ''}
                     readOnly
                     placeholder="Select Check-out Date"
                   />
@@ -190,15 +213,14 @@ export default function BookingForm() {
                     <VisualCalendar
                       initialBlocked={calendarData.blocked}
                       initialBookings={calendarData.bookings}
-                      checkIn={formData.checkIn ? new Date(formData.checkIn) : null}
-                      checkOut={formData.checkOut ? new Date(formData.checkOut) : null}
+                      checkIn={formData.checkIn ? parseLocalDate(formData.checkIn) : null}
+                      checkOut={formData.checkOut ? parseLocalDate(formData.checkOut) : null}
                       onDateClick={(date) => {
                         const dateStr = format(date, 'yyyy-MM-dd');
                         if (activeField === 'checkIn') {
                           setFormData(prev => {
                             const newCheckIn = dateStr;
                             let newCheckOut = prev.checkOut;
-                            // If checkout is before new checkin, clear it
                             if (newCheckOut && newCheckOut <= newCheckIn) {
                               newCheckOut = '';
                             }
@@ -208,8 +230,6 @@ export default function BookingForm() {
                           setFormData(prev => {
                             const newCheckOut = dateStr;
                             let newCheckIn = prev.checkIn;
-                            // If checkin is after new checkout, swap or clear? 
-                            // User wants flexibility. Let's just set it if valid, or clear checkin if invalid.
                             if (newCheckIn && newCheckIn >= newCheckOut) {
                               newCheckIn = '';
                             }
@@ -251,7 +271,7 @@ export default function BookingForm() {
       )}
 
       {step === 2 && (
-        <form onSubmit={handleSubmit} className={styles.formSection}>
+        <form onSubmit={handleDetailsSubmit} className={styles.formSection}>
           <h2>Guest Details</h2>
           <div className={styles.grid}>
             <div className={styles.field}>
@@ -305,7 +325,7 @@ export default function BookingForm() {
               required
             />
             <label htmlFor="acceptedTerms" className={styles.checkboxLabel}>
-              I have read and agree to the <Link href="/house-rules" target="_blank">House Rules</Link> and <Link href="/policies" target="_blank">Cancellation Policy</Link>.
+              I have read and agree to the <Link href="/house-rules" target="_blank">House Rules</Link>.
             </label>
           </div>
 
@@ -314,12 +334,62 @@ export default function BookingForm() {
             <button
               type="submit"
               className={styles.primaryBtn}
-              disabled={loading || !acceptedTerms}
+              disabled={!acceptedTerms}
+            >
+              Continue
+            </button>
+          </div>
+        </form>
+      )}
+
+      {step === 3 && (
+        <div className={styles.formSection}>
+          <h2>Cancellation Policy</h2>
+          <p className={styles.policyIntro}>Please review our cancellation policy before proceeding to payment.</p>
+
+          <div className={styles.policyCard}>
+            <div className={styles.policyItem}>
+              <h4>📅 Full Refund</h4>
+              <p>Cancellations made <strong>30+ days</strong> before check-in receive a <strong>100% refund</strong>.</p>
+            </div>
+            <div className={styles.policyItem}>
+              <h4>🔄 Partial Refund</h4>
+              <p>Cancellations between <strong>14-29 days</strong> before check-in receive a <strong>50% refund</strong>.</p>
+            </div>
+            <div className={styles.policyItem}>
+              <h4>❌ No Refund</h4>
+              <p>Cancellations made <strong>less than 14 days</strong> before arrival are <strong>non-refundable</strong>.</p>
+            </div>
+            <div className={styles.policyItem}>
+              <h4>🛡️ Damage Deposit</h4>
+              <p>Your refundable damage deposit (20%) will be returned within <strong>12-24 hours</strong> after checkout inspection, provided no damages are found.</p>
+            </div>
+          </div>
+
+          <div className={styles.checkboxField}>
+            <input
+              type="checkbox"
+              id="acceptedCancellation"
+              className={styles.checkboxInput}
+              checked={acceptedCancellation}
+              onChange={(e) => setAcceptedCancellation(e.target.checked)}
+            />
+            <label htmlFor="acceptedCancellation" className={styles.checkboxLabel}>
+              I have read and understand the cancellation policy and damage deposit terms.
+            </label>
+          </div>
+
+          <div className={styles.actions}>
+            <button type="button" onClick={() => setStep(2)} className={styles.secondaryBtn}>Back</button>
+            <button
+              className={styles.primaryBtn}
+              onClick={handlePolicyAccept}
+              disabled={loading || !acceptedCancellation}
             >
               {loading ? 'Processing...' : 'Continue to Payment'}
             </button>
           </div>
-        </form>
+        </div>
       )}
     </div>
   );

@@ -97,13 +97,13 @@ export async function sendBookingConfirmation(booking: BookingEmailData) {
       <div class="container">
         <div class="header">
           <div class="logo">Amahoro Luxury Villa</div>
-          <p>Booking Confirmation</p>
+          <p>Booking Information</p>
         </div>
         
         <div class="content">
           <p>Dear ${booking.guestName},</p>
           
-          <p>Thank you for your booking! We're excited to host you at Amahoro Luxury Villa.</p>
+          <p>Thank you for choosing Amahoro Luxury Villa! We look forward to hosting you.</p>
           
           <div class="details">
             <div class="details-row">
@@ -118,31 +118,21 @@ export async function sendBookingConfirmation(booking: BookingEmailData) {
               <span>Guests:</span>
               <strong>${booking.guestsCount}</strong>
             </div>
-            <div class="details-row">
-              <span>Total Amount:</span>
-              <strong>$${booking.totalAmountUsd.toFixed(2)}</strong>
-            </div>
-            <div class="details-row">
-              <span>Full Payment Required:</span>
-              <strong>$${booking.totalAmountUsd.toFixed(2)}</strong>
-            </div>
           </div>
           
           <div class="note">
-            <strong>Next Step:</strong> Please complete your full payment to confirm your booking. 
-            A 20% refundable damage fee will also be collected and refunded within 12 hours after checkout supervision, provided the property is left in good condition.
+            <strong>Payment Required:</strong> Please complete your full payment to guarantee your reservation. 
+            The payment includes the stay total plus a 20% refundable damage fee, which is returned within 12 hours after checkout supervision.
           </div>
           
           <p>Booking Reference: <strong>${booking.bookingId.slice(0, 8).toUpperCase()}</strong></p>
-          
-          <p>If you have any questions, please don't hesitate to contact us via WhatsApp or email.</p>
           
           <p>Warm regards,<br>Amahoro Luxury Villa Team</p>
         </div>
         
         <div class="footer">
           <p>Kibagabaga, Kigali, Rwanda</p>
-          <p>© ${new Date().getFullYear()} Amahoro Luxury Villa. All rights reserved.</p>
+          <p>© ${new Date().getFullYear()} Amahoro Luxury Villa.</p>
         </div>
       </div>
     </body>
@@ -151,16 +141,12 @@ export async function sendBookingConfirmation(booking: BookingEmailData) {
 
   return sendEmail(
     booking.guestEmail,
-    `Booking Confirmation - Amahoro Luxury Villa`,
+    `Booking Information - Amahoro Luxury Villa`,
     html
   );
 }
 
 export async function sendPaymentConfirmation(data: PaymentEmailData) {
-  const statusMessage = data.isFullyPaid
-    ? 'Your booking is now fully paid!'
-    : `Deposit received! Remaining balance: $${data.balanceDue.toFixed(2)}`;
-
   const html = `
     <!DOCTYPE html>
     <html>
@@ -189,12 +175,10 @@ export async function sendPaymentConfirmation(data: PaymentEmailData) {
           <p>Dear ${data.guestName},</p>
           
           <div style="text-align: center;">
-            <span class="success-badge">✓ Payment Received</span>
+            <span class="success-badge">✓ Payment Confirmed</span>
           </div>
           
-          <p>We have received your payment of <strong>$${data.amountPaid.toFixed(2)}</strong>.</p>
-          
-          <p>${statusMessage}</p>
+          <p>We have successfully received your full payment. Your booking is now guaranteed!</p>
           
           <div class="details">
             <div class="details-row">
@@ -206,19 +190,9 @@ export async function sendPaymentConfirmation(data: PaymentEmailData) {
               <strong>${formatDate(data.checkOut)}</strong>
             </div>
             <div class="details-row">
-              <span>Total Amount:</span>
-              <strong>$${data.totalAmountUsd.toFixed(2)}</strong>
+              <span>Amount Received:</span>
+              <strong style="color: #2e7d32;">$${data.amountPaid.toFixed(2)}</strong>
             </div>
-            <div class="details-row">
-              <span>Amount Paid:</span>
-              <strong style="color: #2e7d32;">$${(data.totalAmountUsd - data.balanceDue).toFixed(2)}</strong>
-            </div>
-            ${!data.isFullyPaid ? `
-            <div class="details-row">
-              <span>Balance Due:</span>
-              <strong style="color: #c62828;">$${data.balanceDue.toFixed(2)}</strong>
-            </div>
-            ` : ''}
           </div>
           
           <p>Booking Reference: <strong>${data.bookingId.slice(0, 8).toUpperCase()}</strong></p>
@@ -230,7 +204,7 @@ export async function sendPaymentConfirmation(data: PaymentEmailData) {
         
         <div class="footer">
           <p>Kibagabaga, Kigali, Rwanda</p>
-          <p>© ${new Date().getFullYear()} Amahoro Luxury Villa. All rights reserved.</p>
+          <p>© ${new Date().getFullYear()} Amahoro Luxury Villa.</p>
         </div>
       </div>
     </body>
@@ -328,7 +302,8 @@ export async function sendAdminPaymentNotification(data: PaymentEmailData) {
   );
 }
 
-export async function sendBalanceReminder(data: PaymentEmailData, daysUntilCheckIn: number) {
+export async function sendStayReminder(data: PaymentEmailData, daysUntilCheckIn: number) {
+  const hasBalance = data.balanceDue > 0.01;
   const html = `
     <!DOCTYPE html>
     <html>
@@ -360,8 +335,8 @@ export async function sendBalanceReminder(data: PaymentEmailData, daysUntilCheck
           
           <p>We're looking forward to your upcoming stay at Amahoro Luxury Villa in ${daysUntilCheckIn} days!</p>
           
+          ${hasBalance ? `
           <p>This is a friendly reminder regarding the remaining balance for your booking.</p>
-          
           <div class="details">
             <div class="details-row">
               <span>Booking Reference:</span>
@@ -372,32 +347,34 @@ export async function sendBalanceReminder(data: PaymentEmailData, daysUntilCheck
               <strong>${formatDate(data.checkIn)}</strong>
             </div>
             <div class="details-row">
-              <span>Total Amount:</span>
-              <strong>$${data.totalAmountUsd.toFixed(2)}</strong>
-            </div>
-            <div class="details-row">
-              <span>Amount Paid:</span>
-              <strong>$${(data.totalAmountUsd - data.balanceDue).toFixed(2)}</strong>
-            </div>
-            <div class="details-row">
               <span>Remaining Balance:</span>
               <strong class="urgent">$${data.balanceDue.toFixed(2)}</strong>
             </div>
           </div>
-          
           <div class="cta-box">
             <p>Please complete your payment before check-in to ensure a smooth arrival.</p>
             <a href="${process.env.SITE_URL}/pay-balance/${data.bookingId}" class="cta-button">Pay Remaining Balance</a>
           </div>
-          
-          <p>If you have already made this payment or have questions, please reach out to us.</p>
+          ` : `
+          <p>Your booking is fully confirmed and we are preparing for your arrival. If you have any special requests or need assistance with airport transfers, please let us know.</p>
+          <div class="details">
+            <div class="details-row">
+              <span>Booking Reference:</span>
+              <strong>${data.bookingId.slice(0, 8).toUpperCase()}</strong>
+            </div>
+            <div class="details-row">
+              <span>Check-in:</span>
+              <strong>${formatDate(data.checkIn)}</strong>
+            </div>
+          </div>
+          `}
           
           <p>Warm regards,<br>Amahoro Luxury Villa Team</p>
         </div>
         
         <div class="footer">
           <p>Kibagabaga, Kigali, Rwanda</p>
-          <p>© ${new Date().getFullYear()} Amahoro Luxury Villa. All rights reserved.</p>
+          <p>© ${new Date().getFullYear()} Amahoro Luxury Villa.</p>
         </div>
       </div>
     </body>
@@ -406,7 +383,7 @@ export async function sendBalanceReminder(data: PaymentEmailData, daysUntilCheck
 
   return sendEmail(
     data.guestEmail,
-    `Reminder: Your stay at Amahoro Luxury Villa is in ${daysUntilCheckIn} days`,
+    `Your stay at Amahoro Luxury Villa is in ${daysUntilCheckIn} days`,
     html
   );
 }

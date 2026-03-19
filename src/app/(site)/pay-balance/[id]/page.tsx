@@ -119,7 +119,7 @@ export default function PayBalancePage({ params }: { params: { id: string } }) {
                 )}
 
                 <p className={styles.secureHint}>
-                    Secure payment via Flutterwave. Supports Visa, Mastercard & Mobile Money.
+                    Secure payment powered by DPO Pay. Accepts International Cards & Local Mobile Money.
                 </p>
             </div>
         </div>

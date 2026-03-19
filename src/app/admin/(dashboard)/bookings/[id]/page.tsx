@@ -261,17 +261,13 @@ export default function BookingDetailsPage({ params }: { params: { id: string } 
                   <button 
                     className={styles.primaryBtn}
                     onClick={handleMarkPaid}
-                    disabled={actionLoading || booking.balanceDueUsd <= 0}
+                    disabled={actionLoading}
                   >
-                    {actionLoading ? 'Processing...' : 'Mark Paid (Offline)'}
+                    {actionLoading ? 'Processing...' : 'Mark Full Payment Received (Offline)'}
                   </button>
-                  <button 
-                    className={styles.secondaryBtn}
-                    onClick={handleGenerateLink}
-                    disabled={actionLoading || booking.balanceDueUsd <= 0}
-                  >
-                    {actionLoading ? 'Generating...' : 'Generate Balance Link'}
-                  </button>
+                  <p className={styles.adminNote}>
+                    Note: Balance links are disabled as full payment is now required at booking.
+                  </p>
                 </div>
               )}
 

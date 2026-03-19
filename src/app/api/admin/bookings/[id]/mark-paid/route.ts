@@ -51,11 +51,12 @@ export async function POST(
     await prisma.paymentTransaction.create({
       data: {
         bookingId,
-        flutterwaveTxRef: `OFFLINE-${Date.now()}`,
+        provider: 'OFFLINE',
+        providerToken: `OFFLINE-${Date.now()}`,
         amountUsd: paymentAmount,
         type: isFullyPaid ? 'full' : 'balance',
         status: 'success',
-        flutterwaveTransactionId: note || 'Offline payment',
+        providerReference: note || 'Offline payment',
       },
     });
 

@@ -1,45 +1,51 @@
 import { NextResponse } from 'next/server';
 import prisma from '@/lib/prisma';
 import { sendPaymentConfirmation, sendAdminPaymentNotification } from '@/lib/email';
-import { getExchangeRate } from '@/lib/exchange-rate';
+import { dpo } from '@/lib/dpo';
 
 export const dynamic = 'force-dynamic';
 
 export async function POST(request: Request) {
   try {
-    const signature = request.headers.get('verif-hash');
-    const secretHash = process.env.FLUTTERWAVE_WEBHOOK_HASH;
+    const text = await request.text();
+    
+    // DPO Pay Push Webhook often sends XML
+    // Ref: https://dpogroup.com/api-and-technical-documentation/
+    const tokenMatch = text.match(/<TransToken>(.*?)<\/TransToken>/);
+    const statusMatch = text.match(/<TransactionApproval>(.*?)<\/TransactionApproval>/);
+    const refMatch = text.match(/<TransRef>(.*?)<\/TransRef>/);
 
-    if (!signature || signature !== secretHash) {
-      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    const transToken = tokenMatch ? tokenMatch[1] : '';
+    const status = statusMatch ? statusMatch[1] : '';
+    const transRef = refMatch ? refMatch[1] : '';
+
+    if (!transToken) {
+      return NextResponse.json({ received: true });
     }
 
-    const payload = await request.json();
-    const { status, tx_ref, amount: flwAmount, id: flw_id, currency: flwCurrency } = payload.data || payload;
-
     const transaction = await prisma.paymentTransaction.findUnique({
-      where: { flutterwaveTxRef: tx_ref },
+      where: { providerToken: transToken },
       include: { booking: true },
     });
 
     if (!transaction) return NextResponse.json({ received: true });
 
-    if (status === 'successful') {
+    const isApproved = status === 'Authorized' || status === 'Approved' || status === 'Handled';
+
+    if (isApproved) {
       if (transaction.status !== 'success') {
         const booking = transaction.booking;
-
-        // Convert RWF back to USD for internal tracking
-        const rwfRate = await getExchangeRate();
-        const paidAmountUsd = flwCurrency === 'RWF' ? (flwAmount / rwfRate) : flwAmount;
+        const paidAmountUsd = transaction.amountUsd;
+        
         const newPaidAmount = booking.amountPaidUsd + paidAmountUsd;
-        const isFullyPaid = (booking.totalAmountUsd - newPaidAmount) < 0.01;
+        const isFullyPaid = (booking.totalAmountUsd - newPaidAmount) < 0.05;
 
         // Update Transaction
         await prisma.paymentTransaction.update({
           where: { id: transaction.id },
           data: {
             status: 'success',
-            flutterwaveTransactionId: flw_id.toString()
+            providerReference: transRef || undefined
           },
         });
 
@@ -74,11 +80,14 @@ export async function POST(request: Request) {
           sendAdminPaymentNotification(emailData),
         ]).catch(console.error);
       }
-    } else if (status === 'failed') {
-      await prisma.paymentTransaction.update({
-        where: { id: transaction.id },
-        data: { status: 'failed' },
-      });
+    } else {
+      // Possible failure
+      if (text.includes('Declined') || text.includes('Cancelled')) {
+        await prisma.paymentTransaction.update({
+          where: { id: transaction.id },
+          data: { status: 'failed' },
+        });
+      }
     }
 
     return NextResponse.json({ received: true });

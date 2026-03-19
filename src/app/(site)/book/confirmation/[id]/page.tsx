@@ -32,7 +32,7 @@ export default async function ConfirmationPage({ params }: { params: { id: strin
           <span className={styles.label}>Reservation Confirmed</span>
           <h1>Thank you, {booking.guestName}!</h1>
           <p className={styles.lead}>
-            Your reservation request has been received. Please complete the full payment to secure your dates.
+            Your reservation request has been received. Please complete the full payment to secure your stay.
           </p>
 
           <div className={styles.details}>
@@ -45,18 +45,22 @@ export default async function ConfirmationPage({ params }: { params: { id: strin
               <strong>{format(new Date(booking.checkIn), 'MMM dd, yyyy')} — {format(new Date(booking.checkOut), 'MMM dd, yyyy')}</strong>
             </div>
             <div className={styles.detailRow}>
-              <span>Total Amount:</span>
+              <span>Stay Total:</span>
               <strong>${booking.totalAmountUsd}</strong>
             </div>
             <div className={styles.detailRow}>
-              <span>Amount Due:</span>
-              <strong className={styles.highlight}>${booking.totalAmountUsd}</strong>
+              <span>Refundable Fee:</span>
+              <strong>${Math.round(booking.totalAmountUsd * 0.2)}</strong>
+            </div>
+            <div className={styles.detailRow}>
+              <span>Total Due Now:</span>
+              <strong className={styles.highlight}>${Math.round(booking.totalAmountUsd * 1.2)}</strong>
             </div>
           </div>
 
           <div className={styles.actions}>
             <Link href={`/book/payment/${booking.id}`} className={styles.primaryBtn}>
-              Pay Now
+              Proceed to Payment
             </Link>
             <Link href="/contact" className={styles.secondaryBtn}>
               Contact Host
@@ -65,7 +69,7 @@ export default async function ConfirmationPage({ params }: { params: { id: strin
 
           <p className={styles.note}>
             A confirmation email has been sent to {booking.guestEmail}.
-            Please note that your booking is only guaranteed once full payment is received.
+            Please note that your booking is only guaranteed once the **full payment** (including the refundable damage fee) is received.
           </p>
         </div>
       </div>

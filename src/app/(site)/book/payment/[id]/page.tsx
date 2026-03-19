@@ -226,50 +226,38 @@ export default function PaymentPage() {
             {error && <div className={styles.error}>{error}</div>}
 
             <div className={styles.methodNote}>
-              {currency === 'USD'
-                ? 'Best for Cards and PayPal'
-                : 'Best for Mobile Money (MTN/Airtel)'}
+              Pay securely with your Credit or Debit Card or Mobile Money
             </div>
 
-            {showBalanceOption ? (
-              // Already paid deposit, show balance payment
-              <div className={styles.optionCard}>
-                <h3>Pay Remaining Balance</h3>
-                <p className={styles.amount}>{getAmountDisplay(booking.balanceDueUsd)}</p>
-                <p>Complete your payment to confirm your booking.</p>
-                <button
-                  className={styles.primaryBtn}
-                  onClick={() => handlePayment('full')}
-                  disabled={processing}
-                >
-                  {processing ? 'Processing...' : 'Pay Balance Now'}
-                </button>
+            <div className={styles.optionCard}>
+              <h3>Full Payment Required</h3>
+              <div className={styles.breakdownRow}>
+                <span>Stay Total</span>
+                <span>{getAmountDisplay(booking.totalAmountUsd)}</span>
               </div>
-            ) : (
-              <div className={styles.optionCard}>
-                <h3>Pay Full Amount</h3>
-                <div className={styles.breakdownRow}>
-                  <span>Rental Total</span>
-                  <span>{getAmountDisplay(booking.totalAmountUsd)}</span>
-                </div>
-                <div className={styles.breakdownRow}>
-                  <span>Refundable Damage Fee (20%)</span>
-                  <span>{getAmountDisplay(Math.round(booking.totalAmountUsd * 0.2))}</span>
-                </div>
-                <p className={styles.amount}>{getAmountDisplay(booking.totalAmountUsd + Math.round(booking.totalAmountUsd * 0.2))}</p>
-                <p className={styles.damageNote}>The 20% damage fee is fully refundable within 12 hours after checkout supervision, provided the property is left in good condition.</p>
-                <button
-                  className={styles.primaryBtn}
-                  onClick={() => handlePayment('full')}
-                  disabled={processing}
-                >
-                  {processing ? 'Processing...' : 'Pay Now'}
-                </button>
+              <div className={styles.breakdownRow}>
+                <span>Refundable Damage Fee (20%)</span>
+                <span>{getAmountDisplay(Math.round(booking.totalAmountUsd * 0.2))}</span>
               </div>
-            )}
+              <div className={`${styles.breakdownRow} ${styles.totalRow}`}>
+                <span>Total Due Now</span>
+                <span>{getAmountDisplay(booking.totalAmountUsd + Math.round(booking.totalAmountUsd * 0.2))}</span>
+              </div>
+              <p className={styles.damageNote}>
+                The 20% damage fee is fully refundable within 12 hours after checkout supervision, 
+                provided the property is left in good condition.
+              </p>
+              <button
+                className={styles.primaryBtn}
+                onClick={() => handlePayment('full')}
+                disabled={processing}
+              >
+                {processing ? 'Connecting to Secure Checkout...' : 'Proceed to Secure Checkout'}
+              </button>
+            </div>
 
             <p className={styles.note}>
-              Secure payment powered by Flutterwave. Your payment information is encrypted.
+              Secure payment powered by DPO Pay. Accepts International Cards & Local Mobile Money.
             </p>
           </div>
         </div>

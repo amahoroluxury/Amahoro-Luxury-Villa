@@ -76,7 +76,7 @@ export default function Footer() {
 
           <p className={styles.developer}>
             <a href="https://getrwanda.rw/" target="_blank" rel="noopener noreferrer">
-              Built by #TeamGet
+              Website Built by #TeamGet
             </a>
           </p>
         </div>

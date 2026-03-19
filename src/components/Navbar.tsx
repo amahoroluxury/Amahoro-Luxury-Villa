@@ -14,8 +14,6 @@ const navLinks = [
   { name: 'Amenities', href: '/amenities' },
   { name: 'Gallery', href: '/gallery' },
   { name: 'Policies', href: '/policies' },
-  { name: 'Reviews', href: '/reviews' },
-  { name: 'FAQ', href: '/faq' },
   { name: 'Contact', href: '/contact' },
 ];
 
@@ -40,11 +38,13 @@ export default function Navbar() {
     <nav className={`${styles.nav} ${scrolled ? styles.scrolled : ''}`}>
       <div className="container">
         <div className={styles.navContainer}>
-          <Link href="/" className={styles.logo}>
-            <Logo height={scrolled ? 60 : 80} className={styles.navLogo} theme={scrolled ? 'dark' : 'light'} />
-          </Link>
+          <div className={styles.leftSide}>
+            <Link href="/" className={styles.logo}>
+              <Logo height={scrolled ? 60 : 80} className={styles.navLogo} theme={scrolled ? 'dark' : 'light'} />
+            </Link>
+          </div>
 
-          <div className={styles.desktopLinks}>
+          <div className={styles.centerLinks}>
             {navLinks.map((link) => (
               <Link
                 key={link.name}
@@ -54,18 +54,20 @@ export default function Navbar() {
                 {link.name}
               </Link>
             ))}
+          </div>
+
+          <div className={styles.rightSide}>
             <Link href="/book" className={styles.bookBtn}>
               Book Now
             </Link>
+            <button
+              className={styles.mobileOpen}
+              onClick={() => setIsOpen(true)}
+              aria-label="Open Menu"
+            >
+              <Menu size={24} />
+            </button>
           </div>
-
-          <button
-            className={styles.mobileOpen}
-            onClick={() => setIsOpen(true)}
-            aria-label="Open Menu"
-          >
-            <Menu size={24} />
-          </button>
         </div>
       </div>
 

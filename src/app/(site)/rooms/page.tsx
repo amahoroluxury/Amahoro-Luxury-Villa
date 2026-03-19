@@ -19,14 +19,14 @@ const rooms = [
   {
     id: 'bedroom-2',
     name: 'Bedroom 2',
-    description: 'Elegantly designed with sliding doors to the patio and natural ventilation.',
+    description: 'A peaceful retreat with direct access to the lush outdoor spaces.',
     features: ['Queen bed', 'Ensuite bathroom', 'Sliding doors to patios', 'Mosquito nets', 'Quiet ceiling fans'],
     image: '/images/gallery/Bed Rooms page/2nd-bedroom.jpg'
   },
   {
     id: 'bedroom-3',
     name: 'Bedroom 3',
-    description: 'A peaceful retreat with direct access to the lush outdoor spaces.',
+    description: 'Elegantly designed with sliding doors to the patio and natural ventilation.',
     features: ['Queen bed', 'Ensuite bathroom', 'Sliding doors to patios', 'Mosquito nets', 'Quiet ceiling fans'],
     image: '/images/gallery/Bed Rooms page/3rd bedrooms.png'
   },

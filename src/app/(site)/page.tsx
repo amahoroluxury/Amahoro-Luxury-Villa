@@ -1,12 +1,9 @@
 import Link from 'next/link';
 import styles from './page.module.css';
 import InstagramFeed from '@/components/InstagramFeed';
-import GuestFavoriteBanner from '@/components/GuestFavoriteBanner';
+import GuestFavoriteReview from '@/components/GuestFavoriteReview';
 import FeaturedSpaces from '@/components/FeaturedSpaces';
-import TestimonialsCarousel from '@/components/TestimonialsCarousel';
-import PropertyCarousel from '@/components/PropertyCarousel';
 import MapPreview from '@/components/MapPreview';
-import MobileGalleryCarousel from '@/components/MobileGalleryCarousel';
 import VisualTour from '@/components/VisualTour';
 import Image from 'next/image';
 
@@ -82,7 +79,7 @@ export default function Home() {
 
       <section className="section-padding">
         <div className="container">
-          <div className={styles.introGrid}>
+          <div className={styles.introSection}>
             <div className={styles.introText}>
               <span className={styles.label}>Brand Overview</span>
               <h2>Afro-Modern Comfort.<br />Kigali Energy. Private Peace.</h2>
@@ -93,21 +90,16 @@ export default function Home() {
               </p>
               <Link href="/about" className={styles.textLink}>Our Story &rarr;</Link>
             </div>
-            <div className={styles.introImageContainer}>
+            <div className={styles.introPhotos}>
               <VisualTour />
             </div>
           </div>
         </div>
       </section>
 
-      <PropertyCarousel />
-
       <FeaturedSpaces />
 
-      <GuestFavoriteBanner />
-      <TestimonialsCarousel />
-
-      <MobileGalleryCarousel />
+      <GuestFavoriteReview />
 
       <InstagramFeed />
 

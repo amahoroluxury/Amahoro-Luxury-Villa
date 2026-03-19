@@ -1,6 +1,6 @@
 import prisma from './prisma';
 import { differenceInDays, startOfDay } from 'date-fns';
-import { sendBalanceReminder, sendPreArrivalInfo } from './email';
+import { sendStayReminder, sendPreArrivalInfo } from './email';
 
 export async function checkAndSendReminders() {
     const today = startOfDay(new Date());
@@ -28,45 +28,44 @@ export async function checkAndSendReminders() {
             const updatedSent: string[] = Array.from(sent);
             let needsUpdate = false;
 
-            // Logic for Balance Reminders (7 days and 2 days)
-            if (booking.balanceDueUsd > 0.01) {
-                if (daysUntil === 7 && !sent.has('7d')) {
-                    await sendBalanceReminder({
-                        guestName: booking.guestName,
-                        guestEmail: booking.guestEmail,
-                        checkIn: booking.checkIn,
-                        checkOut: booking.checkOut,
-                        totalAmountUsd: booking.totalAmountUsd,
-                        depositAmountUsd: booking.depositAmountUsd,
-                        bookingId: booking.id,
-                        guestsCount: booking.guestsCount,
-                        amountPaid: booking.amountPaidUsd,
-                        isFullyPaid: false,
-                        balanceDue: booking.balanceDueUsd,
-                    }, 7);
-                    updatedSent.push('7d');
-                    needsUpdate = true;
-                    results.sent7d++;
-                }
+            // Logic for Stay Reminders (7 days and 2 days)
+            // We send this to everyone to keep them excited, but the template highlights balance if it exists
+            if (daysUntil === 7 && !sent.has('7d')) {
+                await sendStayReminder({
+                    guestName: booking.guestName,
+                    guestEmail: booking.guestEmail,
+                    checkIn: booking.checkIn,
+                    checkOut: booking.checkOut,
+                    totalAmountUsd: booking.totalAmountUsd,
+                    depositAmountUsd: booking.depositAmountUsd,
+                    bookingId: booking.id,
+                    guestsCount: booking.guestsCount,
+                    amountPaid: booking.amountPaidUsd,
+                    isFullyPaid: booking.balanceDueUsd < 0.05,
+                    balanceDue: booking.balanceDueUsd,
+                }, 7);
+                updatedSent.push('7d');
+                needsUpdate = true;
+                results.sent7d++;
+            }
 
-                if (daysUntil === 2 && !sent.has('2d')) {
-                    await sendBalanceReminder({
-                        guestName: booking.guestName,
-                        guestEmail: booking.guestEmail,
-                        checkIn: booking.checkIn,
-                        checkOut: booking.checkOut,
-                        totalAmountUsd: booking.totalAmountUsd,
-                        depositAmountUsd: booking.depositAmountUsd,
-                        bookingId: booking.id,
-                        guestsCount: booking.guestsCount,
-                        amountPaid: booking.amountPaidUsd,
-                        isFullyPaid: false,
-                        balanceDue: booking.balanceDueUsd,
-                    }, 2);
-                    updatedSent.push('2d');
-                    needsUpdate = true;
-                    results.sent2d++;
-                }
+            if (daysUntil === 2 && !sent.has('2d')) {
+                await sendStayReminder({
+                    guestName: booking.guestName,
+                    guestEmail: booking.guestEmail,
+                    checkIn: booking.checkIn,
+                    checkOut: booking.checkOut,
+                    totalAmountUsd: booking.totalAmountUsd,
+                    depositAmountUsd: booking.depositAmountUsd,
+                    bookingId: booking.id,
+                    guestsCount: booking.guestsCount,
+                    amountPaid: booking.amountPaidUsd,
+                    isFullyPaid: booking.balanceDueUsd < 0.05,
+                    balanceDue: booking.balanceDueUsd,
+                }, 2);
+                updatedSent.push('2d');
+                needsUpdate = true;
+                results.sent2d++;
             }
 
             // Logic for Pre-arrival Welcome Guide (3 days)

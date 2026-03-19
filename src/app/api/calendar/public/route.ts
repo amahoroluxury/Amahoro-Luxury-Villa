@@ -41,7 +41,13 @@ export async function GET() {
 
         const publicBlocked = [
             ...blockedDates.map(b => ({ id: b.id, date: b.date.toISOString(), reason: b.reason })),
-            ...externalBlocks
+            ...externalBlocks.map(b => ({
+                id: b.id,
+                date: b.date,
+                endDate: b.endDate,
+                reason: b.reason || 'Unavailable',
+                isExternal: b.isExternal
+            }))
         ];
 
         const publicBookings = bookings.map(b => ({

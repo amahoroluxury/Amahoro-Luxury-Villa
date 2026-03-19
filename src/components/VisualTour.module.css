@@ -28,10 +28,13 @@
     overflow-x: auto;
     gap: 1.5rem;
     scroll-snap-type: x mandatory;
-    -ms-overflow-style: none;
+    /* Hide scrollbar for IE, Edge and Firefox */
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
     padding-bottom: 1rem;
 }
 
+/* Hide scrollbar for Chrome, Safari and Opera */
 .scrollContainer::-webkit-scrollbar {
     display: none;
 }

@@ -5,15 +5,14 @@ import Image from 'next/image';
 import styles from './VisualTour.module.css';
 
 const images = [
-    { src: '/images/gallery/TROPICAL GARDEN.jpg', title: 'Tropical Garden' },
+    { src: '/images/site/home-tropical-garden-terrace.webp', title: 'Tropical Garden Terrace' },
     { src: '/images/gallery/Living Room.jpg', title: 'Elegant Living Room' },
-    { src: '/images/gallery/CHEFS KITCHEN.jpg', title: 'Gourmet Kitchen' },
+    { src: '/images/site/home-chefs-kitchen.webp', title: 'Gourmet Kitchen' },
     { src: '/images/gallery/master-suite.jpg', title: 'Master Suite' },
     { src: '/images/gallery/gallery-4.jpg', title: 'Modern Exterior' },
     { src: '/images/gallery/TERRACE VIEWS.jpeg', title: 'Stunning Terrace Views' },
-    { src: '/images/gallery/FIRE PIT.jpg', title: 'Zen Fire Pit' },
-    { src: '/images/gallery/OUTDOOR BARBECUE.jpeg', title: 'Outdoor Barbecue' },
-    { src: '/images/gallery/movie-room.png', title: 'Private Cinema' },
+    { src: '/images/site/home-fire-pit.webp', title: 'Zen Fire Pit' },
+    { src: '/images/site/home-outdoor-kitchen.webp', title: 'Outdoor Kitchen' },
 ];
 
 const VisualTour = () => {

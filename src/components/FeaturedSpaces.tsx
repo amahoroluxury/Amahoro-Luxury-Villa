@@ -13,31 +13,31 @@ const spaces = [
     id: 2,
     title: 'Chef\'s Kitchen',
     description: 'High-end appliances, coffee station, and fully stocked for culinary needs.',
-    image: '/images/gallery/gallery-5.jpeg'
+    image: '/images/site/home-chefs-kitchen.webp'
   },
   {
     id: 3,
     title: 'Fire Pit',
     description: 'Enjoy a night cap with friends in our private, stone-lined outdoor fire pit.',
-    image: '/images/gallery/FIRE PIT.jpg'
+    image: '/images/site/home-fire-pit.webp'
   },
   {
     id: 4,
-    title: 'Tropical Garden',
+    title: 'Tropical Garden Terrace',
     description: 'A lush sanctuary featuring a zen water fountain and exotic Rwandan flora.',
-    image: '/images/gallery/TROPICAL GARDEN.jpg'
+    image: '/images/site/home-tropical-garden-terrace.webp'
   },
   {
     id: 5,
     title: 'Outdoor Barbecue',
     description: 'A fully equipped outdoor kitchen and dining area for al fresco entertaining.',
-    image: '/images/gallery/OUTDOOR BARBECUE.jpeg'
+    image: '/images/site/home-outdoor-kitchen.webp'
   },
   {
     id: 6,
     title: 'Cinema Room',
     description: 'State-of-the-art cinematic experience with plush seating and surround sound.',
-    image: '/images/gallery/movie-room.png'
+    image: '/images/site/home-movie-room.webp'
   }
 ];
 

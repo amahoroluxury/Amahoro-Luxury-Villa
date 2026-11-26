@@ -67,12 +67,21 @@ const VisualTour = () => {
                         tabIndex={0}
                         onKeyDown={(e) => e.key === 'Enter' && openLightbox(index)}
                     >
+                        {/* Blurred copy fills the frame so the full photo can sit on top uncropped */}
+                        <Image
+                            src={img.src}
+                            alt=""
+                            aria-hidden
+                            fill
+                            className={styles.backdrop}
+                            sizes="10vw"
+                        />
                         <Image
                             src={img.src}
                             alt={img.title}
                             fill
                             className={styles.image}
-                            sizes="(max-width: 1024px) 100vw, 50vw"
+                            sizes="(max-width: 1024px) 100vw, 1200px"
                         />
                         <div className={styles.caption}>{img.title}</div>
                     </div>

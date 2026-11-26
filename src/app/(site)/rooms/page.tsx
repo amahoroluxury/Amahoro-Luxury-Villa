@@ -14,7 +14,7 @@ const rooms = [
     name: 'Master Suite',
     description: 'The ultimate sanctuary featuring private balcony views and a spa-like ensuite.',
     features: ['King bed', 'Ensuite bath', 'Balcony views', 'Walk out to terrace', 'Spa bath with soaker tub'],
-    image: '/images/gallery/Bed Rooms page/MASTER SUITE.jpg'
+    image: '/images/site/hero-accommodation.webp'
   },
   {
     id: 'bedroom-2',
@@ -28,7 +28,7 @@ const rooms = [
     name: 'Bedroom 3',
     description: 'Elegantly designed with sliding doors to the patio and natural ventilation.',
     features: ['Queen bed', 'Ensuite bathroom', 'Sliding doors to patios', 'Mosquito nets', 'Quiet ceiling fans'],
-    image: '/images/gallery/Bed Rooms page/3rd bedrooms.png'
+    image: '/images/site/room-bedroom-3.webp'
   },
   {
     id: 'bedroom-4',
@@ -37,6 +37,13 @@ const rooms = [
     features: ['Full bed', 'Workspace desk', 'Sliding door to patio', 'Ensuite bathroom'],
     image: '/images/gallery/Bed Rooms page/4TH BEDROOM.jpeg'
   }
+];
+
+const bathrooms = [
+  { name: 'Master Ensuite', note: 'Spa bath with soaker tub and walk-in shower', image: '/images/site/bathroom-master.webp' },
+  { name: 'Bathroom 1', note: 'Rain shower with marble finishes', image: '/images/site/bathroom-1.webp' },
+  { name: 'Bathroom 2', note: 'Walk-in glass shower', image: '/images/site/bathroom-2.webp' },
+  { name: 'Bathroom 3', note: 'Walk-in shower and vanity', image: '/images/site/bathroom-3.webp' },
 ];
 
 export default function RoomsPage() {
@@ -77,6 +84,34 @@ export default function RoomsPage() {
               </div>
             </div>
           ))}
+        </div>
+      </section>
+
+      <section className={styles.bathrooms}>
+        <div className="container">
+          <div className={styles.bathHeader}>
+            <h2>Ensuite bathrooms</h2>
+            <p>Every bedroom has its own bathroom, finished in marble with modern fittings.</p>
+          </div>
+          <div className={styles.bathGrid}>
+            {bathrooms.map((bath) => (
+              <figure key={bath.name} className={styles.bathCard}>
+                <div className={styles.bathImage}>
+                  <Image
+                    src={bath.image}
+                    alt={bath.name}
+                    fill
+                    sizes="(max-width: 768px) 50vw, 25vw"
+                    className={styles.img}
+                  />
+                </div>
+                <figcaption>
+                  <strong>{bath.name}</strong>
+                  <span>{bath.note}</span>
+                </figcaption>
+              </figure>
+            ))}
+          </div>
         </div>
       </section>
 

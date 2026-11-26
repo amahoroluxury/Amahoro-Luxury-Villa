@@ -8,31 +8,26 @@ interface GalleryImage {
     id: string;
     url: string;
     category: string;
-    span: string;
+    span?: string;
+    width?: number;
+    height?: number;
 }
 
-// Comprehensive fallback images ensuring no blank spaces
+// Default gallery photos. Shown unless 8+ photos have been added in the admin gallery.
+// Laid out as a masonry grid: each photo keeps its own shape, so there are no gaps or awkward crops.
 const fallbackImages: GalleryImage[] = [
-    { id: 'f1', url: '/images/gallery/TROPICAL GARDEN.jpg', category: 'Tropical Garden', span: 'wide' },
-    { id: 'f2', url: '/images/gallery/Living Room.jpg', category: 'Living Room', span: 'normal' },
-    { id: 'f3', url: '/images/gallery/CHEFS KITCHEN.jpg', category: "Chef's Kitchen", span: 'normal' },
-    { id: 'f4', url: '/images/gallery/master-suite.jpg', category: 'Master Suite', span: 'tall' },
-    { id: 'f5', url: '/images/gallery/gallery-4.jpg', category: 'Villa Exterior', span: 'normal' },
-    { id: 'f6', url: '/images/gallery/TERRACE VIEWS.jpeg', category: 'Terrace Views', span: 'normal' },
-    { id: 'f7', url: '/images/gallery/FIRE PIT.jpg', category: 'Fire Pit', span: 'wide' },
-    { id: 'f8', url: '/images/gallery/OUTDOOR BARBECUE.jpeg', category: 'Outdoor Barbecue', span: 'normal' },
-    { id: 'f9', url: '/images/gallery/movie-room.png', category: 'Cinema Room', span: 'normal' },
-    { id: 'f10', url: '/images/gallery/gallery-2.jpg', category: 'Villa Interior', span: 'tall' },
-    { id: 'f11', url: '/images/gallery/gallery-3.jpg', category: 'Villa Details', span: 'normal' },
-    { id: 'f12', url: '/images/gallery/gallery-7.jpg', category: 'Living Spaces', span: 'normal' },
-    { id: 'f13', url: '/images/gallery/gallery-11.jpg', category: 'Garden Path', span: 'wide' },
-    { id: 'f14', url: '/images/gallery/Bed Rooms page/MASTER SUITE.jpg', category: 'Master Bedroom', span: 'normal' },
-    { id: 'f15', url: '/images/gallery/Bed Rooms page/2nd-bedroom.jpg', category: 'Second Bedroom', span: 'normal' },
-    { id: 'f16', url: '/images/gallery/Bed Rooms page/3rd bedrooms.png', category: 'Third Bedroom', span: 'normal' },
-    { id: 'f17', url: '/images/gallery/Bed Rooms page/4TH BEDROOM.jpeg', category: 'Fourth Bedroom', span: 'normal' },
-    { id: 'f18', url: '/images/gallery/gallery-15.jpg', category: 'Patio Area', span: 'wide' },
-    { id: 'f19', url: '/images/gallery/gallery-16.jpg', category: 'Dining Area', span: 'normal' },
-    { id: 'f20', url: '/images/gallery/gallery-17.jpg', category: 'Sunset View', span: 'normal' },
+    { id: 'g1', url: '/images/site/gallery-pool-night-aerial.webp', category: 'Pool at Night', width: 1600, height: 890 },
+    { id: 'g2', url: '/images/site/gallery-fountain.webp', category: 'Zen Fountain', width: 863, height: 1296 },
+    { id: 'g3', url: '/images/site/gallery-bedroom-2.webp', category: 'Bedroom 2', width: 1600, height: 1203 },
+    { id: 'g4', url: '/images/site/gallery-pool-at-dawn.webp', category: 'Pool at Dawn', width: 1080, height: 810 },
+    { id: 'g5', url: '/images/site/gallery-living-room.webp', category: 'Living Room', width: 1600, height: 1185 },
+    { id: 'g6', url: '/images/site/gallery-night-pool.webp', category: 'Night-time Pool', width: 1600, height: 1212 },
+    { id: 'g7', url: '/images/site/gallery-garden-path.webp', category: 'Garden Path', width: 1200, height: 1600 },
+    { id: 'g8', url: '/images/site/gallery-master-desk.webp', category: 'Master Suite Desk', width: 1600, height: 1162 },
+    { id: 'g9', url: '/images/site/gallery-garden-late-afternoon.webp', category: 'Garden in the Late Afternoon', width: 1600, height: 929 },
+    { id: 'g10', url: '/images/site/gallery-evening-fire-pit.webp', category: 'Evening Fire Pit', width: 965, height: 1304 },
+    { id: 'g11', url: '/images/site/gallery-movie-room.webp', category: 'Movie Room', width: 1600, height: 1239 },
+    { id: 'g12', url: '/images/site/home-pool.webp', category: 'Pool & Garden', width: 1400, height: 1063 },
 ];
 
 export default function GalleryContent() {
@@ -99,7 +94,7 @@ export default function GalleryContent() {
                             {images.map((img, index) => (
                                 <div
                                     key={img.id}
-                                    className={`${styles.galleryItem} ${styles[img.span] || ''}`}
+                                    className={styles.galleryItem}
                                     onClick={() => openLightbox(index)}
                                     role="button"
                                     tabIndex={0}
@@ -108,8 +103,9 @@ export default function GalleryContent() {
                                     <Image
                                         src={img.url}
                                         alt={img.category}
-                                        fill
-                                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                                        width={img.width || 1600}
+                                        height={img.height || 1200}
+                                        sizes="(max-width: 600px) 100vw, (max-width: 1024px) 50vw, 33vw"
                                         className={styles.img}
                                     />
                                     <div className={styles.overlay}>

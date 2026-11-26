@@ -53,8 +53,8 @@ export default function AboutPage() {
           <div className={styles.expGrid}>
             <div className={styles.expImage}>
               <Image
-                src="/images/2 A HOME BUILT FOR FORGETTABLE MOMENTS.jpeg"
-                alt="Amahoro Luxury Villa front elevation"
+                src="/images/site/home-unforgettable-moments.webp"
+                alt="Friends gathered at the kitchen island"
                 fill
                 style={{ objectFit: 'cover' }}
                 sizes="(min-width: 1024px) 50vw, 100vw"

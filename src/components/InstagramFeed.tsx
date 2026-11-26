@@ -5,10 +5,10 @@ const INSTAGRAM_URL = "https://www.instagram.com/amahoro_luxury_villa_rw";
 
 // Placeholder images from the gallery to simulate a feed
 const FEED_ITEMS = [
-  { id: 1, src: '/images/gallery/gallery-2.jpg', alt: ' Amahoro Luxury Villa  View' },
+  { id: 1, src: '/images/site/instagram-1-dining.webp', alt: 'Dining room with valley views' },
   { id: 2, src: '/images/gallery/gallery-5.jpeg', alt: 'Relaxing Interior' },
-  { id: 3, src: '/images/gallery/gallery-3.jpg', alt: 'Beautiful Garden' },
-  { id: 4, src: '/images/gallery/gallery-4.jpg', alt: 'Luxury Bedroom' },
+  { id: 3, src: '/images/site/instagram-2-entrance.webp', alt: 'Villa entrance' },
+  { id: 4, src: '/images/site/instagram-4-balcony.webp', alt: 'Relaxing on the balcony' },
   // Add more if we want 6 items for larger screens
 ];
 

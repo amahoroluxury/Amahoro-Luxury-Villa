@@ -51,7 +51,7 @@ export default function Home() {
           loop
           playsInline
           preload="auto"
-          poster="/og-image.jpg"
+          poster="/images/site/home-hero.webp"
           className={styles.videoBackground}
           src="/Amahoroluxury-video.mp4"
         />

@@ -56,15 +56,20 @@
     overflow: hidden;
     border-radius: 4px;
     cursor: pointer;
+    background: var(--surface);
 }
 
-.image {
+/* Soft, blurred version of the same photo behind it, so portrait and
+   square photos fill the frame without being cropped. */
+.backdrop {
     object-fit: cover;
-    transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    filter: blur(24px) brightness(0.85);
+    transform: scale(1.15);
 }
 
-.slide:hover .image {
-    transform: scale(1.05);
+/* The photo itself is always shown in full. */
+.image {
+    object-fit: contain;
 }
 
 .caption {
@@ -81,15 +86,14 @@
 
 @media (min-width: 768px) {
     .slide {
-        aspect-ratio: 16/9;
-        max-height: 65vh;
+        aspect-ratio: 3/2;
+        max-height: 70vh;
     }
 }
 
 @media (min-width: 1024px) {
     .slide {
-        aspect-ratio: 16/9;
-        max-height: 600px;
+        max-height: 640px;
     }
 }
 
